@@ -68,7 +68,10 @@ def parse_events(text):
         key=lambda x: x["start"]
     )
 
-URL = URL.replace("webcal://", "https://", 1)
+URL = URL.strip()
+
+if URL.lower().startswith("webcal://"):
+    URL = "https://" + URL[9:]
 with urllib.request.urlopen(URL, timeout=30) as r:
     raw = r.read().decode(
         "utf-8-sig",
