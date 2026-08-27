@@ -1,7 +1,12 @@
 import os, re, json, urllib.request
 from datetime import datetime, timezone
 
-URL = os.environ["ICLOUD_CALENDAR_URL"].replace("webcal://", "https://", 1)
+URL = os.environ["ICLOUD_CALENDAR_URL"].strip()
+
+if URL.startswith("webcal://"):
+    URL = "https://" + URL[len("webcal://"):]
+elif URL.startswith("webcals://"):
+    URL = "https://" + URL[len("webcals://"):]
 OUT = "calendar.json"
 
 def unfold(text):
