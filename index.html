@@ -4,107 +4,62 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#10161d">
-<link rel="manifest" href="manifest.webmanifest">
 <title>Min arbetsdag</title>
 <style>
 :root{font-family:Segoe UI,Arial,sans-serif;color:#fff;background:#10161d}
 *{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#0f151b,#1b2732);min-height:100vh}
-header{padding:22px 22px 12px;display:flex;justify-content:space-between;align-items:flex-start;max-width:1250px;margin:auto}
+header{padding:22px;display:flex;justify-content:space-between;max-width:1250px;margin:auto}
 h1{margin:0;font-size:29px}.muted{color:#aeb9c5;font-size:13px}.clock{font-size:31px;font-weight:650}
-main{max-width:1250px;margin:auto;padding:0 18px 30px}
-.hero{display:grid;grid-template-columns:1.7fr 1fr;gap:14px;margin-bottom:14px}
+main{max-width:1250px;margin:auto;padding:0 18px 30px}.hero{display:grid;grid-template-columns:1.7fr 1fr;gap:14px;margin-bottom:14px}
 .card{background:rgba(255,255,255,.065);border:1px solid rgba(255,255,255,.075);border-radius:18px;padding:17px;box-shadow:0 10px 30px rgba(0,0,0,.14)}
 .weather{display:flex;align-items:center;gap:20px}.temp{font-size:47px;font-weight:750}.weathername{font-size:18px}
-.grid{display:grid;grid-template-columns:1.15fr .85fr .85fr;gap:14px}
-.title{font-size:12px;font-weight:750;letter-spacing:.5px;color:#9eacba;margin-bottom:10px}
-.next{font-size:14px;color:#aeb9c5;margin-bottom:8px}.next strong{color:#fff}
-.item{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.075);line-height:1.3}
-.time{color:#8fb5d6;font-weight:700;display:inline-block;min-width:62px}
+.grid{display:grid;grid-template-columns:1.15fr .85fr .85fr;gap:14px}.title{font-size:12px;font-weight:750;letter-spacing:.5px;color:#9eacba;margin-bottom:10px}
+.item{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.075);line-height:1.3}.time{color:#8fb5d6;font-weight:700;display:inline-block;min-width:62px}
 .badge{display:inline-block;border-radius:99px;background:#314352;padding:4px 8px;font-size:11px;margin-left:6px}
 button,a.button{display:inline-block;background:#2c3c4c;color:#fff;border:0;border-radius:8px;padding:9px 11px;margin-top:10px;text-decoration:none;font-size:13px}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:rgba(255,255,255,.045);padding:10px;border-radius:10px}.num{font-size:22px;font-weight:700}
 .weekday{font-weight:700;margin-top:8px;color:#dfe6ec}.empty{color:#73818d;font-size:13px;padding:5px 0}
 .footer{text-align:center;color:#687783;font-size:11px;margin-top:16px}
-@media(max-width:850px){header{padding:16px 14px 10px}.hero,.grid{grid-template-columns:1fr}.weather{justify-content:space-between}.clock{font-size:25px}.card{padding:15px}main{padding:0 12px 24px}}
+@media(max-width:850px){header{padding:16px 14px 10px}.hero,.grid{grid-template-columns:1fr}.clock{font-size:25px}.card{padding:15px}main{padding:0 12px 24px}}
 </style>
 </head>
 <body>
-<header>
- <div><h1>Min arbetsdag</h1><div id="date" class="muted"></div></div>
- <div style="text-align:right"><div id="clock" class="clock">--:--</div><div class="muted">Resursteamet</div></div>
-</header>
+<header><div><h1>Min arbetsdag</h1><div id="date" class="muted"></div></div><div style="text-align:right"><div id="clock" class="clock">--:--</div><div class="muted">Resursteamet</div></div></header>
 <main>
 <section class="hero">
- <div class="card">
-  <div class="title">DAGENS ÖVERSIKT</div>
-  <div class="weather"><div><div id="temp" class="temp">--°</div><div id="weather" class="weathername">Hämtar väder...</div></div>
-  <div><div id="range" class="muted"></div><div id="rain" class="muted"></div></div></div>
- </div>
- <div class="card">
-  <div class="title">NÄSTA</div>
-  <div id="next" style="font-size:17px">Kalendern kopplas snart</div>
-  <div class="muted">Din privata kalender först. Arbetskalender senare.</div>
- </div>
+<div class="card"><div class="title">DAGENS ÖVERSIKT</div><div class="weather"><div><div id="temp" class="temp">--°</div><div id="weather" class="weathername">Hämtar väder...</div></div><div><div id="range" class="muted"></div><div id="rain" class="muted"></div></div></div></div>
+<div class="card"><div class="title">NÄSTA</div><div id="next" style="font-size:17px">Laddar kalender...</div><div id="calstatus" class="muted"></div></div>
 </section>
-
 <section class="grid">
- <div class="card">
-  <div class="title">DAGENS KALENDER</div>
-  <div id="calendar">
-   <div class="item"><span class="time">08:00</span>Planering <span class="badge">exempel</span></div>
-   <div class="item"><span class="time">09:30</span>Resursteamet <span class="badge">exempel</span></div>
-   <div class="item"><span class="time">11:00</span>Elevmöte <span class="badge">exempel</span></div>
-   <div class="item"><span class="time">13:00</span>Uppföljning <span class="badge">exempel</span></div>
-  </div>
-  <a class="button" href="https://outlook.office.com/calendar/" target="_blank">Öppna Outlook</a>
- </div>
-
- <div class="card">
-  <div class="title">DAGENS MENY</div>
-  <div class="muted">Gånghesterskolan</div>
-  <div id="meal" style="margin-top:9px">Meny kopplas till automatisk hämtning.</div>
-  <a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank">Visa veckans meny</a>
- </div>
-
- <div class="card">
-  <div class="title">RESURSTEAMET</div>
-  <div class="stats">
-   <div class="stat"><div class="num">4</div><div class="muted">Aktiva uppdrag</div></div>
-   <div class="stat"><div class="num">2</div><div class="muted">Följa upp</div></div>
-   <div class="stat"><div class="num">1</div><div class="muted">Dokumentation</div></div>
-  </div>
-  <div class="item">Dagens viktigaste uppgift</div>
-  <div class="item">Följ upp elevinsatser</div>
-  <div class="item">Dokumentation / planering</div>
- </div>
-
- <div class="card">
-  <div class="title">VECKANS KALENDER</div>
-  <div class="weekday">Måndag</div><div class="empty">Kalenderdata kopplas snart</div>
-  <div class="weekday">Tisdag</div><div class="empty">Kalenderdata kopplas snart</div>
-  <div class="weekday">Onsdag</div><div class="empty">Kalenderdata kopplas snart</div>
-  <div class="weekday">Torsdag</div><div class="empty">Kalenderdata kopplas snart</div>
-  <div class="weekday">Fredag</div><div class="empty">Kalenderdata kopplas snart</div>
- </div>
-
- <div class="card">
-  <div class="title">SNABBT</div>
-  <a class="button" href="https://outlook.office.com/calendar/" target="_blank">Outlook Kalender</a><br>
-  <a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank">Matilda Menu</a>
- </div>
-
- <div class="card">
-  <div class="title">PLANERAT</div>
-  <div class="item">Privat kalender → först</div>
-  <div class="item">Gånghesterskolan → meny</div>
-  <div class="item">Borås-kalender → efter godkännande</div>
- </div>
+<div class="card"><div class="title">DAGENS KALENDER</div><div id="calendar"><div class="empty">Laddar...</div></div><a class="button" href="https://www.icloud.com/calendar/" target="_blank">Öppna iCloud Kalender</a></div>
+<div class="card"><div class="title">DAGENS MENY</div><div class="muted">Gånghesterskolan</div><div style="margin-top:9px">Meny kopplas till automatisk hämtning.</div><a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank">Visa veckans meny</a></div>
+<div class="card"><div class="title">RESURSTEAMET</div><div class="stats"><div class="stat"><div class="num">4</div><div class="muted">Aktiva uppdrag</div></div><div class="stat"><div class="num">2</div><div class="muted">Följa upp</div></div><div class="stat"><div class="num">1</div><div class="muted">Dokumentation</div></div></div></div>
+<div class="card"><div class="title">VECKANS KALENDER</div><div id="week"><div class="empty">Laddar...</div></div></div>
+<div class="card"><div class="title">SNABBT</div><a class="button" href="https://outlook.office.com/calendar/" target="_blank">Outlook Kalender</a><br><a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank">Matilda Menu</a></div>
+<div class="card"><div class="title">KALENDERSTATUS</div><div class="item">iCloud: <span id="status">kontrollerar...</span></div><div class="item">Senast hämtad: <span id="updated">—</span></div><div class="muted">Kalendern hämtas automatiskt var 30:e minut.</div></div>
 </section>
-<div class="footer">Min arbetsdag · Version 2 · samma app på dator och iPhone</div>
+<div class="footer">Min arbetsdag · Version 3 · iCloud-kalender test</div>
 </main>
 <script>
+const weekdays=['söndag','måndag','tisdag','onsdag','torsdag','fredag','lördag'];
+const fmtTime=s=>new Date(s).toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});
 function tick(){const d=new Date();document.getElementById('clock').textContent=d.toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});document.getElementById('date').textContent=d.toLocaleDateString('sv-SE',{weekday:'long',day:'numeric',month:'long',year:'numeric'});}
+async function calendar(){
+ try{
+  const j=await fetch('calendar.json?x='+Date.now()).then(r=>{if(!r.ok)throw Error();return r.json()});
+  const now=new Date(), day=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  const end=new Date(day); end.setDate(end.getDate()+1);
+  const today=j.events.filter(e=>new Date(e.start)>=day&&new Date(e.start)<end);
+  const upcoming=j.events.filter(e=>new Date(e.end)>=now).sort((a,b)=>new Date(a.start)-new Date(b.start));
+  document.getElementById('calendar').innerHTML=today.length?today.map(e=>`<div class="item"><span class="time">${fmtTime(e.start)}</span>${escapeHtml(e.title||'Kalenderhändelse')}</div>`).join(''):'<div class="empty">Inga kalenderhändelser idag.</div>';
+  const n=upcoming[0];document.getElementById('next').textContent=n?`${fmtTime(n.start)} · ${n.title||'Kalenderhändelse'}`:'Inga fler händelser';
+  document.getElementById('status').textContent='ansluten';
+  document.getElementById('updated').textContent=j.updatedAt?new Date(j.updatedAt).toLocaleString('sv-SE'):'—';
+  const days=[];for(let i=0;i<5;i++){const x=new Date(day);x.setDate(x.getDate()+i);const x2=new Date(x);x2.setDate(x2.getDate()+1);const ev=j.events.filter(e=>new Date(e.start)>=x&&new Date(e.start)<x2);days.push(`<div class="weekday">${weekdays[x.getDay()]}</div>${ev.length?ev.map(e=>`<div class="empty">${fmtTime(e.start)} · ${escapeHtml(e.title||'Kalenderhändelse')}</div>`).join(''):'<div class="empty">—</div>'}`)}document.getElementById('week').innerHTML=days.join('');
+ }catch(e){document.getElementById('status').textContent='väntar på första hämtningen';document.getElementById('calendar').innerHTML='<div class="empty">Kalenderdata har ännu inte hämtats.</div>';document.getElementById('next').textContent='Kalenderdata saknas';}
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
 async function weather(){try{const u='https://api.open-meteo.com/v1/forecast?latitude=57.7210&longitude=12.9401&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FStockholm&forecast_days=1';const j=await fetch(u).then(r=>r.json());const n={0:'Klart',1:'Mestadels klart',2:'Delvis molnigt',3:'Mulet',45:'Dimma',48:'Dimma',51:'Duggregn',53:'Duggregn',55:'Duggregn',61:'Regn',63:'Regn',65:'Kraftigt regn',71:'Snö',73:'Snö',75:'Snö',80:'Regnskurar',81:'Regnskurar',82:'Kraftiga regnskurar',95:'Åska'};document.getElementById('temp').textContent=Math.round(j.current.temperature_2m)+'°';document.getElementById('weather').textContent=n[j.current.weather_code]||'Väder';document.getElementById('range').textContent=Math.round(j.daily.temperature_2m_min[0])+'° / '+Math.round(j.daily.temperature_2m_max[0])+'° idag';document.getElementById('rain').textContent='Regnrisk: '+j.daily.precipitation_probability_max[0]+'%';}catch(e){document.getElementById('weather').textContent='Väder ej tillgängligt'}}
-tick();weather();setInterval(tick,30000);setInterval(weather,900000);
+tick();calendar();weather();setInterval(tick,30000);setInterval(calendar,300000);setInterval(weather,900000);
 </script>
 </body></html>
