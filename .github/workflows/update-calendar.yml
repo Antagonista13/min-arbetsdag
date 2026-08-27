@@ -24,7 +24,7 @@ jobs:
       - name: Hämta matsedel
         run: python .github/scripts/fetch_menu.py
 
-            - name: Publicera kalender och matsedel
+      - name: Publicera kalender och matsedel
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
