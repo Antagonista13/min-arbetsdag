@@ -16,10 +16,11 @@ jobs:
       - name: Hämta repository
         uses: actions/checkout@v4
 
-      - name: Hämta iCloud-kalender
-        env:
-          ICLOUD_CALENDAR_URL: ${{ secrets.ICLOUD_CALENDAR_URL }}
-        run: python .github/scripts/fetch_calendar.py
+- name: Hämta iCloud-kalender
+  env:
+    ICLOUD_CALENDAR_URL: ${{ secrets.ICLOUD_CALENDAR_URL }}
+    ICLOUD_WORK_CALENDAR_URL: ${{ secrets.ICLOUD_WORK_CALENDAR_URL }}
+  run: python .github/scripts/fetch_calendar.py
 
       - name: Publicera kalenderdata
         run: |
