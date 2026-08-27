@@ -9,331 +9,195 @@
 
 <style>
 :root{
-  font-family:"Segoe UI",Arial,sans-serif;
+  font-family:Segoe UI,Arial,sans-serif;
   color:#fff;
-  background:#10161d;
+  background:#10161d
 }
 
 *{
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 body{
   margin:0;
-  background:
-    radial-gradient(circle at top left,rgba(56,78,96,.35),transparent 40%),
-    linear-gradient(145deg,#0b1117,#18232d 55%,#101820);
-  min-height:100vh;
+  background:linear-gradient(145deg,#0f151b,#1b2732);
+  min-height:100vh
 }
 
 header{
-  padding:28px 34px 22px;
+  padding:22px;
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
-  max-width:1500px;
-  margin:auto;
+  max-width:1250px;
+  margin:auto
 }
 
 h1{
   margin:0;
-  font-size:42px;
-  line-height:1.05;
-  letter-spacing:.5px;
-  font-weight:750;
+  font-size:29px
 }
 
 .muted{
   color:#aeb9c5;
-  font-size:16px;
+  font-size:13px
 }
 
 .clock{
-  font-size:46px;
-  line-height:1;
-  font-weight:700;
-  letter-spacing:1px;
+  font-size:31px;
+  font-weight:650
 }
 
 main{
-  max-width:1500px;
+  max-width:1250px;
   margin:auto;
-  padding:0 34px 35px;
+  padding:0 18px 30px
 }
 
 .hero{
   display:grid;
-  grid-template-columns:1.55fr 1fr;
-  gap:18px;
-  margin-bottom:18px;
+  grid-template-columns:1.7fr 1fr;
+  gap:14px;
+  margin-bottom:14px
 }
 
 .card{
   background:rgba(255,255,255,.065);
-  border:1px solid rgba(255,255,255,.09);
-  border-radius:20px;
-  padding:22px;
-  box-shadow:0 12px 35px rgba(0,0,0,.18);
-  backdrop-filter:blur(4px);
-}
-
-.title{
-  font-size:14px;
-  font-weight:800;
-  letter-spacing:1px;
-  color:#aebdca;
-  margin-bottom:15px;
+  border:1px solid rgba(255,255,255,.075);
+  border-radius:18px;
+  padding:17px;
+  box-shadow:0 10px 30px rgba(0,0,0,.14)
 }
 
 .weather{
   display:flex;
   align-items:center;
-  gap:30px;
+  gap:20px
 }
 
 .temp{
-  font-size:64px;
-  line-height:1;
-  font-weight:750;
+  font-size:47px;
+  font-weight:750
 }
 
 .weathername{
-  font-size:23px;
-  margin-top:6px;
-}
-
-#next{
-  font-size:25px !important;
-  line-height:1.35;
-  font-weight:650;
-  min-height:40px;
-}
-
-#calstatus{
-  margin-top:12px;
+  font-size:18px
 }
 
 .grid{
   display:grid;
-  grid-template-columns:1.25fr 1fr 1fr;
-  gap:18px;
+  grid-template-columns:1.15fr .85fr .85fr;
+  gap:14px
+}
+
+.title{
+  font-size:12px;
+  font-weight:750;
+  letter-spacing:.5px;
+  color:#9eacba;
+  margin-bottom:10px
 }
 
 .item{
-  padding:11px 0;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  line-height:1.35;
-  font-size:18px;
-}
-
-.item:last-child{
-  border-bottom:0;
+  padding:9px 0;
+  border-bottom:1px solid rgba(255,255,255,.075);
+  line-height:1.3
 }
 
 .time{
-  color:#9ec8e9;
-  font-weight:750;
+  color:#8fb5d6;
+  font-weight:700;
   display:inline-block;
-  min-width:72px;
+  min-width:62px
 }
 
 .badge{
   display:inline-block;
   border-radius:99px;
   background:#314352;
-  padding:5px 9px;
-  font-size:12px;
-  margin-left:6px;
+  padding:4px 8px;
+  font-size:11px;
+  margin-left:6px
 }
 
 button,
 a.button{
   display:inline-block;
-  background:#304353;
+  background:#2c3c4c;
   color:#fff;
-  border:1px solid rgba(255,255,255,.08);
-  border-radius:9px;
-  padding:11px 14px;
-  margin-top:12px;
+  border:0;
+  border-radius:8px;
+  padding:9px 11px;
+  margin-top:10px;
   text-decoration:none;
-  font-size:14px;
-  transition:.2s;
-}
-
-a.button:hover{
-  background:#40576a;
+  font-size:13px
 }
 
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:10px;
+  gap:8px
 }
 
 .stat{
   background:rgba(255,255,255,.045);
-  padding:15px;
-  border-radius:12px;
+  padding:10px;
+  border-radius:10px
 }
 
 .num{
-  font-size:30px;
-  font-weight:750;
-  line-height:1;
-  margin-bottom:7px;
+  font-size:22px;
+  font-weight:700
 }
 
 .weekday{
-  font-weight:750;
-  margin-top:13px;
-  color:#e3eaf0;
-  font-size:17px;
+  font-weight:700;
+  margin-top:8px;
+  color:#dfe6ec
 }
 
 .empty{
-  color:#82909c;
-  font-size:16px;
-  padding:7px 0;
+  color:#73818d;
+  font-size:13px;
+  padding:5px 0
 }
 
-.menu-main{
-  font-size:22px;
-  line-height:1.4;
-  font-weight:600;
+.menu-today{
+  font-size:15px;
+  color:#e5ebf0;
+  line-height:1.45
 }
 
-.menu-alternative{
-  color:#b7c5d0;
-}
-
-.menu-date{
-  color:#8fa0ad;
-  font-size:14px;
-  margin-bottom:8px;
+.menu-today .item{
+  padding:8px 0
 }
 
 .footer{
   text-align:center;
   color:#687783;
-  font-size:12px;
-  margin-top:22px;
+  font-size:11px;
+  margin-top:16px
 }
 
-.status-ok{
-  color:#9ed6a5;
-  font-weight:600;
-}
-
-.status-wait{
-  color:#d6b67c;
-  font-weight:600;
-}
-
-/* TV / större skärmar */
-@media(min-width:1400px){
+@media(max-width:850px){
   header{
-    padding-top:34px;
-  }
-
-  h1{
-    font-size:48px;
-  }
-
-  .clock{
-    font-size:52px;
-  }
-
-  .card{
-    padding:25px;
-  }
-
-  .title{
-    font-size:15px;
-  }
-
-  .item{
-    font-size:20px;
-  }
-
-  .weekday{
-    font-size:19px;
-  }
-
-  .empty{
-    font-size:17px;
-  }
-}
-
-/* Laptop / mindre skärmar */
-@media(max-width:1000px){
-
-  header{
-    padding:20px 20px 15px;
-  }
-
-  h1{
-    font-size:32px;
-  }
-
-  .clock{
-    font-size:36px;
-  }
-
-  main{
-    padding:0 20px 25px;
-  }
-
-  .hero{
-    grid-template-columns:1fr;
-  }
-
-  .grid{
-    grid-template-columns:1fr 1fr;
-  }
-}
-
-/* Mobil */
-@media(max-width:700px){
-
-  header{
-    padding:16px 14px 12px;
-  }
-
-  h1{
-    font-size:26px;
-  }
-
-  .clock{
-    font-size:27px;
-  }
-
-  .muted{
-    font-size:13px;
-  }
-
-  main{
-    padding:0 12px 24px;
+    padding:16px 14px 10px
   }
 
   .hero,
   .grid{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
+  }
+
+  .clock{
+    font-size:25px
   }
 
   .card{
-    padding:16px;
+    padding:15px
   }
 
-  .temp{
-    font-size:48px;
-  }
-
-  .weathername{
-    font-size:18px;
-  }
-
-  #next{
-    font-size:20px !important;
+  main{
+    padding:0 12px 24px
   }
 }
 </style>
@@ -355,190 +219,190 @@ a.button:hover{
 
 <main>
 
-  <!-- DAGENS ÖVERSIKT -->
-  <section class="hero">
+<section class="hero">
 
-    <div class="card">
-      <div class="title">DAGENS ÖVERSIKT</div>
+  <div class="card">
+    <div class="title">DAGENS ÖVERSIKT</div>
 
-      <div class="weather">
-        <div>
-          <div id="temp" class="temp">--°</div>
-          <div id="weather" class="weathername">Hämtar väder...</div>
-        </div>
+    <div class="weather">
+      <div>
+        <div id="temp" class="temp">--°</div>
+        <div id="weather" class="weathername">Hämtar väder...</div>
+      </div>
 
-        <div>
-          <div id="range" class="muted"></div>
-          <div id="rain" class="muted"></div>
-        </div>
+      <div>
+        <div id="range" class="muted"></div>
+        <div id="rain" class="muted"></div>
       </div>
     </div>
+  </div>
 
-    <div class="card">
-      <div class="title">NÄSTA HÄNDELSE</div>
+  <div class="card">
+    <div class="title">NÄSTA HÄNDELSE</div>
 
-      <div id="next">
-        Laddar kalender...
-      </div>
-
-      <div id="calstatus" class="muted"></div>
+    <div id="next" style="font-size:17px">
+      Laddar kalender...
     </div>
 
-  </section>
+    <div id="calstatus" class="muted"></div>
+  </div>
+
+</section>
 
 
-  <!-- HUVUDINNEHÅLL -->
-  <section class="grid">
+<section class="grid">
 
-    <!-- DAGENS KALENDER -->
-    <div class="card">
+  <!-- DAGENS KALENDER -->
 
-      <div class="title">DAGENS KALENDER</div>
+  <div class="card">
 
-      <div id="calendar">
-        <div class="empty">Laddar kalender...</div>
-      </div>
+    <div class="title">DAGENS KALENDER</div>
 
-      <a
-        class="button"
-        href="https://www.icloud.com/calendar/"
-        target="_blank"
-      >
-        Öppna iCloud Kalender
-      </a>
-
+    <div id="calendar">
+      <div class="empty">Laddar...</div>
     </div>
 
+    <a
+      class="button"
+      href="https://www.icloud.com/calendar/"
+      target="_blank">
+      Öppna iCloud Kalender
+    </a>
 
-    <!-- DAGENS MENY -->
-    <div class="card">
+  </div>
 
-      <div class="title">DAGENS MENY</div>
 
-      <div class="muted">
-        Gånghesterskolan
-      </div>
+  <!-- DAGENS MENY -->
 
-      <div
-        id="menu"
-        style="margin-top:12px"
-      >
-        <div class="empty">
-          Laddar dagens meny...
-        </div>
-      </div>
+  <div class="card">
+
+    <div class="title">DAGENS MENY</div>
+
+    <div class="muted">Gånghesterskolan</div>
+
+    <div id="menu" class="menu-today">
+      <div class="empty">Laddar meny...</div>
+    </div>
+
+    <div style="margin-top:12px">
 
       <a
         class="button"
         href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok"
-        target="_blank"
-      >
+        target="_blank">
         Visa veckans meny
       </a>
 
     </div>
 
-
-    <!-- RESURSTEAMET -->
-    <div class="card">
-
-      <div class="title">RESURSTEAMET</div>
-
-      <div class="stats">
-
-        <div class="stat">
-          <div class="num">4</div>
-          <div class="muted">Aktiva uppdrag</div>
-        </div>
-
-        <div class="stat">
-          <div class="num">2</div>
-          <div class="muted">Följa upp</div>
-        </div>
-
-        <div class="stat">
-          <div class="num">1</div>
-          <div class="muted">Dokumentation</div>
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- VECKANS KALENDER -->
-    <div class="card">
-
-      <div class="title">VECKANS KALENDER</div>
-
-      <div id="week">
-        <div class="empty">Laddar...</div>
-      </div>
-
-    </div>
-
-
-    <!-- SNABBT -->
-    <div class="card">
-
-      <div class="title">SNABBT</div>
-
-      <a
-        class="button"
-        href="https://outlook.office.com/calendar/"
-        target="_blank"
-      >
-        Outlook Kalender
-      </a>
-
-      <br>
-
-      <a
-        class="button"
-        href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok"
-        target="_blank"
-      >
-        Matilda Menu
-      </a>
-
-    </div>
-
-
-    <!-- STATUS -->
-    <div class="card">
-
-      <div class="title">SYSTEMSTATUS</div>
-
-      <div class="item">
-        iCloud:
-        <span id="status" class="status-wait">
-          kontrollerar...
-        </span>
-      </div>
-
-      <div class="item">
-        Senast hämtad:
-        <span id="updated">—</span>
-      </div>
-
-      <div class="muted">
-        Kalender och matsedel uppdateras automatiskt.
-      </div>
-
-    </div>
-
-  </section>
-
-  <div class="footer">
-    Resursteamet · Borås · Digital anslagstavla
   </div>
+
+
+  <!-- RESURSTEAMET -->
+
+  <div class="card">
+
+    <div class="title">RESURSTEAMET</div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <div class="num">4</div>
+        <div class="muted">Aktiva uppdrag</div>
+      </div>
+
+      <div class="stat">
+        <div class="num">2</div>
+        <div class="muted">Följa upp</div>
+      </div>
+
+      <div class="stat">
+        <div class="num">1</div>
+        <div class="muted">Dokumentation</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- VECKANS KALENDER -->
+
+  <div class="card">
+
+    <div class="title">VECKANS KALENDER</div>
+
+    <div id="week">
+      <div class="empty">Laddar...</div>
+    </div>
+
+  </div>
+
+
+  <!-- SNABBT -->
+
+  <div class="card">
+
+    <div class="title">SNABBT</div>
+
+    <a
+      class="button"
+      href="https://outlook.office.com/calendar/"
+      target="_blank">
+      Outlook Kalender
+    </a>
+
+    <br>
+
+    <a
+      class="button"
+      href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok"
+      target="_blank">
+      Matilda Menu
+    </a>
+
+  </div>
+
+
+  <!-- SYSTEMSTATUS -->
+
+  <div class="card">
+
+    <div class="title">SYSTEMSTATUS</div>
+
+    <div class="item">
+      iCloud:
+      <span id="status">kontrollerar...</span>
+    </div>
+
+    <div class="item">
+      Senast hämtad:
+      <span id="updated">—</span>
+    </div>
+
+    <div class="muted">
+      Kalender och matsedel hämtas automatiskt.
+    </div>
+
+  </div>
+
+</section>
+
+
+<div class="footer">
+  Resursteamet Borås · Digital anslagstavla
+</div>
 
 </main>
 
 
 <script>
 
-const weekdays=[
+/* =========================
+   GEMENSAMMA FUNKTIONER
+========================= */
+
+const weekdays = [
   'söndag',
   'måndag',
   'tisdag',
@@ -549,7 +413,7 @@ const weekdays=[
 ];
 
 
-const fmtTime=s =>
+const fmtTime = s =>
   new Date(s).toLocaleTimeString(
     'sv-SE',
     {
@@ -559,11 +423,31 @@ const fmtTime=s =>
   );
 
 
+function escapeHtml(s){
+
+  return String(s).replace(
+    /[&<>"']/g,
+    m => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#039;'
+    }[m])
+  );
+
+}
+
+
+/* =========================
+   KLOCKA OCH DATUM
+========================= */
+
 function tick(){
 
-  const d=new Date();
+  const d = new Date();
 
-  document.getElementById('clock').textContent=
+  document.getElementById('clock').textContent =
     d.toLocaleTimeString(
       'sv-SE',
       {
@@ -572,7 +456,7 @@ function tick(){
       }
     );
 
-  document.getElementById('date').textContent=
+  document.getElementById('date').textContent =
     d.toLocaleDateString(
       'sv-SE',
       {
@@ -586,64 +470,71 @@ function tick(){
 
 
 /* =========================
-   KALENDER
-   ========================= */
+   ICLOUD-KALENDER
+========================= */
 
 async function calendar(){
 
   try{
 
-    const r=await fetch(
-      'calendar.json?t='+Date.now()
-    );
+    const j = await fetch(
+      'calendar.json?t=' + Date.now()
+    ).then(r => {
 
-    if(!r.ok)
-      throw Error();
+      if(!r.ok){
+        throw Error();
+      }
 
-    const j=await r.json();
+      return r.json();
 
-    const now=new Date();
+    });
 
-    const day=new Date(
+
+    const now = new Date();
+
+    const day = new Date(
       now.getFullYear(),
       now.getMonth(),
       now.getDate()
     );
 
-    const end=new Date(day);
+
+    const end = new Date(day);
 
     end.setDate(
-      end.getDate()+1
+      end.getDate() + 1
     );
 
 
-    const today=j.events
-      .filter(e =>
-        new Date(e.start)>=day &&
-        new Date(e.start)<end
+    const today =
+      j.events.filter(
+        e =>
+          new Date(e.start) >= day &&
+          new Date(e.start) < end
       );
 
 
-    const upcoming=j.events
-      .filter(e =>
-        new Date(e.end)>=now
-      )
-      .sort(
-        (a,b)=>
-          new Date(a.start)-
-          new Date(b.start)
-      );
+    const upcoming =
+      j.events
+        .filter(
+          e =>
+            new Date(e.end) >= now
+        )
+        .sort(
+          (a,b) =>
+            new Date(a.start) -
+            new Date(b.start)
+        );
 
 
-    document.getElementById('calendar').innerHTML=
-
+    document.getElementById('calendar').innerHTML =
       today.length
 
       ?
 
-      today
-        .map(e=>`
-          <div class="item">
+      today.map(
+        e =>
+          `<div class="item">
             <span class="time">
               ${fmtTime(e.start)}
             </span>
@@ -651,131 +542,122 @@ async function calendar(){
               e.title ||
               'Kalenderhändelse'
             )}
-          </div>
-        `)
-        .join('')
+          </div>`
+      ).join('')
 
       :
 
       '<div class="empty">Inga kalenderhändelser idag.</div>';
 
 
-    const n=upcoming[0];
+    const n = upcoming[0];
 
 
-    document.getElementById('next').textContent=
-
+    document.getElementById('next').textContent =
       n
-
       ?
-
-      `${fmtTime(n.start)} · ${
-        n.title ||
-        'Kalenderhändelse'
-      }`
-
+      `${fmtTime(n.start)} · ${n.title || 'Kalenderhändelse'}`
       :
-
       'Inga fler händelser';
 
 
-    document.getElementById('status').textContent=
+    document.getElementById('status').textContent =
       'ansluten';
 
-    document.getElementById('status').className=
-      'status-ok';
 
-
-    document.getElementById('updated').textContent=
-
+    document.getElementById('updated').textContent =
       j.updatedAt
-
       ?
-
       new Date(
         j.updatedAt
       ).toLocaleString('sv-SE')
-
       :
-
       '—';
 
 
-    const days=[];
+    /* VECKANS KALENDER */
+
+    const days = [];
 
 
     for(let i=0;i<5;i++){
 
-      const x=new Date(day);
+      const x = new Date(day);
 
       x.setDate(
-        x.getDate()+i
+        x.getDate() + i
       );
 
 
-      const x2=new Date(x);
+      const x2 = new Date(x);
 
       x2.setDate(
-        x2.getDate()+1
+        x2.getDate() + 1
       );
 
 
-      const ev=j.events.filter(e=>
-        new Date(e.start)>=x &&
-        new Date(e.start)<x2
-      );
+      const ev =
+        j.events.filter(
+          e =>
+            new Date(e.start) >= x &&
+            new Date(e.start) < x2
+        );
 
 
-      days.push(`
+      days.push(
 
-        <div class="weekday">
+        `<div class="weekday">
           ${weekdays[x.getDay()]}
-        </div>
+        </div>`
 
-        ${
+        +
+
+        (
+
           ev.length
 
           ?
 
-          ev
-            .map(e=>`
-              <div class="empty">
+          ev.map(
+            e =>
+              `<div class="empty">
                 ${fmtTime(e.start)}
                 ·
                 ${escapeHtml(
                   e.title ||
                   'Kalenderhändelse'
                 )}
-              </div>
-            `)
-            .join('')
+              </div>`
+          ).join('')
 
           :
 
           '<div class="empty">—</div>'
-        }
 
-      `);
+        )
+
+      );
 
     }
 
 
-    document.getElementById('week').innerHTML=
+    document.getElementById('week').innerHTML =
       days.join('');
 
 
-  }catch(e){
+  }
 
-    document.getElementById('status').textContent=
+  catch(e){
+
+    document.getElementById('status').textContent =
       'väntar på första hämtningen';
 
-    document.getElementById('status').className=
-      'status-wait';
 
-    document.getElementById('calendar').innerHTML=
+    document.getElementById('calendar').innerHTML =
       '<div class="empty">Kalenderdata har ännu inte hämtats.</div>';
 
-    document.getElementById('next').textContent=
+
+    document.getElementById('next').textContent =
       'Kalenderdata saknas';
 
   }
@@ -784,122 +666,134 @@ async function calendar(){
 
 
 /* =========================
-   SÄKER TEXT
-   ========================= */
-
-function escapeHtml(s){
-
-  return String(s).replace(
-    /[&<>"']/g,
-    m=>({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      '"':'&quot;',
-      "'":'&#039;'
-    }[m])
-  );
-
-}
-
-
-/* =========================
    MATSEDEL
-   ========================= */
+========================= */
 
 async function menu(){
 
   try{
 
-    const r=await fetch(
-      'menu.json?t='+Date.now()
+    const r = await fetch(
+      'menu.json?t=' + Date.now()
     );
 
-    if(!r.ok)
-      throw Error();
 
-    const j=await r.json();
+    if(!r.ok){
+      throw Error();
+    }
+
+
+    const j = await r.json();
+
+
+    /*
+      fetch_menu.py sparar numera:
+
+      {
+        "updatedAt": "...",
+        "source": "...",
+        "meals": [
+          {
+            "date": "2026-08-27",
+            "name": "...",
+            "dishes": [
+              "...",
+              "..."
+            ]
+          }
+        ]
+      }
+
+      Därför letar vi efter dagens datum
+      istället för "day" och "meals".
+    */
+
+
+    const today =
+      new Date();
+
+
+    const todayISO =
+      today.getFullYear()
+      + '-'
+      + String(
+          today.getMonth()+1
+        ).padStart(2,'0')
+      + '-'
+      + String(
+          today.getDate()
+        ).padStart(2,'0');
+
+
+    let meals = [];
 
 
     if(
-      !j.meals ||
-      !Array.isArray(j.meals)
+      Array.isArray(j.meals)
     ){
 
-      document.getElementById('menu').innerHTML=
-        '<div class="empty">Ingen meny hittades</div>';
-
-      return;
-
-    }
-
-
-    const today=
-      new Date()
-        .toISOString()
-        .slice(0,10);
-
-
-    const todayMeals=
-      j.meals.filter(meal=>
-        meal.date === today
-      );
-
-
-    if(!todayMeals.length){
-
-      document.getElementById('menu').innerHTML=
-        '<div class="empty">Ingen meny för idag</div>';
-
-      return;
-
-    }
-
-
-    let html='';
-
-
-    todayMeals.forEach(meal=>{
-
-      if(meal.name){
-
-        html+=`
-          <div class="menu-date">
-            ${escapeHtml(meal.name)}
-          </div>
-        `;
-
-      }
+      const todayMeal =
+        j.meals.find(
+          m =>
+            String(m.date).slice(0,10)
+            ===
+            todayISO
+        );
 
 
       if(
-        meal.dishes &&
-        Array.isArray(meal.dishes)
+        todayMeal &&
+        Array.isArray(todayMeal.dishes)
       ){
 
-        meal.dishes.forEach(dish=>{
-
-          html+=`
-            <div class="menu-main">
-              ${escapeHtml(dish)}
-            </div>
-          `;
-
-        });
+        meals =
+          todayMeal.dishes.filter(
+            d =>
+              d &&
+              String(d).trim()
+          );
 
       }
 
-    });
+    }
 
 
-    document.getElementById('menu').innerHTML=
-      html ||
-      '<div class="empty">Ingen meny för idag</div>';
+    /*
+      Visa dagens meny
+    */
+
+    if(meals.length){
+
+      document.getElementById('menu').innerHTML =
+
+        meals.map(
+          meal =>
+            `<div class="item">
+              ${escapeHtml(meal)}
+            </div>`
+        ).join('');
+
+    }
+
+    else{
+
+      document.getElementById('menu').innerHTML =
+        '<div class="empty">Ingen meny för idag</div>';
+
+    }
 
 
-  }catch(e){
+  }
 
-    document.getElementById('menu').innerHTML=
+  catch(e){
+
+    console.error(
+      'Kunde inte läsa menu.json:',
+      e
+    );
+
+
+    document.getElementById('menu').innerHTML =
       '<div class="empty">Matsedeln kunde inte hämtas</div>';
 
   }
@@ -909,13 +803,13 @@ async function menu(){
 
 /* =========================
    VÄDER
-   ========================= */
+========================= */
 
 async function weather(){
 
   try{
 
-    const u=
+    const u =
       'https://api.open-meteo.com/v1/forecast' +
       '?latitude=57.7210' +
       '&longitude=12.9401' +
@@ -925,65 +819,97 @@ async function weather(){
       '&forecast_days=1';
 
 
-    const j=
+    const j =
       await fetch(u)
-        .then(r=>r.json());
+        .then(
+          r => r.json()
+        );
 
 
-    const n={
+    const names = {
 
       0:'Klart',
+
       1:'Mestadels klart',
+
       2:'Delvis molnigt',
+
       3:'Mulet',
+
       45:'Dimma',
+
       48:'Dimma',
+
       51:'Duggregn',
+
       53:'Duggregn',
+
       55:'Duggregn',
+
       61:'Regn',
+
       63:'Regn',
+
       65:'Kraftigt regn',
+
       71:'Snö',
+
       73:'Snö',
+
       75:'Snö',
+
       80:'Regnskurar',
+
       81:'Regnskurar',
+
       82:'Kraftiga regnskurar',
+
       95:'Åska'
 
     };
 
 
-    document.getElementById('temp').textContent=
+    document.getElementById('temp').textContent =
       Math.round(
         j.current.temperature_2m
-      )+'°';
+      ) + '°';
 
 
-    document.getElementById('weather').textContent=
-      n[j.current.weather_code] ||
+    document.getElementById('weather').textContent =
+      names[
+        j.current.weather_code
+      ]
+      ||
       'Väder';
 
 
-    document.getElementById('range').textContent=
+    document.getElementById('range').textContent =
       Math.round(
         j.daily.temperature_2m_min[0]
-      )+'° / '+
+      )
+      +
+      '° / '
+      +
       Math.round(
         j.daily.temperature_2m_max[0]
-      )+'° idag';
+      )
+      +
+      '° idag';
 
 
-    document.getElementById('rain').textContent=
-      'Regnrisk: '+
-      j.daily.precipitation_probability_max[0]+
+    document.getElementById('rain').textContent =
+      'Regnrisk: '
+      +
+      j.daily.precipitation_probability_max[0]
+      +
       '%';
 
 
-  }catch(e){
+  }
 
-    document.getElementById('weather').textContent=
+  catch(e){
+
+    document.getElementById('weather').textContent =
       'Väder ej tillgängligt';
 
   }
@@ -993,30 +919,38 @@ async function weather(){
 
 /* =========================
    START
-   ========================= */
+========================= */
 
 tick();
+
 calendar();
+
 menu();
+
 weather();
 
 
-/* Automatiska uppdateringar */
+/* =========================
+   AUTOMATISK UPPDATERING
+========================= */
 
 setInterval(
   tick,
   30000
 );
 
+
 setInterval(
   calendar,
   300000
 );
 
+
 setInterval(
   menu,
   300000
 );
+
 
 setInterval(
   weather,
