@@ -7,6 +7,11 @@ if URL.startswith("webcal://"):
     URL = "https://" + URL[len("webcal://"):]
 elif URL.startswith("webcals://"):
     URL = "https://" + URL[len("webcals://"):]
+
+if URL.startswith("webcal://"):
+    URL = "https://" + URL[len("webcal://"):]
+elif URL.startswith("webcals://"):
+    URL = "https://" + URL[len("webcals://"):]
 OUT = "calendar.json"
 
 def unfold(text):
