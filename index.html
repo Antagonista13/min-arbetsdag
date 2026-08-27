@@ -62,7 +62,28 @@ async function calendar(){
  }catch(e){document.getElementById('status').textContent='väntar på första hämtningen';document.getElementById('calendar').innerHTML='<div class="empty">Kalenderdata har ännu inte hämtats.</div>';document.getElementById('next').textContent='Kalenderdata saknas';}
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
-async function weather(){try{const u='https://api.open-meteo.com/v1/forecast?latitude=57.7210&longitude=12.9401&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FStockholm&forecast_days=1';const j=await fetch(u).then(r=>r.json());const n={0:'Klart',1:'Mestadels klart',2:'Delvis molnigt',3:'Mulet',45:'Dimma',48:'Dimma',51:'Duggregn',53:'Duggregn',55:'Duggregn',61:'Regn',63:'Regn',65:'Kraftigt regn',71:'Snö',73:'Snö',75:'Snö',80:'Regnskurar',81:'Regnskurar',82:'Kraftiga regnskurar',95:'Åska'};document.getElementById('temp').textContent=Math.round(j.current.temperature_2m)+'°';document.getElementById('weather').textContent=n[j.current.weather_code]||'Väder';document.getElementById('range').textContent=Math.round(j.daily.temperature_2m_min[0])+'° / '+Math.round(j.daily.temperature_2m_max[0])+'° idag';document.getElementById('rain').textContent='Regnrisk: '+j.daily.precipitation_probability_max[0]+'%';}catch(e){document.getElementById('weather').textContent='Väder ej tillgängligt'}}
+async function menu(){
+  try{
+    const r=await fetch('menu.json?t='+Date.now());
+    if(!r.ok) throw Error();
+    const j=await r.json();
+
+    const days=['söndag','måndag','tisdag','onsdag','torsdag','fredag','lördag'];
+    const today=new Date();
+    const todayName=days[today.getDay()];
+
+    const meal=j.days?.find(d=>d.day.toLowerCase()===todayName);
+
+    document.getElementById('menu').innerHTML=
+      meal && meal.meals?.length
+      ? meal.meals.map(m=>`<div class="item">${escapeHtml(m)}</div>`).join('')
+      : '<div class="empty">Ingen meny hittades</div>';
+
+  }catch(e){
+    document.getElementById('menu').innerHTML=
+      '<div class="empty">Matsedeln kunde inte hämtas</div>';
+  }
+}async function weather(){try{const u='https://api.open-meteo.com/v1/forecast?latitude=57.7210&longitude=12.9401&current=temperature_2m,weather_code&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Europe%2FStockholm&forecast_days=1';const j=await fetch(u).then(r=>r.json());const n={0:'Klart',1:'Mestadels klart',2:'Delvis molnigt',3:'Mulet',45:'Dimma',48:'Dimma',51:'Duggregn',53:'Duggregn',55:'Duggregn',61:'Regn',63:'Regn',65:'Kraftigt regn',71:'Snö',73:'Snö',75:'Snö',80:'Regnskurar',81:'Regnskurar',82:'Kraftiga regnskurar',95:'Åska'};document.getElementById('temp').textContent=Math.round(j.current.temperature_2m)+'°';document.getElementById('weather').textContent=n[j.current.weather_code]||'Väder';document.getElementById('range').textContent=Math.round(j.daily.temperature_2m_min[0])+'° / '+Math.round(j.daily.temperature_2m_max[0])+'° idag';document.getElementById('rain').textContent='Regnrisk: '+j.daily.precipitation_probability_max[0]+'%';}catch(e){document.getElementById('weather').textContent='Väder ej tillgängligt'}}
 tick();
 calendar();
 weather();
