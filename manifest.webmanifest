@@ -1,0 +1,10 @@
+{
+  "name": "Min arbetsdag",
+  "short_name": "Min arbetsdag",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#10161d",
+  "theme_color": "#16212b",
+  "lang": "sv",
+  "icons": []
+}
