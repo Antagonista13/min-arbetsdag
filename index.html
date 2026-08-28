@@ -926,88 +926,87 @@ document.getElementById('next').textContent = nextText;
 
 async function menu(){
 
+  const menuEl = document.getElementById('menu');
+
   try{
 
     const r = await fetch(
       'menu.json?t=' + Date.now()
     );
 
-
     if(!r.ok){
-      throw Error();
+      throw new Error('Kunde inte läsa menu.json');
     }
-
 
     const j = await r.json();
 
-
-    /*
-      fetch_menu.py sparar numera:
-
-      {
-        "updatedAt": "...",
-        "source": "...",
-        "meals": [
-          {
-            "date": "2026-08-27",
-            "name": "...",
-            "dishes": [
-              "...",
-              "..."
-            ]
-          }
-        ]
-      }
-
-      Därför letar vi efter dagens datum
-      istället för "day" och "meals".
-    */
-
-
-    const today =
-      new Date();
-
+    const today = new Date();
 
     const todayISO =
       today.getFullYear()
       + '-'
-      + String(
-          today.getMonth()+1
-        ).padStart(2,'0')
+      + String(today.getMonth()+1).padStart(2,'0')
       + '-'
-      + String(
-          today.getDate()
-        ).padStart(2,'0');
-
+      + String(today.getDate()).padStart(2,'0');
 
     let meals = [];
 
+    if(Array.isArray(j.meals)){
 
-    if(
-      Array.isArray(j.meals)
-    ){
-
-      const todayMeal =
-        j.meals.find(
-          m =>
-            String(m.date).slice(0,10)
-            ===
-            todayISO
-        );
-
+      const todayMeal = j.meals.find(
+        m =>
+          String(m.date).slice(0,10)
+          === todayISO
+      );
 
       if(
         todayMeal &&
         Array.isArray(todayMeal.dishes)
       ){
 
-        meals =
-          todayMeal.dishes.filter(
-            d =>
-              d &&
-              String(d).trim()
-          );
+        meals = todayMeal.dishes.filter(
+          d =>
+            d &&
+            String(d).trim()
+        );
 
+      }
+
+    }
+
+    if(!menuEl){
+      return;
+    }
+
+    if(meals.length === 0){
+
+      menuEl.innerHTML =
+        '<div class="empty">Ingen meny registrerad för idag.</div>';
+
+      return;
+    }
+
+    menuEl.innerHTML = meals
+      .map(
+        dish =>
+          `<div class="menu-item">${dish}</div>`
+      )
+      .join('');
+
+  }catch(error){
+
+    console.error('Matsedel:', error);
+
+    if(menuEl){
+
+      menuEl.innerHTML =
+        '<div class="empty">Kunde inte läsa dagens meny.</div>';
+
+    }
+
+  }
+
+}
       }
     async function visaAllaUppdrag(){
 
