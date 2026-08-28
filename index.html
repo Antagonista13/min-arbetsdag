@@ -719,7 +719,7 @@ async function calendar(){
         e =>
           `<div class="item">
             <span class="time">
-              ${fmtTime(e.start)}
+              ${fmtTime(e.start)}–${fmtTime(e.end)}
             </span>
             ${escapeHtml(
               e.title ||
