@@ -2,22 +2,23 @@ import os
 import re
 import json
 import urllib.request
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 URL = os.environ["ICLOUD_CALENDAR_URL"]
 OUT = "calendar.json"
 
+# Hur långt framåt kalendern ska hämtas
+DAYS_AHEAD = 90
 
 def unfold(text):
     return re.sub(r"\r?\n[ \t]", "", text)
-
 
 def parse_dt(value):
     value = value.strip()
 
     if "T" not in value:
         return (
-            value[:4]
+            value[0:4]
             + "-"
             + value[4:6]
             + "-"
@@ -26,13 +27,19 @@ def parse_dt(value):
         )
 
     base = value.rstrip("Z")
-    dt = datetime.strptime(base, "%Y%m%dT%H%M%S")
-    return dt.isoformat()
 
+    try:
+        dt = datetime.strptime(base, "%Y%m%dT%H%M%S")
+        return dt.isoformat()
+    except ValueError:
+        return value
 
 def parse_events(text):
     text = unfold(text)
     events = []
+
+    today = datetime.now(timezone.utc).date()
+    max_date = today + timedelta(days=DAYS_AHEAD)
 
     for block in re.findall(
         r"BEGIN:VEVENT(.*?)END:VEVENT",
@@ -56,9 +63,26 @@ def parse_events(text):
         start = fields["DTSTART"][0]
         end = fields.get("DTEND", [start])[0]
 
+        parsed_start = parse_dt(start)
+
+        try:
+            event_date = datetime.fromisoformat(
+                parsed_start
+            ).date()
+        except ValueError:
+            continue
+
+        # Ta bort gamla händelser och händelser
+        # som ligger för långt fram i tiden.
+        if event_date < today:
+            continue
+
+        if event_date > max_date:
+            continue
+
         events.append({
             "title": fields.get("SUMMARY", [""])[0],
-            "start": parse_dt(start),
+            "start": parsed_start,
             "end": parse_dt(end),
             "location": fields.get("LOCATION", [""])[0],
         })
@@ -68,16 +92,30 @@ def parse_events(text):
         key=lambda x: x["start"]
     )
 
+
 URL = URL.strip()
 
 if URL.lower().startswith("webcal://"):
     URL = "https://" + URL[9:]
-with urllib.request.urlopen(URL, timeout=30) as r:
-    raw = r.read().decode(
-        "utf-8-sig",
-        errors="replace"
-    )
 
+request = urllib.request.Request(
+    URL,
+    headers={
+        "User-Agent": "Mozilla/5.0",
+        "Accept": "text/calendar,text/plain,*/*",
+    },
+)
+
+with urllib.request.urlopen(request, timeout=30) as r:
+    raw_bytes = r.read()
+
+# Försök först med UTF-8. Om kalendern innehåller äldre
+# teckenkodning använder vi latin-1 som reserv istället
+# för att förstöra tecken med �.
+try:
+    raw = raw_bytes.decode("utf-8-sig")
+except UnicodeDecodeError:
+    raw = raw_bytes.decode("latin-1")
 
 with open(
     OUT,
@@ -96,6 +134,5 @@ with open(
         ensure_ascii=False,
         indent=2,
     )
-
 
 print(f"Wrote {OUT}")
