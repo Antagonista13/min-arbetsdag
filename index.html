@@ -785,34 +785,13 @@ async function calendar(){
     */
     const n = upcoming[0];
 
-    let nextText = 'Inga fler händelser';
 
-    if (n) {
-    const start = new Date(n.start);
-    const finish = new Date(n.end || n.start);
-    const now = new Date();
-
-    const isOngoing = start <= now && finish > now;
-    const isMultiDay = finish - start > 24 * 60 * 60 * 1000;
-
-    if (isOngoing && isMultiDay) {
-    const endDay = finish.getTime() - 1;
-    const endDate = new Date(endDay);
-
-    const endDayName = endDate.toLocaleDateString(
-      'sv-SE',
-      { weekday: 'long' }
-    );
-
-    nextText =
-      `${n.title || 'Kalenderhändelse'} · Pågår till ${endDayName}`;
-  } else {
-    nextText =
-      `${formatEventTime(n)} · ${n.title || 'Kalenderhändelse'}`;
-  }
-}
-
-document.getElementById('next').textContent = nextText;
+    document.getElementById('next').textContent =
+      n
+      ?
+      `${formatEventTime(n)} · ${n.title || 'Kalenderhändelse'}`
+      :
+      'Inga fler händelser';
 
 
     document.getElementById('status').textContent =
@@ -926,88 +905,89 @@ document.getElementById('next').textContent = nextText;
 
 async function menu(){
 
-  const menuEl = document.getElementById('menu');
-
   try{
 
     const r = await fetch(
       'menu.json?t=' + Date.now()
     );
 
+
     if(!r.ok){
-      throw new Error('Kunde inte läsa menu.json');
+      throw Error();
     }
+
 
     const j = await r.json();
 
-    const today = new Date();
+
+    /*
+      fetch_menu.py sparar numera:
+
+      {
+        "updatedAt": "...",
+        "source": "...",
+        "meals": [
+          {
+            "date": "2026-08-27",
+            "name": "...",
+            "dishes": [
+              "...",
+              "..."
+            ]
+          }
+        ]
+      }
+
+      Därför letar vi efter dagens datum
+      istället för "day" och "meals".
+    */
+
+
+    const today =
+      new Date();
+
 
     const todayISO =
       today.getFullYear()
       + '-'
-      + String(today.getMonth()+1).padStart(2,'0')
+      + String(
+          today.getMonth()+1
+        ).padStart(2,'0')
       + '-'
-      + String(today.getDate()).padStart(2,'0');
+      + String(
+          today.getDate()
+        ).padStart(2,'0');
+
 
     let meals = [];
 
-    if(Array.isArray(j.meals)){
 
-      const todayMeal = j.meals.find(
-        m =>
-          String(m.date).slice(0,10)
-          === todayISO
-      );
+    if(
+      Array.isArray(j.meals)
+    ){
+
+      const todayMeal =
+        j.meals.find(
+          m =>
+            String(m.date).slice(0,10)
+            ===
+            todayISO
+        );
+
 
       if(
         todayMeal &&
         Array.isArray(todayMeal.dishes)
       ){
 
-        meals = todayMeal.dishes.filter(
-          d =>
-            d &&
-            String(d).trim()
-        );
+        meals =
+          todayMeal.dishes.filter(
+            d =>
+              d &&
+              String(d).trim()
+          );
 
       }
-
-    }
-
-    if(!menuEl){
-      return;
-    }
-
-    if(meals.length === 0){
-
-      menuEl.innerHTML =
-        '<div class="empty">Ingen meny registrerad för idag.</div>';
-
-      return;
-    }
-
-    menuEl.innerHTML = meals
-      .map(
-        dish =>
-          `<div class="menu-item">${dish}</div>`
-      )
-      .join('');
-
-  }catch(error){
-
-    console.error('Matsedel:', error);
-
-    if(menuEl){
-
-      menuEl.innerHTML =
-        '<div class="empty">Kunde inte läsa dagens meny.</div>';
-
-    }
-
-  }
-
-}
-  
     async function visaAllaUppdrag(){
 
     try{
