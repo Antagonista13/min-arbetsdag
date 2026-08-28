@@ -804,7 +804,7 @@ async function calendar(){
           ev.map(
             e =>
               `<div class="empty">
-                ${fmtTime(e.start)}
+                ${fmtTime(e.start)}–${fmtTime(e.end)}
                 ·
                 ${escapeHtml(
                   e.title ||
