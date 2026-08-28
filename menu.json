@@ -1,6 +1,46 @@
 {
-  "updatedAt": "2026-08-28T06:15:29.577754Z",
-  "source": "https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok",
-  "meals": [],
-  "status": "Matilda-sidan hittades men matsedelsdatan ligger på en annan nivå."
+  "updatedAt": "2026-08-28T06:39:54.742031+00:00",
+  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-08-24&endDate=2026-08-30&lang=sv",
+  "meals": [
+    {
+      "date": "2026-08-24T00:00:00",
+      "name": "",
+      "dishes": [
+        "Pasta med ostsås & rökt hönskött",
+        "Zuccinibiffar med Tzatsiki & rostad kulpotatis"
+      ]
+    },
+    {
+      "date": "2026-08-25T00:00:00",
+      "name": "",
+      "dishes": [
+        "Chili con carne med ris",
+        "Okonomiyaki (Japansk kålpannkaka) med edamamebönor, picklad rödlök & sojamajo"
+      ]
+    },
+    {
+      "date": "2026-08-26T00:00:00",
+      "name": "",
+      "dishes": [
+        "Stekta köttbullar med makaroner",
+        "Morotsbiffar med böncréme & rostade rotfrukter"
+      ]
+    },
+    {
+      "date": "2026-08-27T00:00:00",
+      "name": "",
+      "dishes": [
+        "Fiskgratäng med pepparrot & västerbottensost serveras med potatismos",
+        "Grönsaksnuggets med ajvar & fetaostsås med bulgur"
+      ]
+    },
+    {
+      "date": "2026-08-28T00:00:00",
+      "name": "",
+      "dishes": [
+        "Tomatsoppa med pasta samt bröd & tillbehör",
+        "Blomkålssoppa med rostade solrosfrön samt bröd & tillbehör"
+      ]
+    }
+  ]
 }
