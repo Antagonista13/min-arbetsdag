@@ -807,7 +807,8 @@ async function calendar(){
                       ${fmtTime(e.start)}–${fmtTime(e.end)}
                       ·
                       ${escapeHtml(
-                          e.title || 'Kalenderhändelse'
+                          e.title ||
+                          'Kalenderhändelse'
                       )}
                   </div>`
 ).join('')
