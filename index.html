@@ -701,7 +701,7 @@ async function calendar(){
       j.events
         .filter(
           e =>
-            new Date(e.end) >= now
+            new Date(e.start) > now
         )
         .sort(
           (a,b) =>
