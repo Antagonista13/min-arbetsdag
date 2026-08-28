@@ -1,0 +1,48 @@
+{
+  "updatedAt": "2026-08-28T08:21:14.808864+00:00",
+  "summary": {
+    "activeAssignments": 3,
+    "followUp": 3
+  },
+  "assignments": [
+    {
+      "school": "Sjöboskolan",
+      "student": "Ajdin",
+      "grade": 3,
+      "description": "Uppdrag på plats",
+      "start": "2026-08-26",
+      "end": null,
+      "priority": 3,
+      "responsible": "Carro",
+      "placement": "",
+      "notes": "",
+      "needsFollowUp": true
+    },
+    {
+      "school": "Erikslund F-6",
+      "student": "",
+      "grade": null,
+      "description": "Annat",
+      "start": null,
+      "end": null,
+      "priority": null,
+      "responsible": "",
+      "placement": "",
+      "notes": "uppstart av flex",
+      "needsFollowUp": true
+    },
+    {
+      "school": "Dalsjöskolan KSU",
+      "student": "Hugo",
+      "grade": 4,
+      "description": "Uppdrag på plats",
+      "start": "2026-08-26",
+      "end": null,
+      "priority": 3,
+      "responsible": "Marko",
+      "placement": "",
+      "notes": "stötta inskolning",
+      "needsFollowUp": true
+    }
+  ]
+}
