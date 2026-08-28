@@ -21,7 +21,7 @@ jobs:
           ICLOUD_CALENDAR_URL: ${{ secrets.ICLOUD_CALENDAR_URL }}
         run: python .github/scripts/fetch_calendar.py
 
-            - name: Hämta matsedel
+      - name: Hämta matsedel
         run: python .github/scripts/fetch_menu.py
 
       - name: Spara Matilda-debug
