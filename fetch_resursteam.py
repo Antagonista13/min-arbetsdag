@@ -78,7 +78,8 @@ def fetch_resursteam(input_file=INPUT_FILE, output_file=OUTPUT_FILE):
     result = {
         "updatedAt": datetime.now().astimezone().isoformat(),
         "summary": {
-            "activeAssignments": len(assignments),
+           "activeAssignments": len(assignments),
+            "totalAssignments": len(assignments),
             "followUp": sum(
                 1 for item in assignments
                 if item["needsFollowUp"]
