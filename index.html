@@ -818,7 +818,7 @@ async function resursteam(){
       j.summary?.followUp ?? 0;
 
     document.getElementById('documentation').textContent =
-      j.summary?.documentation ?? 0;
+    j.summary?.totalAssignments ?? 0;
 
   }catch(e){
     console.error(
