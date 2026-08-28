@@ -1,4 +1,17 @@
 {
-  "updatedAt": "2026-08-28T09:38:12.264200+00:00",
-  "events": []
+  "updatedAt": "2026-08-28T10:16:47.451196+00:00",
+  "events": [
+    {
+      "title": "Observation",
+      "start": "2026-08-28T08:00:00",
+      "end": "2026-08-28T14:00:00",
+      "location": "Sjöboskolan"
+    },
+    {
+      "title": "Handledning",
+      "start": "2026-08-28T08:00:00",
+      "end": "2026-08-28T09:00:00",
+      "location": "Dalsjöskolan KSU"
+    }
+  ]
 }
