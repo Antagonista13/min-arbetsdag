@@ -689,11 +689,30 @@ async function calendar(){
     );
 
 
+    /*
+      En kalenderhändelse kan pågå över flera dagar.
+      Därför räcker det inte att bara kontrollera e.start.
+
+      Exempel:
+      start = tisdag 00:00
+      end   = lördag 00:00
+
+      Händelsen ska då synas även onsdag, torsdag och fredag.
+    */
+    const overlapsDay = (e, from, to) => {
+
+      const start = new Date(e.start);
+      const finish = new Date(e.end || e.start);
+
+      return start < to && finish > from;
+
+    };
+
+
     const today =
       j.events.filter(
         e =>
-          new Date(e.start) >= day &&
-          new Date(e.start) < end
+          overlapsDay(e, day, end)
       );
 
 
@@ -701,13 +720,40 @@ async function calendar(){
       j.events
         .filter(
           e =>
-            new Date(e.start) > now
+            new Date(e.end || e.start) > now
         )
         .sort(
           (a,b) =>
             new Date(a.start) -
             new Date(b.start)
         );
+
+
+    const formatEventTime = e => {
+
+      /*
+        Heldag/flerdagars händelser ska inte visas som
+        00:00–00:00. Visa istället "Heldag".
+      */
+      const start = new Date(e.start);
+      const finish = new Date(e.end || e.start);
+
+      if(
+        e.allDay ||
+        (
+          start.getHours() === 0 &&
+          start.getMinutes() === 0 &&
+          finish.getHours() === 0 &&
+          finish.getMinutes() === 0 &&
+          finish > start
+        )
+      ){
+        return 'Heldag';
+      }
+
+      return `${fmtTime(e.start)}–${fmtTime(e.end)}`;
+
+    };
 
 
     document.getElementById('calendar').innerHTML =
@@ -719,7 +765,7 @@ async function calendar(){
         e =>
           `<div class="item">
             <span class="time">
-              ${fmtTime(e.start)}–${fmtTime(e.end)}
+              ${formatEventTime(e)}
             </span>
             ${escapeHtml(
               e.title ||
@@ -733,13 +779,17 @@ async function calendar(){
       '<div class="empty">Inga kalenderhändelser idag.</div>';
 
 
+    /*
+      Om en fler-dagars händelse redan pågår visar vi den
+      som nästa relevanta händelse istället för att tappa bort den.
+    */
     const n = upcoming[0];
 
 
     document.getElementById('next').textContent =
       n
       ?
-      `${fmtTime(n.start)}–${fmtTime(n.end)} · ${n.title || 'Kalenderhändelse'}`
+      `${formatEventTime(n)} · ${n.title || 'Kalenderhändelse'}`
       :
       'Inga fler händelser';
 
@@ -782,8 +832,7 @@ async function calendar(){
       const ev =
         j.events.filter(
           e =>
-            new Date(e.start) >= x &&
-            new Date(e.start) < x2
+            overlapsDay(e, x, x2)
         );
 
 
@@ -802,16 +851,16 @@ async function calendar(){
           ?
 
           ev.map(
-              e =>
-                  `<div class="empty">
-                      ${fmtTime(e.start)}–${fmtTime(e.end)}
-                      ·
-                      ${escapeHtml(
-                          e.title ||
-                          'Kalenderhändelse'
-                      )}
-                  </div>`
-).join('')
+            e =>
+              `<div class="empty">
+                ${formatEventTime(e)}
+                ·
+                ${escapeHtml(
+                  e.title ||
+                  'Kalenderhändelse'
+                )}
+              </div>`
+          ).join('')
 
           :
 
@@ -831,6 +880,8 @@ async function calendar(){
   }
 
   catch(e){
+
+    console.error('Kalenderfel:', e);
 
     document.getElementById('status').textContent =
       'väntar på första hämtningen';

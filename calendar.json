@@ -5,37 +5,43 @@
       "title": "Observation - Sjöboskolan",
       "start": "2026-08-28T08:00:00",
       "end": "2026-08-28T14:00:00",
-      "location": "Sjöboskolan"
+      "location": "Sjöboskolan",
+      "allDay": false
     },
     {
       "title": "Handledning",
       "start": "2026-08-28T08:00:00",
       "end": "2026-08-28T14:00:00",
-      "location": "Dalsjöskolan KSU"
+      "location": "Dalsjöskolan KSU",
+      "allDay": false
     },
     {
       "title": "Avstämning med APT",
       "start": "2026-08-31T14:30:00",
       "end": "2026-08-31T16:00:00",
-      "location": "Resursteamet"
+      "location": "Resursteamet",
+      "allDay": false
     },
     {
       "title": "TMO - utbildning",
       "start": "2026-09-11T08:00:00",
       "end": "2026-09-11T12:00:00",
-      "location": "Erikslundskolan"
+      "location": "Erikslundskolan",
+      "allDay": false
     },
     {
       "title": "Henric borta",
       "start": "2026-09-15T00:00:00",
       "end": "2026-09-19T00:00:00",
-      "location": ""
+      "location": "",
+      "allDay": true
     },
     {
       "title": "Avstämning",
       "start": "2026-09-15T14:30:00",
       "end": "2026-09-15T15:00:00",
-      "location": "Teams"
+      "location": "Teams",
+      "allDay": false
     }
   ]
 }
