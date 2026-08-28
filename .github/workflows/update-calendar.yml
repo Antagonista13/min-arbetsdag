@@ -15,7 +15,10 @@ jobs:
     steps:
       - name: Hämta repository
         uses: actions/checkout@v4
-
+        
+      - name: Installera Python-beroenden
+        run: pip install openpyxl
+        
       - name: Hämta iCloud-kalender
         env:
           ICLOUD_CALENDAR_URL: ${{ secrets.ICLOUD_CALENDAR_URL }}
@@ -23,6 +26,9 @@ jobs:
 
       - name: Hämta matsedel
         run: python .github/scripts/fetch_menu.py
+
+      - name: Hämta Resursteam
+        run: python .github/scripts/fetch_resursteam.py
 
       - name: Publicera kalender och matsedel
         run: |
