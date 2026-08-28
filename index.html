@@ -739,7 +739,7 @@ async function calendar(){
     document.getElementById('next').textContent =
       n
       ?
-      `${fmtTime(n.start)} · ${n.title || 'Kalenderhändelse'}`
+      `${fmtTime(n.start)}–${fmtTime(n.end)} · ${n.title || 'Kalenderhändelse'}`
       :
       'Inga fler händelser';
 
