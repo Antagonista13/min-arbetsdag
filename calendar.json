@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-28T10:40:21.015318+00:00",
+  "updatedAt": "2026-08-28T10:53:13.292760+00:00",
   "events": [
     {
       "title": "Observation",
@@ -10,8 +10,32 @@
     {
       "title": "Handledning",
       "start": "2026-08-28T08:00:00",
-      "end": "2026-08-28T09:00:00",
+      "end": "2026-08-28T14:00:00",
       "location": "Dalsjöskolan KSU"
+    },
+    {
+      "title": "Avstämning med APT",
+      "start": "2026-08-31T14:30:00",
+      "end": "2026-08-31T16:00:00",
+      "location": "Resursteamet"
+    },
+    {
+      "title": "TMO - utbildning",
+      "start": "2026-09-11T08:00:00",
+      "end": "2026-09-11T12:00:00",
+      "location": "Erikslundskolan"
+    },
+    {
+      "title": "Henric borta",
+      "start": "2026-09-15T00:00:00",
+      "end": "2026-09-19T00:00:00",
+      "location": ""
+    },
+    {
+      "title": "Avstämning",
+      "start": "2026-09-15T14:30:00",
+      "end": "2026-09-15T15:00:00",
+      "location": "Teams"
     }
   ]
 }
