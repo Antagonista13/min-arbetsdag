@@ -785,13 +785,34 @@ async function calendar(){
     */
     const n = upcoming[0];
 
+    let nextText = 'Inga fler händelser';
 
-    document.getElementById('next').textContent =
-      n
-      ?
-      `${formatEventTime(n)} · ${n.title || 'Kalenderhändelse'}`
-      :
-      'Inga fler händelser';
+    if (n) {
+    const start = new Date(n.start);
+    const finish = new Date(n.end || n.start);
+    const now = new Date();
+
+    const isOngoing = start <= now && finish > now;
+    const isMultiDay = finish - start > 24 * 60 * 60 * 1000;
+
+    if (isOngoing && isMultiDay) {
+    const endDay = finish.getTime() - 1;
+    const endDate = new Date(endDay);
+
+    const endDayName = endDate.toLocaleDateString(
+      'sv-SE',
+      { weekday: 'long' }
+    );
+
+    nextText =
+      `${n.title || 'Kalenderhändelse'} · Pågår till ${endDayName}`;
+  } else {
+    nextText =
+      `${formatEventTime(n)} · ${n.title || 'Kalenderhändelse'}`;
+  }
+}
+
+document.getElementById('next').textContent = nextText;
 
 
     document.getElementById('status').textContent =
