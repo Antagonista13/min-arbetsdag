@@ -28,7 +28,7 @@ jobs:
         run: python .github/scripts/fetch_menu.py
 
       - name: Hämta Resursteam
-        run: python .github/scripts/fetch_resursteam.py
+        run: python fetch_resursteam.py
 
       - name: Publicera kalender och matsedel
         run: |
