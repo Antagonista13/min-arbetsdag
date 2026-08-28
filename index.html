@@ -8,6 +8,121 @@
 <title>RESURSTEAMET BORÅS</title>
 
 <style>
+  .clickable {
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.clickable:hover {
+    transform: translateY(-2px);
+    background: #34404c;
+}
+  .uppdrag-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.uppdrag-modal {
+    width: min(850px, 100%);
+    max-height: 85vh;
+    overflow: hidden;
+    background: #1f2730;
+    border: 1px solid #3a4652;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+}
+
+.uppdrag-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 24px;
+    border-bottom: 1px solid #3a4652;
+}
+
+.uppdrag-title {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.uppdrag-count {
+    margin-top: 5px;
+    color: #9eafbf;
+    font-size: 14px;
+}
+
+.uppdrag-close {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 10px;
+    background: #34404c;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+.uppdrag-close:hover {
+    background: #465463;
+}
+
+.uppdrag-list {
+    max-height: calc(85vh - 100px);
+    overflow-y: auto;
+    padding: 10px 20px 20px;
+}
+
+.uppdrag-item {
+    display: flex;
+    gap: 15px;
+    padding: 18px 5px;
+    border-bottom: 1px solid #35404b;
+}
+
+.uppdrag-number {
+    min-width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #34404c;
+    font-weight: 700;
+}
+
+.uppdrag-content {
+    flex: 1;
+}
+
+.uppdrag-school {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.uppdrag-student,
+.uppdrag-description,
+.uppdrag-responsible,
+.uppdrag-notes {
+    color: #b9c5d0;
+    margin-top: 4px;
+}
+
+.uppdrag-description {
+    color: white;
+}
+
+.uppdrag-empty {
+    padding: 40px;
+    text-align: center;
+    color: #9eafbf;
+}
 :root{
   font-family:Segoe UI,Arial,sans-serif;
   color:#fff;
@@ -300,15 +415,15 @@ a.button{
 
   <!-- RESURSTEAMET -->
 
-  <div class="card">
+  <div class="card" onclick="openResursteam()" style="cursor:pointer;">
 
     <div class="title">RESURSTEAMET</div>
 
     <div class="stats">
 
-      <div class="stat">
-      <div class="num" id="activeAssignments">0</div>
-      <div class="muted">Aktiva uppdrag</div>
+      <div class="stat clickable" onclick="visaAllaUppdrag()">
+      <div class="num" id="totalAssignments">0</div>
+      <div class="muted">Totalt antal uppdrag</div>
       </div>
 
       <div class="stat">
@@ -316,14 +431,78 @@ a.button{
       <div class="muted">Följa upp</div>
       </div>
 
-      <div class="stat">
+      <div class="stat clickable" onclick="visaResursteam()">
         <div class="num" id="totalAssignments">0</div>
         <div class="muted">Totalt antal uppdrag</div>
       </div>
 
     </div>
 
+  </div><!-- RESURSTEAMET DETALJVY -->
+<div id="resursteamModal" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:9999;
+  padding:30px;
+  overflow-y:auto;
+">
+
+  <div style="
+    max-width:1000px;
+    margin:0 auto;
+    background:#202830;
+    border:1px solid #394550;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+  ">
+
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:20px;
+    ">
+      <div>
+        <div style="
+          font-size:12px;
+          letter-spacing:1px;
+          color:#9fb4c8;
+          text-transform:uppercase;
+        ">
+          Resursteamet
+        </div>
+
+        <h2 style="margin:5px 0 0;">
+          Aktuella uppdrag
+        </h2>
+      </div>
+
+      <button
+        onclick="closeResursteam(event)"
+        style="
+          border:0;
+          background:#344454;
+          color:white;
+          padding:10px 16px;
+          border-radius:10px;
+          cursor:pointer;
+          font-size:15px;
+        ">
+        Stäng
+      </button>
+    </div>
+
+    <div id="resursteamDetails">
+      <div class="empty">
+        Laddar uppdrag...
+      </div>
+    </div>
+
   </div>
+</div>
 
 
   <!-- VECKANS KALENDER -->
@@ -754,7 +933,151 @@ async function menu(){
           );
 
       }
+    async function visaAllaUppdrag(){
 
+    try{
+
+        const r = await fetch(
+            'resursteam.json?t=' + Date.now()
+        );
+
+        if(!r.ok){
+            throw new Error('Kunde inte läsa resursteam.json');
+        }
+
+        const j = await r.json();
+
+        const uppdrag = j.assignments || [];
+
+        let html = `
+            <div class="uppdrag-overlay" id="uppdragOverlay">
+
+                <div class="uppdrag-modal">
+
+                    <div class="uppdrag-header">
+                        <div>
+                            <div class="uppdrag-title">
+                                RESURSTEAM – ALLA UPPDRAG
+                            </div>
+
+                            <div class="uppdrag-count">
+                                ${uppdrag.length} uppdrag totalt
+                            </div>
+                        </div>
+
+                        <button
+                            class="uppdrag-close"
+                            onclick="stangAllaUppdrag()">
+                            ×
+                        </button>
+                    </div>
+
+                    <div class="uppdrag-list">
+        `;
+
+        if(uppdrag.length === 0){
+
+            html += `
+                <div class="uppdrag-empty">
+                    Inga uppdrag finns registrerade.
+                </div>
+            `;
+
+        } else {
+
+            uppdrag.forEach((item, index) => {
+
+                html += `
+                    <div class="uppdrag-item">
+
+                        <div class="uppdrag-number">
+                            ${index + 1}
+                        </div>
+
+                        <div class="uppdrag-content">
+
+                            <div class="uppdrag-school">
+                                ${item.school || 'Ingen skola angiven'}
+                            </div>
+
+                            ${
+                                item.student
+                                ? `<div class="uppdrag-student">
+                                    Elev: ${item.student}
+                                   </div>`
+                                : ''
+                            }
+
+                            ${
+                                item.description
+                                ? `<div class="uppdrag-description">
+                                    ${item.description}
+                                   </div>`
+                                : ''
+                            }
+
+                            ${
+                                item.responsible
+                                ? `<div class="uppdrag-responsible">
+                                    Ansvarig: ${item.responsible}
+                                   </div>`
+                                : ''
+                            }
+
+                            ${
+                                item.notes
+                                ? `<div class="uppdrag-notes">
+                                    ${item.notes}
+                                   </div>`
+                                : ''
+                            }
+
+                        </div>
+
+                    </div>
+                `;
+
+            });
+
+        }
+
+        html += `
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+        document.body.insertAdjacentHTML(
+            'beforeend',
+            html
+        );
+
+    } catch(e){
+
+        console.error(
+            'Kunde inte visa Resursteamets uppdrag:',
+            e
+        );
+
+        alert(
+            'Kunde inte läsa Resursteamets uppdrag.'
+        );
+    }
+}
+
+
+function stangAllaUppdrag(){
+
+    const overlay =
+        document.getElementById('uppdragOverlay');
+
+    if(overlay){
+        overlay.remove();
+    }
+
+}
     }
 
 
@@ -826,6 +1149,200 @@ async function resursteam(){
       e
     );
   }
+}async function openResursteam(event){
+
+  if(event){
+    event.stopPropagation();
+  }
+
+  const modal = document.getElementById('resursteamModal');
+  const details = document.getElementById('resursteamDetails');
+
+  modal.style.display = 'block';
+
+  details.innerHTML = `
+    <div class="empty">
+      Laddar uppdrag...
+    </div>
+  `;
+
+  try{
+
+    const r = await fetch(
+      'resursteam.json?t=' + Date.now()
+    );
+
+    if(!r.ok){
+      throw new Error('Kunde inte läsa resursteam.json');
+    }
+
+    const j = await r.json();
+
+    if(!j.assignments || !j.assignments.length){
+
+      details.innerHTML = `
+        <div class="empty">
+          Inga uppdrag finns registrerade.
+        </div>
+      `;
+
+      return;
+    }
+
+    details.innerHTML = j.assignments.map(item => `
+
+      <div style="
+        background:#29333d;
+        border:1px solid #3a4652;
+        border-radius:14px;
+        padding:18px;
+        margin-bottom:14px;
+      ">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          align-items:flex-start;
+        ">
+
+          <div>
+
+            <div style="
+              font-size:20px;
+              font-weight:600;
+              margin-bottom:5px;
+            ">
+              ${item.school || 'Ingen skola angiven'}
+            </div>
+
+            <div style="
+              color:#9fb4c8;
+              margin-bottom:12px;
+            ">
+              ${item.student || 'Elev ej angiven'}
+              ${item.grade ? ' • Årskurs ' + item.grade : ''}
+            </div>
+
+          </div>
+
+          ${
+            item.needsFollowUp
+            ? `
+              <div style="
+                background:#805b25;
+                color:#fff;
+                padding:6px 10px;
+                border-radius:8px;
+                font-size:12px;
+                white-space:nowrap;
+              ">
+                Följ upp
+              </div>
+            `
+            : ''
+          }
+
+        </div>
+
+        <div style="
+          display:grid;
+          grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+          gap:12px;
+          margin-top:12px;
+        ">
+
+          <div>
+            <div style="color:#8fa3b5;font-size:12px;">
+              Uppdrag
+            </div>
+            <div>
+              ${item.description || '—'}
+            </div>
+          </div>
+
+          <div>
+            <div style="color:#8fa3b5;font-size:12px;">
+              Ansvarig
+            </div>
+            <div>
+              ${item.responsible || '—'}
+            </div>
+          </div>
+
+          <div>
+            <div style="color:#8fa3b5;font-size:12px;">
+              Start
+            </div>
+            <div>
+              ${item.start || '—'}
+            </div>
+          </div>
+
+          <div>
+            <div style="color:#8fa3b5;font-size:12px;">
+              Placering
+            </div>
+            <div>
+              ${item.placement || '—'}
+            </div>
+          </div>
+
+        </div>
+
+        ${
+          item.notes
+          ? `
+            <div style="
+              margin-top:14px;
+              padding-top:12px;
+              border-top:1px solid #3a4652;
+            ">
+              <div style="
+                color:#8fa3b5;
+                font-size:12px;
+                margin-bottom:4px;
+              ">
+                Anteckningar
+              </div>
+
+              <div>
+                ${item.notes}
+              </div>
+            </div>
+          `
+          : ''
+        }
+
+      </div>
+
+    `).join('');
+
+  }catch(e){
+
+    console.error(
+      'Kunde inte läsa resursteam.json:',
+      e
+    );
+
+    details.innerHTML = `
+      <div class="empty">
+        Kunde inte läsa Resursteamets uppdrag.
+      </div>
+    `;
+  }
+}
+
+
+function closeResursteam(event){
+
+  if(event){
+    event.stopPropagation();
+  }
+
+  document.getElementById(
+    'resursteamModal'
+  ).style.display = 'none';
 }
 
 /* =========================
