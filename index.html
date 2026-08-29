@@ -754,7 +754,43 @@ async function calendar(){
       return `${fmtTime(e.start)}–${fmtTime(e.end)}`;
 
     };
+const getEventDayStatus = (e, day) => {
 
+    const start = new Date(e.start);
+    const finish = new Date(e.end || e.start);
+
+    const currentDay = new Date(
+        day.getFullYear(),
+        day.getMonth(),
+        day.getDate()
+    );
+
+    const startDay = new Date(
+        start.getFullYear(),
+        start.getMonth(),
+        start.getDate()
+    );
+
+    const finishDay = new Date(
+        finish.getFullYear(),
+        finish.getMonth(),
+        finish.getDate()
+    );
+
+    if (startDay.getTime() === finishDay.getTime()) {
+        return 'single';
+    }
+
+    if (currentDay.getTime() === startDay.getTime()) {
+        return 'start';
+    }
+
+    if (currentDay.getTime() === finishDay.getTime()) {
+        return 'end';
+    }
+
+    return 'middle';
+};
 
     document.getElementById('calendar').innerHTML =
       today.length
@@ -850,17 +886,43 @@ async function calendar(){
 
           ?
 
-          ev.map(
-            e =>
-              `<div class="empty">
+          ev.map(e => {
+
+    const status =
+        getEventDayStatus(e, x);
+
+    let marker = '';
+
+    if (status === 'start') {
+        marker = '▶';
+    }
+    else if (status === 'middle') {
+        marker = '↔';
+    }
+    else if (status === 'end') {
+        marker = '◀';
+    }
+
+    return `
+        <div class="calendar-event ${status}">
+            <span class="event-marker">
+                ${marker}
+            </span>
+
+            <span class="event-time">
                 ${formatEventTime(e)}
-                ·
+            </span>
+
+            <span class="event-title">
                 ${escapeHtml(
-                  e.title ||
-                  'Kalenderhändelse'
+                    e.title ||
+                    'Kalenderhändelse'
                 )}
-              </div>`
-          ).join('')
+            </span>
+        </div>
+    `;
+
+}).join('')
 
           :
 
