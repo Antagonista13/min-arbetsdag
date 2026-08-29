@@ -731,234 +731,188 @@ async function calendar(){
 
     const formatEventTime = e => {
 
-      /*
-        Heldag/flerdagars händelser ska inte visas som
-        00:00–00:00. Visa istället "Heldag".
-      */
-      const start = new Date(e.start);
-      const finish = new Date(e.end || e.start);
+  const start = new Date(e.start);
+  const finish = new Date(e.end || e.start);
 
-      if(
-        e.allDay ||
-        (
-          start.getHours() === 0 &&
-          start.getMinutes() === 0 &&
-          finish.getHours() === 0 &&
-          finish.getMinutes() === 0 &&
-          finish > start
-        )
-      ){
-        return 'Heldag';
-      }
+  /*
+    Heldag/flerdagars händelser ska inte visas som
+    00:00–00:00. Visa istället "Heldag".
+  */
+  if (
+    e.allDay ||
+    (
+      start.getHours() === 0 &&
+      start.getMinutes() === 0 &&
+      finish.getHours() === 0 &&
+      finish.getMinutes() === 0 &&
+      finish > start
+    )
+  ) {
+    return 'Heldag';
+  }
 
-      return `${fmtTime(e.start)}–${fmtTime(e.end)}`;
-
-    };
-const getEventDayStatus = (e, day) => {
-
-    const start = new Date(e.start);
-    const finish = new Date(e.end || e.start);
-
-    const currentDay = new Date(
-        day.getFullYear(),
-        day.getMonth(),
-        day.getDate()
-    );
-
-    const startDay = new Date(
-        start.getFullYear(),
-        start.getMonth(),
-        start.getDate()
-    );
-
-    const finishDay = new Date(
-        finish.getFullYear(),
-        finish.getMonth(),
-        finish.getDate()
-    );
-
-    if (startDay.getTime() === finishDay.getTime()) {
-        return 'single';
-    }
-
-    if (currentDay.getTime() === startDay.getTime()) {
-        return 'start';
-    }
-
-    if (currentDay.getTime() === finishDay.getTime()) {
-        return 'end';
-    }
-
-    return 'middle';
+  return `${fmtTime(e.start)}–${fmtTime(e.end)}`;
 };
 
-    document.getElementById('calendar').innerHTML =
-      today.length
 
-      ?
+const getEventDayStatus = (e, day) => {
 
-      today.map(
-        e =>
-          `<div class="item">
-            <span class="time">
-              ${formatEventTime(e)}
-            </span>
-            ${escapeHtml(
-              e.title ||
-              'Kalenderhändelse'
-            )}
-          </div>`
-      ).join('')
+  const start = new Date(e.start);
+  const finish = new Date(e.end || e.start);
 
-      :
+  const currentDay = new Date(
+    day.getFullYear(),
+    day.getMonth(),
+    day.getDate()
+  );
 
-      '<div class="empty">Inga kalenderhändelser idag.</div>';
+  const startDay = new Date(
+    start.getFullYear(),
+    start.getMonth(),
+    start.getDate()
+  );
 
+  const finishDay = new Date(
+    finish.getFullYear(),
+    finish.getMonth(),
+    finish.getDate()
+  );
 
-    /*
-      Om en fler-dagars händelse redan pågår visar vi den
-      som nästa relevanta händelse istället för att tappa bort den.
-    */
-    const n = upcoming[0];
+  if (startDay.getTime() === finishDay.getTime()) {
+    return 'single';
+  }
 
+  if (currentDay.getTime() === startDay.getTime()) {
+    return 'start';
+  }
 
-    document.getElementById('next').textContent =
-      n
-      ?
-      `${formatEventTime(n)} · ${n.title || 'Kalenderhändelse'}`
-      :
-      'Inga fler händelser';
+  if (currentDay.getTime() === finishDay.getTime()) {
+    return 'end';
+  }
 
-
-    document.getElementById('status').textContent =
-      'ansluten';
+  return 'middle';
+};
 
 
-    document.getElementById('updated').textContent =
-      j.updatedAt
-      ?
-      new Date(
+document.getElementById('calendar').innerHTML =
+  today.length
+    ? today.map(e => `
+        <div class="item">
+          <span class="time">
+            ${formatEventTime(e)}
+          </span>
+          ${escapeHtml(
+            e.title || 'Kalenderhändelse'
+          )}
+        </div>
+      `).join('')
+    : '<div class="empty">Inga kalenderhändelser idag.</div>';
+
+
+const n = upcoming[0];
+
+document.getElementById('next').textContent =
+  n
+    ? `${formatEventTime(n)} · ${n.title || 'Kalenderhändelse'}`
+    : 'Inga fler händelser';
+
+
+document.getElementById('status').textContent =
+  'ansluten';
+
+
+document.getElementById('updated').textContent =
+  j.updatedAt
+    ? new Date(
         j.updatedAt
       ).toLocaleString('sv-SE')
-      :
-      '—';
+    : '–';
 
 
-    /* VECKANS KALENDER */
+/* VECKANS KALENDER */
 
-    const days = [];
+const days = [];
 
+for (let i = 0; i < 30; i++) {
 
-    for(let i=0;i<30;i++){
+  const x = new Date(day);
 
-      const x = new Date(day);
+  x.setDate(
+    x.getDate() + i
+  );
 
-      x.setDate(
-        x.getDate() + i
-      );
+  const x2 = new Date(x);
 
+  x2.setDate(
+    x2.getDate() + 1
+  );
 
-      const x2 = new Date(x);
+  const ev =
+    j.events.filter(
+      e =>
+        overlapDay(e, x, x2)
+    );
 
-      x2.setDate(
-        x2.getDate() + 1
-      );
+  days.push(
 
+    `<div class="weekday">
+      ${weekdays[x.getDay()]}
+    </div>`
 
-      const ev =
-        j.events.filter(
-          e =>
-            overlapsDay(e, x, x2)
-        );
+    +
 
+    (
+      ev.length
 
-      days.push(
+        ? ev.map(e => {
 
-        `<div class="weekday">
-          ${weekdays[x.getDay()]}
-        </div>`
+            const status =
+              getEventDayStatus(e, x);
 
-        +
+            let marker = '';
 
-        (
+            if (status === 'start') {
+              marker = '▶';
+            }
+            else if (status === 'middle') {
+              marker = '↔';
+            }
+            else if (status === 'end') {
+              marker = '◀';
+            }
 
-          ev.length
+            return `
+              <div class="calendar-event ${status}">
 
-          ?
+                <span class="event-marker">
+                  ${marker}
+                </span>
 
-          ev.map(e => {
+                <span class="event-time">
+                  ${formatEventTime(e)}
+                </span>
 
-    const status =
-        getEventDayStatus(e, x);
+                <span class="event-title">
+                  ${escapeHtml(
+                    e.title || 'Kalenderhändelse'
+                  )}
+                </span>
 
-    let marker = '';
+              </div>
+            `;
 
-    if (status === 'start') {
-        marker = '▶';
-    }
-    else if (status === 'middle') {
-        marker = '↔';
-    }
-    else if (status === 'end') {
-        marker = '◀';
-    }
+          }).join('')
 
-    return `
-        <div class="calendar-event ${status}">
-            <span class="event-marker">
-                ${marker}
-            </span>
+        : '<div class="empty">–</div>'
+    )
 
-            <span class="event-time">
-                ${formatEventTime(e)}
-            </span>
-
-            <span class="event-title">
-                ${escapeHtml(
-                    e.title ||
-                    'Kalenderhändelse'
-                )}
-            </span>
-        </div>
-    `;
-
-}).join('')
-
-          :
-
-          '<div class="empty">—</div>'
-
-        )
-
-      );
-
-    }
-
-
-    document.getElementById('week').innerHTML =
-      days.join('');
-
-
-  }
-
-  catch(e){
-
-    console.error('Kalenderfel:', e);
-
-    document.getElementById('status').textContent =
-      'väntar på första hämtningen';
-
-
-    document.getElementById('calendar').innerHTML =
-      '<div class="empty">Kalenderdata har ännu inte hämtats.</div>';
-
-
-    document.getElementById('next').textContent =
-      'Kalenderdata saknas';
-
-  }
+  );
 
 }
+
+
+document.getElementById('week').innerHTML =
+  days.join('');
 
 
 /* =========================
