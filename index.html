@@ -702,6 +702,85 @@ main{
   }
 }
 
+
+
+/* =========================================
+   FIT-SCREEN – FÅ MED MER PÅ STARTSKÄRMEN
+   Gäller främst större informationsskärmar
+========================================= */
+@media (min-width:1151px) and (min-height:700px){
+  header{
+    max-width:1600px;
+    padding:14px 18px 10px;
+  }
+  h1{font-size:27px}
+  .clock{font-size:28px}
+
+  main{
+    padding:8px 18px 16px;
+  }
+
+  .card{padding:12px}
+  .title{margin-bottom:7px}
+
+  /* JUST NU */
+  .now-card{margin-bottom:8px !important}
+  .now-grid{gap:7px}
+  .now-item{
+    min-height:60px;
+    padding:7px 9px;
+    border-radius:10px;
+  }
+  .now-icon{font-size:15px;margin-bottom:1px}
+  .now-label{font-size:9px;margin-bottom:1px}
+  .now-value{font-size:13px}
+  .now-sub{font-size:10px;margin-top:1px}
+
+  /* Väder + nästa händelse */
+  .hero{gap:8px;margin-bottom:8px}
+  .weather{gap:6px}
+  .weather-icon{font-size:32px}
+  .temp{font-size:34px}
+  .weathername{font-size:14px}
+  .weather-detail{padding:6px 8px}
+  .weather-detail-label{font-size:8px;margin-bottom:2px}
+  .weather-detail-value{font-size:12px}
+  .weather-summary{font-size:10px}
+  #next{font-size:15px !important}
+
+  /* Huvudrutor */
+  .grid{gap:8px}
+  .grid > .card:nth-child(1),
+  .grid > .card:nth-child(2),
+  .grid > .card:nth-child(3){min-height:145px}
+
+  .item{padding:6px 0}
+  .weekday{margin-top:8px;padding:6px 8px}
+  .calendar-event{padding:5px 7px;margin:3px 0}
+
+  button,a.button{
+    padding:6px 9px;
+    margin-top:6px;
+    font-size:11px;
+  }
+
+  /* Resursteamet */
+  .stats{gap:5px}
+  .stat{padding:6px 5px}
+  .num{font-size:21px}
+  .resursteam-week{gap:6px}
+  .res-week-item{padding:7px}
+  .res-week-number{font-size:19px;margin-bottom:2px}
+  .res-week-label{font-size:10px}
+  .res-week-sub{font-size:8px;margin-top:1px}
+
+  /* Nästa lov */
+  .grid > .break-card-compact{padding:10px 12px}
+  .break-card-compact .break-icon{font-size:24px}
+  .break-card-compact .break-name{font-size:15px}
+  .break-card-compact .break-number{font-size:25px}
+}
+
 </style>
 </head>
 
