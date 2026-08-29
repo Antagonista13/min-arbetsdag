@@ -240,6 +240,43 @@ button:hover,a.button:hover{background:#3a5065}
   .now-grid{grid-template-columns:1fr 1fr}
 }
 
+
+/* RESURSTEAMET – DENNA VECKA */
+.resursteam-week-card{
+  border:1px solid rgba(143,181,214,.24);
+}
+.resursteam-week{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+.res-week-item{
+  background:rgba(255,255,255,.045);
+  border-radius:12px;
+  padding:13px;
+  border:1px solid rgba(255,255,255,.05);
+}
+.res-week-icon{
+  font-size:18px;
+  margin-bottom:5px;
+}
+.res-week-number{
+  font-size:26px;
+  font-weight:750;
+  line-height:1;
+  margin-bottom:5px;
+}
+.res-week-label{
+  font-size:13px;
+  font-weight:600;
+}
+.res-week-sub{
+  color:#9eacba;
+  font-size:11px;
+  margin-top:4px;
+  line-height:1.35;
+}
+
 </style>
 </head>
 
@@ -355,6 +392,40 @@ button:hover,a.button:hover{background:#3a5065}
       <div class="stat clickable" onclick="visaAllaUppdrag(event)">
         <div class="num" id="totalAssignments">0</div>
         <div class="muted">Totalt antal uppdrag</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card resursteam-week-card">
+    <div class="title">RESURSTEAMET · DENNA VECKA</div>
+
+    <div class="resursteam-week">
+      <div class="res-week-item">
+        <div class="res-week-icon">🆕</div>
+        <div class="res-week-number" id="weekNewAssignments">0</div>
+        <div class="res-week-label">Nya uppdrag</div>
+        <div class="res-week-sub">Startar denna vecka</div>
+      </div>
+
+      <div class="res-week-item">
+        <div class="res-week-icon">🟢</div>
+        <div class="res-week-number" id="weekActiveAssignments">0</div>
+        <div class="res-week-label">Pågående</div>
+        <div class="res-week-sub">Aktiva just nu</div>
+      </div>
+
+      <div class="res-week-item">
+        <div class="res-week-icon">🟠</div>
+        <div class="res-week-number" id="weekFollowUp">0</div>
+        <div class="res-week-label">Följa upp</div>
+        <div class="res-week-sub" id="weekFollowUpText">Inga uppdrag markerade</div>
+      </div>
+
+      <div class="res-week-item">
+        <div class="res-week-icon">🔴</div>
+        <div class="res-week-number" id="weekEndingSoon">0</div>
+        <div class="res-week-label">Avslutas snart</div>
+        <div class="res-week-sub">Inom de närmaste 14 dagarna</div>
       </div>
     </div>
   </div>
@@ -900,6 +971,56 @@ async function getAssignments(){
   return response.json();
 }
 
+
+function parseAssignmentDate(value){
+  if (!value) return null;
+
+  const text = String(value).slice(0,10);
+  const date = new Date(text + 'T00:00:00');
+
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function startOfWeek(date){
+  const result = startOfDay(new Date(date));
+  const day = result.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  result.setDate(result.getDate() + diff);
+  return result;
+}
+
+function updateResursteamWeek(assignments, activeCount, followCount){
+  const now = new Date();
+  const weekStart = startOfWeek(now);
+  const weekEnd = new Date(weekStart);
+  weekEnd.setDate(weekEnd.getDate() + 7);
+
+  const soonEnd = startOfDay(now);
+  soonEnd.setDate(soonEnd.getDate() + 14);
+
+  const newAssignments = assignments.filter(item => {
+    const start = parseAssignmentDate(item.start);
+    return start && start >= weekStart && start < weekEnd;
+  }).length;
+
+  const endingSoon = assignments.filter(item => {
+    const end = parseAssignmentDate(item.end);
+    return end && end >= startOfDay(now) && end <= soonEnd;
+  }).length;
+
+  document.getElementById('weekNewAssignments').textContent = newAssignments;
+  document.getElementById('weekActiveAssignments').textContent = activeCount;
+  document.getElementById('weekFollowUp').textContent = followCount;
+  document.getElementById('weekEndingSoon').textContent = endingSoon;
+
+  document.getElementById('weekFollowUpText').textContent =
+    followCount === 0
+      ? 'Inga uppdrag markerade'
+      : followCount === 1
+        ? '1 uppdrag behöver uppföljning'
+        : `${followCount} uppdrag behöver uppföljning`;
+}
+
 async function resursteam(){
   try{
     const data = await getAssignments();
@@ -923,6 +1044,8 @@ async function resursteam(){
       activeAssignments: active,
       followUp: follow
     });
+
+    updateResursteamWeek(assignments, active, follow);
 
   }catch(error){
     console.error('Resursteamfel:', error);
