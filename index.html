@@ -2,240 +2,81 @@
 <html lang="sv">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#10161d">
-
 <title>RESURSTEAMET BORÅS</title>
 
 <style>
-  .clickable {
-    cursor: pointer;
-    transition: transform 0.15s ease, background 0.15s ease;
-}
-
-.clickable:hover {
-    transform: translateY(-2px);
-    background: #34404c;
-}
-  .uppdrag-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.65);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    padding: 20px;
-}
-
-.uppdrag-modal {
-    width: min(850px, 100%);
-    max-height: 85vh;
-    overflow: hidden;
-    background: #1f2730;
-    border: 1px solid #3a4652;
-    border-radius: 16px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
-}
-
-.uppdrag-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 22px 24px;
-    border-bottom: 1px solid #3a4652;
-}
-
-.uppdrag-title {
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.uppdrag-count {
-    margin-top: 5px;
-    color: #9eafbf;
-    font-size: 14px;
-}
-
-.uppdrag-close {
-    width: 40px;
-    height: 40px;
-    border: 0;
-    border-radius: 10px;
-    background: #34404c;
-    color: white;
-    font-size: 28px;
-    cursor: pointer;
-}
-
-.uppdrag-close:hover {
-    background: #465463;
-}
-
-.uppdrag-list {
-    max-height: calc(85vh - 100px);
-    overflow-y: auto;
-    padding: 10px 20px 20px;
-}
-
-.uppdrag-item {
-    display: flex;
-    gap: 15px;
-    padding: 18px 5px;
-    border-bottom: 1px solid #35404b;
-}
-
-.uppdrag-number {
-    min-width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #34404c;
-    font-weight: 700;
-}
-
-.uppdrag-content {
-    flex: 1;
-}
-
-.uppdrag-school {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-.uppdrag-student,
-.uppdrag-description,
-.uppdrag-responsible,
-.uppdrag-notes {
-    color: #b9c5d0;
-    margin-top: 4px;
-}
-
-.uppdrag-description {
-    color: white;
-}
-
-.uppdrag-empty {
-    padding: 40px;
-    text-align: center;
-    color: #9eafbf;
-}
 :root{
   font-family:Segoe UI,Arial,sans-serif;
   color:#fff;
-  background:#10161d
+  background:#10161d;
 }
-
-*{
-  box-sizing:border-box
-}
-
+*{box-sizing:border-box}
 body{
   margin:0;
+  min-height:100vh;
   background:linear-gradient(145deg,#0f151b,#1b2732);
-  min-height:100vh
 }
-
 header{
+  max-width:1250px;
+  margin:auto;
   padding:22px;
   display:flex;
   justify-content:space-between;
-  max-width:1250px;
-  margin:auto
 }
-
-h1{
-  margin:0;
-  font-size:29px
-}
-
-.muted{
-  color:#aeb9c5;
-  font-size:13px
-}
-
-.clock{
-  font-size:31px;
-  font-weight:650
-}
-
-main{
-  max-width:1250px;
-  margin:auto;
-  padding:0 18px 30px
-}
-
+h1{margin:0;font-size:29px}
+.muted{color:#aeb9c5;font-size:13px}
+.clock{font-size:31px;font-weight:650}
+main{max-width:1250px;margin:auto;padding:0 18px 30px}
 .hero{
   display:grid;
   grid-template-columns:1.7fr 1fr;
   gap:14px;
-  margin-bottom:14px
+  margin-bottom:14px;
 }
-
+.grid{
+  display:grid;
+  grid-template-columns:1.15fr .85fr .85fr;
+  gap:14px;
+}
 .card{
   background:rgba(255,255,255,.065);
   border:1px solid rgba(255,255,255,.075);
   border-radius:18px;
   padding:17px;
-  box-shadow:0 10px 30px rgba(0,0,0,.14)
+  box-shadow:0 10px 30px rgba(0,0,0,.14);
 }
-
-.weather{
-  display:flex;
-  align-items:center;
-  gap:20px
-}
-
-.temp{
-  font-size:47px;
-  font-weight:750
-}
-
-.weathername{
-  font-size:18px
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:1.15fr .85fr .85fr;
-  gap:14px
-}
-
 .title{
   font-size:12px;
   font-weight:750;
   letter-spacing:.5px;
   color:#9eacba;
-  margin-bottom:10px
+  margin-bottom:10px;
 }
-
+.weather{display:flex;align-items:center;gap:20px}
+.temp{font-size:47px;font-weight:750}
+.weathername{font-size:18px}
 .item{
   padding:9px 0;
   border-bottom:1px solid rgba(255,255,255,.075);
-  line-height:1.3
+  line-height:1.35;
 }
-
 .time{
   color:#8fb5d6;
   font-weight:700;
   display:inline-block;
-  min-width:62px
+  min-width:72px;
 }
-
 .badge{
   display:inline-block;
   border-radius:99px;
   background:#314352;
   padding:4px 8px;
   font-size:11px;
-  margin-left:6px
+  margin-left:6px;
 }
-
-button,
-a.button{
+button,a.button{
   display:inline-block;
   background:#2c3c4c;
   color:#fff;
@@ -244,76 +85,114 @@ a.button{
   padding:9px 11px;
   margin-top:10px;
   text-decoration:none;
-  font-size:13px
+  font-size:13px;
+  cursor:pointer;
 }
-
+button:hover,a.button:hover{background:#3a5065}
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
-  gap:8px
+  gap:8px;
 }
-
 .stat{
   background:rgba(255,255,255,.045);
   padding:10px;
-  border-radius:10px
+  border-radius:10px;
 }
-
-.num{
-  font-size:22px;
-  font-weight:700
-}
-
+.stat.clickable{cursor:pointer;transition:.15s}
+.stat.clickable:hover{transform:translateY(-2px);background:#34404c}
+.num{font-size:22px;font-weight:700}
 .weekday{
   font-weight:700;
-  margin-top:8px;
-  color:#dfe6ec
+  margin-top:14px;
+  padding-top:8px;
+  color:#dfe6ec;
+  border-top:1px solid rgba(255,255,255,.08);
+  text-transform:capitalize;
 }
-
-.empty{
-  color:#73818d;
-  font-size:13px;
-  padding:5px 0
-}
-
-.menu-today{
-  font-size:15px;
-  color:#e5ebf0;
-  line-height:1.45
-}
-
-.menu-today .item{
-  padding:8px 0
-}
-
+.weekday:first-child{border-top:0;margin-top:0}
+.empty{color:#73818d;font-size:13px;padding:5px 0}
+.menu-today{font-size:15px;color:#e5ebf0;line-height:1.45}
 .footer{
   text-align:center;
   color:#687783;
   font-size:11px;
-  margin-top:16px
+  margin-top:16px;
 }
-
+.event-marker{
+  display:inline-block;
+  width:20px;
+  color:#8fb5d6;
+  font-weight:bold;
+}
+.calendar-event{
+  padding:8px 0;
+  border-bottom:1px solid rgba(255,255,255,.075);
+  line-height:1.35;
+}
+.event-time{color:#8fb5d6;font-weight:700;margin-right:6px}
+.event-title{color:#fff}
+#resursteamModal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.75);
+  z-index:9999;
+  padding:30px;
+  overflow-y:auto;
+}
+.modal-box{
+  max-width:1000px;
+  margin:0 auto;
+  background:#202830;
+  border:1px solid #394550;
+  border-radius:18px;
+  padding:25px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.modal-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-bottom:20px;
+}
+.assignment{
+  background:#29333d;
+  border:1px solid #3a4652;
+  border-radius:14px;
+  padding:18px;
+  margin-bottom:14px;
+}
+.assignment-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:flex-start;
+}
+.assignment-school{font-size:20px;font-weight:600;margin-bottom:5px}
+.assignment-student{color:#9fb4c8;margin-bottom:12px}
+.assignment-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+.label{color:#8fa3b5;font-size:12px}
+.follow{
+  background:#805b25;
+  padding:6px 10px;
+  border-radius:8px;
+  font-size:12px;
+  white-space:nowrap;
+}
 @media(max-width:850px){
-  header{
-    padding:16px 14px 10px
-  }
-
-  .hero,
-  .grid{
-    grid-template-columns:1fr
-  }
-
-  .clock{
-    font-size:25px
-  }
-
-  .card{
-    padding:15px
-  }
-
-  main{
-    padding:0 12px 24px
-  }
+  header{padding:16px 14px 10px}
+  .hero,.grid{grid-template-columns:1fr}
+  .clock{font-size:25px}
+  .card{padding:15px}
+  main{padding:0 12px 24px}
+  #resursteamModal{padding:12px}
 }
 </style>
 </head>
@@ -325,7 +204,6 @@ a.button{
     <h1>RESURSTEAMET, BORÅS</h1>
     <div id="date" class="muted"></div>
   </div>
-
   <div style="text-align:right">
     <div id="clock" class="clock">--:--</div>
     <div class="muted">Digital anslagstavla</div>
@@ -335,16 +213,13 @@ a.button{
 <main>
 
 <section class="hero">
-
   <div class="card">
     <div class="title">DAGENS ÖVERSIKT</div>
-
     <div class="weather">
       <div>
         <div id="temp" class="temp">--°</div>
         <div id="weather" class="weathername">Hämtar väder...</div>
       </div>
-
       <div>
         <div id="range" class="muted"></div>
         <div id="rain" class="muted"></div>
@@ -354,1109 +229,484 @@ a.button{
 
   <div class="card">
     <div class="title">NÄSTA HÄNDELSE</div>
-
-    <div id="next" style="font-size:17px">
-      Laddar kalender...
-    </div>
-
+    <div id="next" style="font-size:17px">Laddar kalender...</div>
     <div id="calstatus" class="muted"></div>
   </div>
-
 </section>
-
 
 <section class="grid">
 
-  <!-- DAGENS KALENDER -->
-
   <div class="card">
-
     <div class="title">DAGENS KALENDER</div>
-
-    <div id="calendar">
-      <div class="empty">Laddar...</div>
-    </div>
-
-    <a
-      class="button"
-      href="https://www.icloud.com/calendar/"
-      target="_blank">
+    <div id="calendar"><div class="empty">Laddar...</div></div>
+    <a class="button" href="https://www.icloud.com/calendar/" target="_blank" rel="noopener">
       Öppna iCloud Kalender
     </a>
-
   </div>
-
-
-  <!-- DAGENS MENY -->
 
   <div class="card">
-
     <div class="title">DAGENS MENY</div>
-
     <div class="muted">Gånghesterskolan</div>
-
-    <div id="menu" class="menu-today">
-      <div class="empty">Laddar meny...</div>
-    </div>
-
-    <div style="margin-top:12px">
-
-      <a
-        class="button"
-        href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok"
-        target="_blank">
-        Visa veckans meny
-      </a>
-
-    </div>
-
+    <div id="menu" class="menu-today"><div class="empty">Laddar meny...</div></div>
+    <a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank" rel="noopener">
+      Visa veckans meny
+    </a>
   </div>
 
-
-  <!-- RESURSTEAMET -->
-
-  <div class="card" onclick="openResursteam()" style="cursor:pointer;">
-
+  <div class="card" onclick="openResursteam(event)" style="cursor:pointer">
     <div class="title">RESURSTEAMET</div>
-
-   <div class="stats">
-
-    <div class="stat">
+    <div class="stats">
+      <div class="stat">
         <div class="num" id="activeAssignments">0</div>
         <div class="muted">Aktiva uppdrag</div>
-    </div>
-
-    <div class="stat">
+      </div>
+      <div class="stat">
         <div class="num" id="followUp">0</div>
         <div class="muted">Följa upp</div>
-    </div>
-
-    <div class="stat clickable" onclick="visaAllaUppdrag()">
+      </div>
+      <div class="stat clickable" onclick="visaAllaUppdrag(event)">
         <div class="num" id="totalAssignments">0</div>
         <div class="muted">Totalt antal uppdrag</div>
-    </div>
-
-</div>
-
-</div>
-
-    </div>
-
-  </div><!-- RESURSTEAMET DETALJVY -->
-<div id="resursteamModal" style="
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.75);
-  z-index:9999;
-  padding:30px;
-  overflow-y:auto;
-">
-
-  <div style="
-    max-width:1000px;
-    margin:0 auto;
-    background:#202830;
-    border:1px solid #394550;
-    border-radius:18px;
-    padding:25px;
-    box-shadow:0 20px 60px rgba(0,0,0,.5);
-  ">
-
-    <div style="
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:20px;
-    ">
-      <div>
-        <div style="
-          font-size:12px;
-          letter-spacing:1px;
-          color:#9fb4c8;
-          text-transform:uppercase;
-        ">
-          Resursteamet
-        </div>
-
-        <h2 style="margin:5px 0 0;">
-          Aktuella uppdrag
-        </h2>
-      </div>
-
-      <button
-        onclick="closeResursteam(event)"
-        style="
-          border:0;
-          background:#344454;
-          color:white;
-          padding:10px 16px;
-          border-radius:10px;
-          cursor:pointer;
-          font-size:15px;
-        ">
-        Stäng
-      </button>
-    </div>
-
-    <div id="resursteamDetails">
-      <div class="empty">
-        Laddar uppdrag...
       </div>
     </div>
-
   </div>
-</div>
-
-
-  <!-- VECKANS KALENDER -->
 
   <div class="card">
-
     <div class="title">VECKANS KALENDER</div>
-
-    <div id="week">
-      <div class="empty">Laddar...</div>
-    </div>
-
+    <div id="week"><div class="empty">Laddar...</div></div>
   </div>
 
-
-  <!-- SNABBT -->
-
   <div class="card">
-
     <div class="title">SNABBT</div>
-
-    <a
-      class="button"
-      href="https://outlook.office.com/calendar/"
-      target="_blank">
-      Outlook Kalender
-    </a>
-
+    <a class="button" href="https://outlook.office.com/calendar/" target="_blank" rel="noopener">Outlook Kalender</a>
     <br>
-
-    <a
-      class="button"
-      href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok"
-      target="_blank">
-      Matilda Menu
-    </a>
-
+    <a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank" rel="noopener">Matilda Menu</a>
   </div>
 
-
-  <!-- SYSTEMSTATUS -->
-
   <div class="card">
-
     <div class="title">SYSTEMSTATUS</div>
-
-    <div class="item">
-      iCloud:
-      <span id="status">kontrollerar...</span>
-    </div>
-
-    <div class="item">
-      Senast hämtad:
-      <span id="updated">—</span>
-    </div>
-
-    <div class="muted">
-      Kalender och matsedel hämtas automatiskt.
-    </div>
-
+    <div class="item">iCloud: <span id="status">kontrollerar...</span></div>
+    <div class="item">Senast hämtad: <span id="updated">—</span></div>
+    <div class="muted">Kalender och matsedel hämtas automatiskt.</div>
   </div>
 
 </section>
 
-
-<div class="footer">
-  Resursteamet Borås · Digital anslagstavla
-</div>
-
+<div class="footer">Resursteamet Borås · Digital anslagstavla</div>
 </main>
 
+<div id="resursteamModal" onclick="closeResursteam(event)">
+  <div class="modal-box" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div>
+        <div class="title">RESURSTEAMET</div>
+        <h2 style="margin:5px 0 0">Aktuella uppdrag</h2>
+      </div>
+      <button onclick="closeResursteam(event)">Stäng</button>
+    </div>
+    <div id="resursteamDetails"><div class="empty">Laddar uppdrag...</div></div>
+  </div>
+</div>
 
 <script>
-window.onerror = function(message, source, lineno, colno, error) {
-
-  document.getElementById('calendar').innerHTML =
-    '<div class="empty">JavaScript-fel: ' +
-    message +
-    '<br>Rad: ' +
-    lineno +
-    '</div>';
-
-  document.getElementById('status').textContent =
-    'Fel på rad ' + lineno;
-
-};
-
-
-window.addEventListener('unhandledrejection', function(event) {
-
-  document.getElementById('calendar').innerHTML =
-    '<div class="empty">Async-fel: ' +
-    event.reason +
-    '</div>';
-
-  document.getElementById('status').textContent =
-    'Async-fel upptäckt';
-
-});
-
-
-
-  
 /* =========================
-   GEMENSAMMA FUNKTIONER
+   HJÄLPFUNKTIONER
 ========================= */
 
 const weekdays = [
-  'söndag',
-  'måndag',
-  'tisdag',
-  'onsdag',
-  'torsdag',
-  'fredag',
-  'lördag'
+  'söndag','måndag','tisdag','onsdag',
+  'torsdag','fredag','lördag'
 ];
 
-
-const fmtTime = s =>
-  new Date(s).toLocaleTimeString(
-    'sv-SE',
-    {
-      hour:'2-digit',
-      minute:'2-digit'
-    }
-  );
-
-
-function escapeHtml(s){
-
-  return String(s).replace(
-    /[&<>"']/g,
-    m => ({
-      '&':'&amp;',
-      '<':'&lt;',
-      '>':'&gt;',
-      '"':'&quot;',
-      "'":'&#039;'
-    }[m])
-  );
-
+function escapeHtml(value){
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;',
+    '"':'&quot;',"'":'&#039;'
+  }[ch]));
 }
 
+function fmtTime(value){
+  const d = new Date(value);
+  return Number.isNaN(d.getTime())
+    ? ''
+    : d.toLocaleTimeString('sv-SE',{
+        hour:'2-digit',
+        minute:'2-digit'
+      });
+}
+
+function startOfDay(date){
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    date.getDate()
+  );
+}
+
+function eventEnd(event){
+  const start = new Date(event.start);
+  const end = new Date(event.end || event.start);
+  return Number.isNaN(end.getTime()) ? start : end;
+}
 
 /* =========================
    KLOCKA OCH DATUM
 ========================= */
 
 function tick(){
-
   const d = new Date();
 
   document.getElementById('clock').textContent =
-    d.toLocaleTimeString(
-      'sv-SE',
-      {
-        hour:'2-digit',
-        minute:'2-digit'
-      }
-    );
-
-  document.getElementById('date').textContent =
-    d.toLocaleDateString(
-      'sv-SE',
-      {
-        weekday:'long',
-        day:'numeric',
-        month:'long',
-        year:'numeric'
-      }
-    );
-}
-
-
-/* =========================
-   ICLOUD-KALENDER
-========================= */
-
-async function calendar(){
-
-  try{
-
-    const j = await fetch(
-      'calendar.json?t=' + Date.now()
-    ).then(r => {
-
-      if(!r.ok){
-        throw Error();
-      }
-
-      return r.json();
-
+    d.toLocaleTimeString('sv-SE',{
+      hour:'2-digit',
+      minute:'2-digit'
     });
 
-
-    const now = new Date();
-
-    const day = new Date(
-      now.getFullYear(),
-      now.getMonth(),
-      now.getDate()
-    );
-
-
-    const end = new Date(day);
-
-    end.setDate(
-      end.getDate() + 1
-    );
-
-
-    /*
-      En kalenderhändelse kan pågå över flera dagar.
-      Därför räcker det inte att bara kontrollera e.start.
-
-      Exempel:
-      start = tisdag 00:00
-      end   = lördag 00:00
-
-      Händelsen ska då synas även onsdag, torsdag och fredag.
-    */
-    const overlapsDay = (e, from, to) => {
-
-      const start = new Date(e.start);
-      const finish = new Date(e.end || e.start);
-
-      return start < to && finish > from;
-
-    };
-
-
-    const today =
-      j.events.filter(
-        e =>
-          overlapsDay(e, day, end)
-      );
-
-
-    const upcoming =
-      j.events
-        .filter(
-          e =>
-            new Date(e.end || e.start) > now
-        )
-        .sort(
-          (a,b) =>
-            new Date(a.start) -
-            new Date(b.start)
-        );
-
-
-    const formatEventTime = e => {
-
-  const start = new Date(e.start);
-  const finish = new Date(e.end || e.start);
-
-  /*
-    Heldag/flerdagars händelser ska inte visas som
-    00:00–00:00. Visa istället "Heldag".
-  */
-  if (
-    e.allDay ||
-    (
-      start.getHours() === 0 &&
-      start.getMinutes() === 0 &&
-      finish.getHours() === 0 &&
-      finish.getMinutes() === 0 &&
-      finish > start
-    )
-  ) {
-    return 'Heldag';
-  }
-
-  return `${fmtTime(e.start)}–${fmtTime(e.end)}`;
-};
-
-
-const getEventDayStatus = (e, day) => {
-
-  const start = new Date(e.start);
-  const finish = new Date(e.end || e.start);
-
-  const currentDay = new Date(
-    day.getFullYear(),
-    day.getMonth(),
-    day.getDate()
-  );
-
-  const startDay = new Date(
-    start.getFullYear(),
-    start.getMonth(),
-    start.getDate()
-  );
-
-  const finishDay = new Date(
-    finish.getFullYear(),
-    finish.getMonth(),
-    finish.getDate()
-  );
-
-  if (startDay.getTime() === finishDay.getTime()) {
-    return 'single';
-  }
-
-  if (currentDay.getTime() === startDay.getTime()) {
-    return 'start';
-  }
-
-  if (currentDay.getTime() === finishDay.getTime()) {
-    return 'end';
-  }
-
-  return 'middle';
-};
-
-
-document.getElementById('calendar').innerHTML =
-  today.length
-    ? today.map(e => `
-        <div class="item">
-          <span class="time">
-            ${formatEventTime(e)}
-          </span>
-          ${escapeHtml(
-            e.title || 'Kalenderhändelse'
-          )}
-        </div>
-      `).join('')
-    : '<div class="empty">Inga kalenderhändelser idag.</div>';
-
-
-const n = upcoming[0];
-
-document.getElementById('next').textContent =
-  n
-    ? `${formatEventTime(n)} · ${n.title || 'Kalenderhändelse'}`
-    : 'Inga fler händelser';
-
-
-document.getElementById('status').textContent =
-  'ansluten';
-
-
-document.getElementById('updated').textContent =
-  j.updatedAt
-    ? new Date(
-        j.updatedAt
-      ).toLocaleString('sv-SE')
-    : '–';
-
-
-/* VECKANS KALENDER */
-
-const days = [];
-
-for (let i = 0; i < 30; i++) {
-
-  const x = new Date(day);
-
-  x.setDate(
-    x.getDate() + i
-  );
-
-  const x2 = new Date(x);
-
-  x2.setDate(
-    x2.getDate() + 1
-  );
-
-  const ev =
-    j.events.filter(
-      e =>
-        overlapDay(e, x, x2)
-    );
-
-  days.push(
-
-    `<div class="weekday">
-      ${weekdays[x.getDay()]}
-    </div>`
-
-    +
-
-    (
-      ev.length
-
-        ? ev.map(e => {
-
-            const status =
-              getEventDayStatus(e, x);
-
-            let marker = '';
-
-            if (status === 'start') {
-              marker = '▶';
-            }
-            else if (status === 'middle') {
-              marker = '↔';
-            }
-            else if (status === 'end') {
-              marker = '◀';
-            }
-
-            return `
-              <div class="calendar-event ${status}">
-
-                <span class="event-marker">
-                  ${marker}
-                </span>
-
-                <span class="event-time">
-                  ${formatEventTime(e)}
-                </span>
-
-                <span class="event-title">
-                  ${escapeHtml(
-                    e.title || 'Kalenderhändelse'
-                  )}
-                </span>
-
-              </div>
-            `;
-
-          }).join('')
-
-        : '<div class="empty">–</div>'
-    )
-
-  );
-
+  document.getElementById('date').textContent =
+    d.toLocaleDateString('sv-SE',{
+      weekday:'long',
+      day:'numeric',
+      month:'long',
+      year:'numeric'
+    });
 }
 
+/* =========================
+   KALENDER
+========================= */
 
-document.getElementById('week').innerHTML =
-  days.join('');
+function overlapsDay(event, from, to){
+  const start = new Date(event.start);
+  let finish = eventEnd(event);
 
+  if (Number.isNaN(start.getTime())) return false;
+
+  /* iCalendar använder ofta exklusivt slutdatum för heldagar */
+  if (event.allDay && finish > start) {
+    return start < to && finish > from;
+  }
+
+  return start < to && finish > from;
+}
+
+function formatEventTime(event){
+  const start = new Date(event.start);
+  const finish = eventEnd(event);
+
+  if (event.allDay) return 'Heldag';
+
+  if (
+    start.getHours() === 0 &&
+    start.getMinutes() === 0 &&
+    finish.getHours() === 0 &&
+    finish.getMinutes() === 0 &&
+    finish > start
+  ) return 'Heldag';
+
+  if (!event.end || finish.getTime() === start.getTime()) {
+    return fmtTime(event.start);
+  }
+
+  return `${fmtTime(event.start)}–${fmtTime(event.end)}`;
+}
+
+function getEventDayStatus(event, day){
+  const start = startOfDay(new Date(event.start));
+  const finish = startOfDay(eventEnd(event));
+  const current = startOfDay(day);
+
+  if (start.getTime() === finish.getTime()) return 'single';
+  if (current.getTime() === start.getTime()) return 'start';
+
+  /* Heldagar har normalt exklusivt slutdatum */
+  if (
+    event.allDay &&
+    current.getTime() === finish.getTime()
+  ) return 'outside';
+
+  if (current.getTime() === finish.getTime()) return 'end';
+  return 'middle';
+}
+
+async function calendar(){
+  const calendarEl = document.getElementById('calendar');
+  const weekEl = document.getElementById('week');
+  const nextEl = document.getElementById('next');
+
+  try{
+    const response = await fetch(
+      `calendar.json?t=${Date.now()}`,
+      { cache:'no-store' }
+    );
+
+    if (!response.ok) {
+      throw new Error(`calendar.json kunde inte hämtas (${response.status})`);
+    }
+
+    const data = await response.json();
+    const events = Array.isArray(data.events) ? data.events : [];
+
+    const now = new Date();
+    const todayStart = startOfDay(now);
+    const tomorrow = new Date(todayStart);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    const todayEvents = events
+      .filter(event => overlapsDay(event, todayStart, tomorrow))
+      .sort((a,b) => new Date(a.start) - new Date(b.start));
+
+    calendarEl.innerHTML = todayEvents.length
+      ? todayEvents.map(event => `
+          <div class="item">
+            <span class="time">${escapeHtml(formatEventTime(event))}</span>
+            ${escapeHtml(event.title || 'Kalenderhändelse')}
+          </div>
+        `).join('')
+      : '<div class="empty">Inga kalenderhändelser idag.</div>';
+
+    const upcoming = events
+      .filter(event => eventEnd(event) > now)
+      .sort((a,b) => new Date(a.start) - new Date(b.start));
+
+    const next = upcoming[0];
+
+    nextEl.textContent = next
+      ? `${formatEventTime(next)} · ${next.title || 'Kalenderhändelse'}`
+      : 'Inga fler händelser';
+
+    document.getElementById('calstatus').textContent =
+      events.length ? `${events.length} händelser tillgängliga` : '';
+
+    document.getElementById('status').textContent = 'ansluten';
+
+    document.getElementById('updated').textContent =
+      data.updatedAt
+        ? new Date(data.updatedAt).toLocaleString('sv-SE')
+        : new Date().toLocaleString('sv-SE');
+
+    const days = [];
+
+    for(let i = 0; i < 30; i++){
+      const day = new Date(todayStart);
+      day.setDate(day.getDate() + i);
+
+      const nextDay = new Date(day);
+      nextDay.setDate(nextDay.getDate() + 1);
+
+      const dayEvents = events
+        .filter(event => overlapsDay(event, day, nextDay))
+        .filter(event => getEventDayStatus(event, day) !== 'outside')
+        .sort((a,b) => new Date(a.start) - new Date(b.start));
+
+      days.push(`
+        <div class="weekday">
+          ${weekdays[day.getDay()]} ${day.getDate()}/${day.getMonth()+1}
+        </div>
+      `);
+
+      days.push(
+        dayEvents.length
+          ? dayEvents.map(event => {
+              const status = getEventDayStatus(event, day);
+              const marker =
+                status === 'start' ? '▶' :
+                status === 'middle' ? '↔' :
+                status === 'end' ? '◀' : '•';
+
+              return `
+                <div class="calendar-event">
+                  <span class="event-marker">${marker}</span>
+                  <span class="event-time">${escapeHtml(formatEventTime(event))}</span>
+                  <span class="event-title">${escapeHtml(event.title || 'Kalenderhändelse')}</span>
+                </div>
+              `;
+            }).join('')
+          : '<div class="empty">–</div>'
+      );
+    }
+
+    weekEl.innerHTML = days.join('');
+
+  }catch(error){
+    console.error('Kalenderfel:', error);
+
+    calendarEl.innerHTML =
+      '<div class="empty">Kalendern kunde inte hämtas.</div>';
+
+    weekEl.innerHTML =
+      '<div class="empty">Kalendern kunde inte hämtas.</div>';
+
+    nextEl.textContent = 'Kalendern kunde inte hämtas';
+
+    document.getElementById('status').textContent = 'kalenderfel';
+  }
+}
 
 /* =========================
    MATSEDEL
 ========================= */
 
 async function menu(){
-
   const menuEl = document.getElementById('menu');
 
   try{
-
-    const r = await fetch(
-      'menu.json?t=' + Date.now()
+    const response = await fetch(
+      `menu.json?t=${Date.now()}`,
+      { cache:'no-store' }
     );
 
-    if(!r.ok){
-      throw Error();
+    if (!response.ok) {
+      throw new Error(`menu.json kunde inte hämtas (${response.status})`);
     }
 
-    const j = await r.json();
+    const data = await response.json();
+    const mealsData = Array.isArray(data.meals) ? data.meals : [];
 
     const today = new Date();
-
     const todayISO =
-      today.getFullYear()
-      + '-'
-      + String(
-          today.getMonth()+1
-        ).padStart(2,'0')
-      + '-'
-      + String(
-          today.getDate()
-        ).padStart(2,'0');
+      `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
 
-    let meals = [];
-
-    if(
-      Array.isArray(j.meals)
-    ){
-
-      const todayMeal =
-        j.meals.find(
-          m =>
-            String(m.date).slice(0,10)
-            ===
-            todayISO
-        );
-
-      if(
-        todayMeal &&
-        Array.isArray(todayMeal.dishes)
-      ){
-
-        meals =
-          todayMeal.dishes.filter(
-            d =>
-              d &&
-              String(d).trim()
-          );
-
-      }
-
-    }
-
-    if(meals.length){
-
-      menuEl.innerHTML =
-        meals
-          .map(
-            meal =>
-              `<div class="event">
-                ${meal}
-              </div>`
-          )
-          .join('');
-
-    }else{
-
-      menuEl.innerHTML =
-        `<div class="empty">
-          Ingen meny registrerad för idag.
-        </div>`;
-
-    }
-
-  }catch(e){
-
-    console.error(
-      'Kunde inte läsa dagens meny:',
-      e
+    const todayMeal = mealsData.find(item =>
+      String(item.date || '').slice(0,10) === todayISO
     );
 
-    if(menuEl){
+    const dishes = Array.isArray(todayMeal?.dishes)
+      ? todayMeal.dishes.filter(dish => String(dish || '').trim())
+      : [];
 
-      menuEl.innerHTML =
-        `<div class="empty">
-          Kunde inte läsa dagens meny.
-        </div>`;
+    menuEl.innerHTML = dishes.length
+      ? dishes.map(dish => `
+          <div class="item">${escapeHtml(dish)}</div>
+        `).join('')
+      : '<div class="empty">Ingen meny registrerad för idag.</div>';
 
-    }
+  }catch(error){
+    console.error('Matsedelsfel:', error);
+    menuEl.innerHTML =
+      '<div class="empty">Matsedeln kunde inte hämtas.</div>';
+  }
+}
 
+/* =========================
+   RESURSTEAMET
+========================= */
+
+async function getAssignments(){
+  const response = await fetch(
+    `resursteam.json?t=${Date.now()}`,
+    { cache:'no-store' }
+  );
+
+  if (!response.ok) {
+    throw new Error(`resursteam.json kunde inte hämtas (${response.status})`);
   }
 
-}
-    async function visaAllaUppdrag(){
-
-    try{
-
-        const r = await fetch(
-            'resursteam.json?t=' + Date.now()
-        );
-
-        if(!r.ok){
-            throw new Error('Kunde inte läsa resursteam.json');
-        }
-
-        const j = await r.json();
-
-        const uppdrag = j.assignments || [];
-
-        let html = `
-            <div class="uppdrag-overlay" id="uppdragOverlay">
-
-                <div class="uppdrag-modal">
-
-                    <div class="uppdrag-header">
-                        <div>
-                            <div class="uppdrag-title">
-                                RESURSTEAM – ALLA UPPDRAG
-                            </div>
-
-                            <div class="uppdrag-count">
-                                ${uppdrag.length} uppdrag totalt
-                            </div>
-                        </div>
-
-                        <button
-                            class="uppdrag-close"
-                            onclick="stangAllaUppdrag()">
-                            ×
-                        </button>
-                    </div>
-
-                    <div class="uppdrag-list">
-        `;
-
-        if(uppdrag.length === 0){
-
-            html += `
-                <div class="uppdrag-empty">
-                    Inga uppdrag finns registrerade.
-                </div>
-            `;
-
-        } else {
-
-            uppdrag.forEach((item, index) => {
-
-                html += `
-                    <div class="uppdrag-item">
-
-                        <div class="uppdrag-number">
-                            ${index + 1}
-                        </div>
-
-                        <div class="uppdrag-content">
-
-                            <div class="uppdrag-school">
-                                ${item.school || 'Ingen skola angiven'}
-                            </div>
-
-                            ${
-                                item.student
-                                ? `<div class="uppdrag-student">
-                                    Elev: ${item.student}
-                                   </div>`
-                                : ''
-                            }
-
-                            ${
-                                item.description
-                                ? `<div class="uppdrag-description">
-                                    ${item.description}
-                                   </div>`
-                                : ''
-                            }
-
-                            ${
-                                item.responsible
-                                ? `<div class="uppdrag-responsible">
-                                    Ansvarig: ${item.responsible}
-                                   </div>`
-                                : ''
-                            }
-
-                            ${
-                                item.notes
-                                ? `<div class="uppdrag-notes">
-                                    ${item.notes}
-                                   </div>`
-                                : ''
-                            }
-
-                        </div>
-
-                    </div>
-                `;
-
-            });
-
-        }
-
-        html += `
-                    </div>
-
-                </div>
-
-            </div>
-        `;
-
-        document.body.insertAdjacentHTML(
-            'beforeend',
-            html
-        );
-
-    } catch(e){
-
-        console.error(
-            'Kunde inte visa Resursteamets uppdrag:',
-            e
-        );
-
-        alert(
-            'Kunde inte läsa Resursteamets uppdrag.'
-        );
-    }
+  return response.json();
 }
 
-
-function stangAllaUppdrag(){
-
-    const overlay =
-        document.getElementById('uppdragOverlay');
-
-    if(overlay){
-        overlay.remove();
-    }
-
-}
-    }
-
-
-    /*
-      Visa dagens meny
-    */
-
-    if(meals.length){
-
-      document.getElementById('menu').innerHTML =
-
-        meals.map(
-          meal =>
-            `<div class="item">
-              ${escapeHtml(meal)}
-            </div>`
-        ).join('');
-
-    }
-
-    else{
-
-      document.getElementById('menu').innerHTML =
-        '<div class="empty">Ingen meny för idag</div>';
-
-    }
-
-
-  }
-
-  catch(e){
-
-    console.error(
-      'Kunde inte läsa menu.json:',
-      e
-    );
-
-
-    document.getElementById('menu').innerHTML =
-      '<div class="empty">Matsedeln kunde inte hämtas</div>';
-
-  }
-
-}
 async function resursteam(){
   try{
-    const r = await fetch(
-      'resursteam.json?t=' + Date.now()
-    );
+    const data = await getAssignments();
+    const assignments = Array.isArray(data.assignments)
+      ? data.assignments
+      : [];
 
-    if(!r.ok){
-      throw new Error();
-    }
+    const active =
+      data.summary?.activeAssignments ??
+      assignments.filter(item => item.active !== false).length;
 
-    const j = await r.json();
+    const follow =
+      data.summary?.followUp ??
+      assignments.filter(item => item.needsFollowUp).length;
 
-    document.getElementById('activeAssignments').textContent =
-      j.summary?.activeAssignments ?? 0;
+    document.getElementById('activeAssignments').textContent = active;
+    document.getElementById('followUp').textContent = follow;
+    document.getElementById('totalAssignments').textContent = assignments.length;
 
-    document.getElementById('followUp').textContent =
-      j.summary?.followUp ?? 0;
-
-    document.getElementById('totalAssignments').textContent =
-    j.assignments?.length ?? 0;
-
-  }catch(e){
-    console.error(
-      'Kunde inte läsa resursteam.json:',
-      e
-    );
+  }catch(error){
+    console.error('Resursteamfel:', error);
   }
-}async function openResursteam(event){
+}
 
-  if(event){
-    event.stopPropagation();
-  }
+async function openResursteam(event){
+  if(event) event.stopPropagation();
 
   const modal = document.getElementById('resursteamModal');
   const details = document.getElementById('resursteamDetails');
 
   modal.style.display = 'block';
-
-  details.innerHTML = `
-    <div class="empty">
-      Laddar uppdrag...
-    </div>
-  `;
+  details.innerHTML = '<div class="empty">Laddar uppdrag...</div>';
 
   try{
+    const data = await getAssignments();
+    const assignments = Array.isArray(data.assignments)
+      ? data.assignments
+      : [];
 
-    const r = await fetch(
-      'resursteam.json?t=' + Date.now()
-    );
-
-    if(!r.ok){
-      throw new Error('Kunde inte läsa resursteam.json');
-    }
-
-    const j = await r.json();
-
-    if(!j.assignments || !j.assignments.length){
-
-      details.innerHTML = `
-        <div class="empty">
-          Inga uppdrag finns registrerade.
-        </div>
-      `;
-
+    if (!assignments.length){
+      details.innerHTML =
+        '<div class="empty">Inga uppdrag finns registrerade.</div>';
       return;
     }
 
-    details.innerHTML = j.assignments.map(item => `
-
-      <div style="
-        background:#29333d;
-        border:1px solid #3a4652;
-        border-radius:14px;
-        padding:18px;
-        margin-bottom:14px;
-      ">
-
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          gap:15px;
-          align-items:flex-start;
-        ">
-
+    details.innerHTML = assignments.map(item => `
+      <div class="assignment">
+        <div class="assignment-top">
           <div>
-
-            <div style="
-              font-size:20px;
-              font-weight:600;
-              margin-bottom:5px;
-            ">
-              ${item.school || 'Ingen skola angiven'}
+            <div class="assignment-school">
+              ${escapeHtml(item.school || 'Ingen skola angiven')}
             </div>
-
-            <div style="
-              color:#9fb4c8;
-              margin-bottom:12px;
-            ">
-              ${item.student || 'Elev ej angiven'}
-              ${item.grade ? ' • Årskurs ' + item.grade : ''}
+            <div class="assignment-student">
+              ${escapeHtml(item.student || 'Elev ej angiven')}
+              ${item.grade ? ` · Årskurs ${escapeHtml(item.grade)}` : ''}
             </div>
-
           </div>
-
-          ${
-            item.needsFollowUp
-            ? `
-              <div style="
-                background:#805b25;
-                color:#fff;
-                padding:6px 10px;
-                border-radius:8px;
-                font-size:12px;
-                white-space:nowrap;
-              ">
-                Följ upp
-              </div>
-            `
-            : ''
-          }
-
+          ${item.needsFollowUp ? '<div class="follow">Följ upp</div>' : ''}
         </div>
 
-        <div style="
-          display:grid;
-          grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-          gap:12px;
-          margin-top:12px;
-        ">
-
+        <div class="assignment-grid">
           <div>
-            <div style="color:#8fa3b5;font-size:12px;">
-              Uppdrag
-            </div>
-            <div>
-              ${item.description || '—'}
-            </div>
+            <div class="label">Uppdrag</div>
+            <div>${escapeHtml(item.description || '—')}</div>
           </div>
-
           <div>
-            <div style="color:#8fa3b5;font-size:12px;">
-              Ansvarig
-            </div>
-            <div>
-              ${item.responsible || '—'}
-            </div>
+            <div class="label">Ansvarig</div>
+            <div>${escapeHtml(item.responsible || '—')}</div>
           </div>
-
           <div>
-            <div style="color:#8fa3b5;font-size:12px;">
-              Start
-            </div>
-            <div>
-              ${item.start || '—'}
-            </div>
+            <div class="label">Start</div>
+            <div>${escapeHtml(item.start || '—')}</div>
           </div>
-
           <div>
-            <div style="color:#8fa3b5;font-size:12px;">
-              Placering
-            </div>
-            <div>
-              ${item.placement || '—'}
-            </div>
+            <div class="label">Placering</div>
+            <div>${escapeHtml(item.placement || '—')}</div>
           </div>
-
         </div>
 
-        ${
-          item.notes
-          ? `
-            <div style="
-              margin-top:14px;
-              padding-top:12px;
-              border-top:1px solid #3a4652;
-            ">
-              <div style="
-                color:#8fa3b5;
-                font-size:12px;
-                margin-bottom:4px;
-              ">
-                Anteckningar
-              </div>
-
-              <div>
-                ${item.notes}
-              </div>
-            </div>
-          `
-          : ''
-        }
-
+        ${item.notes ? `
+          <div style="margin-top:14px;padding-top:12px;border-top:1px solid #3a4652">
+            <div class="label">Anteckningar</div>
+            <div>${escapeHtml(item.notes)}</div>
+          </div>
+        ` : ''}
       </div>
-
     `).join('');
 
-  }catch(e){
-
-    console.error(
-      'Kunde inte läsa resursteam.json:',
-      e
-    );
-
-    details.innerHTML = `
-      <div class="empty">
-        Kunde inte läsa Resursteamets uppdrag.
-      </div>
-    `;
+  }catch(error){
+    console.error('Detaljvyfel:', error);
+    details.innerHTML =
+      '<div class="empty">Kunde inte läsa Resursteamets uppdrag.</div>';
   }
 }
 
-
 function closeResursteam(event){
+  if(event) event.stopPropagation();
+  document.getElementById('resursteamModal').style.display = 'none';
+}
 
-  if(event){
-    event.stopPropagation();
-  }
-
-  document.getElementById(
-    'resursteamModal'
-  ).style.display = 'none';
+async function visaAllaUppdrag(event){
+  if(event) event.stopPropagation();
+  await openResursteam();
 }
 
 /* =========================
@@ -1464,10 +714,8 @@ function closeResursteam(event){
 ========================= */
 
 async function weather(){
-
   try{
-
-    const u =
+    const url =
       'https://api.open-meteo.com/v1/forecast' +
       '?latitude=57.7210' +
       '&longitude=12.9401' +
@@ -1476,158 +724,60 @@ async function weather(){
       '&timezone=Europe%2FStockholm' +
       '&forecast_days=1';
 
+    const response = await fetch(url);
 
-    const j =
-      await fetch(u)
-        .then(
-          r => r.json()
-        );
+    if (!response.ok) {
+      throw new Error(`Väderfel (${response.status})`);
+    }
 
+    const data = await response.json();
 
     const names = {
-
-      0:'Klart',
-
-      1:'Mestadels klart',
-
-      2:'Delvis molnigt',
-
-      3:'Mulet',
-
-      45:'Dimma',
-
-      48:'Dimma',
-
-      51:'Duggregn',
-
-      53:'Duggregn',
-
-      55:'Duggregn',
-
-      61:'Regn',
-
-      63:'Regn',
-
-      65:'Kraftigt regn',
-
-      71:'Snö',
-
-      73:'Snö',
-
-      75:'Snö',
-
-      80:'Regnskurar',
-
-      81:'Regnskurar',
-
-      82:'Kraftiga regnskurar',
-
+      0:'Klart',1:'Mestadels klart',2:'Delvis molnigt',
+      3:'Mulet',45:'Dimma',48:'Dimma',
+      51:'Duggregn',53:'Duggregn',55:'Duggregn',
+      61:'Regn',63:'Regn',65:'Kraftigt regn',
+      71:'Snö',73:'Snö',75:'Snö',
+      80:'Regnskurar',81:'Regnskurar',82:'Kraftiga regnskurar',
       95:'Åska'
-
     };
 
-
     document.getElementById('temp').textContent =
-      Math.round(
-        j.current.temperature_2m
-      ) + '°';
-
+      `${Math.round(data.current.temperature_2m)}°`;
 
     document.getElementById('weather').textContent =
-      names[
-        j.current.weather_code
-      ]
-      ||
-      'Väder';
-
+      names[data.current.weather_code] || 'Väder';
 
     document.getElementById('range').textContent =
-      Math.round(
-        j.daily.temperature_2m_min[0]
-      )
-      +
-      '° / '
-      +
-      Math.round(
-        j.daily.temperature_2m_max[0]
-      )
-      +
-      '° idag';
-
+      `${Math.round(data.daily.temperature_2m_min[0])}° / ` +
+      `${Math.round(data.daily.temperature_2m_max[0])}° idag`;
 
     document.getElementById('rain').textContent =
-      'Regnrisk: '
-      +
-      j.daily.precipitation_probability_max[0]
-      +
-      '%';
+      `Regnrisk: ${data.daily.precipitation_probability_max[0]}%`;
 
-
-  }
-
-  catch(e){
-
+  }catch(error){
+    console.error('Väderfel:', error);
     document.getElementById('weather').textContent =
       'Väder ej tillgängligt';
-
   }
-
 }
-
 
 /* =========================
    START
 ========================= */
 
 tick();
-
 calendar();
-
 menu();
-
 resursteam();
-  
 weather();
 
-
-/* =========================
-   AUTOMATISK UPPDATERING
-========================= */
-
-setInterval(
-  tick,
-  30000
-);
-
-
-setInterval(
-  calendar,
-  300000
-);
-
-
-setInterval(
-  menu,
-  300000
-);
-
-setInterval(
-  resursteam,
-  300000
-);
-
-setInterval(
-  weather,
-  300000
-);
-
+setInterval(tick, 30000);
+setInterval(calendar, 300000);
+setInterval(menu, 300000);
+setInterval(resursteam, 300000);
+setInterval(weather, 300000);
 </script>
-<script>
-document.getElementById('calendar').innerHTML =
-  '<div class="empty">TEST – JavaScript fungerar</div>';
 
-document.getElementById('status').textContent =
-  'JavaScript körs';
-</script>
 </body>
 </html>
