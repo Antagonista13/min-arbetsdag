@@ -54,9 +54,22 @@ main{max-width:1250px;margin:auto;padding:0 18px 30px}
   color:#9eacba;
   margin-bottom:10px;
 }
-.weather{display:flex;align-items:center;gap:20px}
-.temp{font-size:47px;font-weight:750}
-.weathername{font-size:18px}
+.weather{display:flex;flex-direction:column;gap:14px}
+.weather-top{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.weather-main{display:flex;align-items:center;gap:14px}
+.weather-icon{font-size:46px;line-height:1}
+.temp{font-size:47px;font-weight:750;line-height:1}
+.weathername{font-size:18px;margin-top:3px}
+.weather-details{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
+.weather-detail{background:rgba(0,0,0,.12);border-radius:10px;padding:9px 10px}
+.weather-detail-label{color:#9eacba;font-size:10px;text-transform:uppercase;letter-spacing:.35px;margin-bottom:4px}
+.weather-detail-value{font-size:14px;font-weight:650}
+.weather-summary{color:#aeb9c5;font-size:12px;line-height:1.4}
+@media(max-width:650px){
+  .weather-top{align-items:flex-start}
+  .weather-details{grid-template-columns:1fr 1fr 1fr}
+  .weather-detail{padding:8px}
+}
 .item{
   padding:9px 0;
   border-bottom:1px solid rgba(255,255,255,.075);
@@ -392,13 +405,36 @@ button:hover,a.button:hover{background:#3a5065}
   <div class="card">
     <div class="title">DAGENS ÖVERSIKT</div>
     <div class="weather">
-      <div>
-        <div id="temp" class="temp">--°</div>
-        <div id="weather" class="weathername">Hämtar väder...</div>
+      <div class="weather-top">
+        <div class="weather-main">
+          <div id="weatherIcon" class="weather-icon">🌤️</div>
+          <div>
+            <div id="temp" class="temp">--°</div>
+            <div id="weather" class="weathername">Hämtar väder...</div>
+          </div>
+        </div>
+
+        <div class="weather-summary">
+          <div id="range">--</div>
+          <div id="rain">--</div>
+        </div>
       </div>
-      <div>
-        <div id="range" class="muted"></div>
-        <div id="rain" class="muted"></div>
+
+      <div class="weather-details">
+        <div class="weather-detail">
+          <div class="weather-detail-label">Känns som</div>
+          <div id="feelsLike" class="weather-detail-value">--°</div>
+        </div>
+
+        <div class="weather-detail">
+          <div class="weather-detail-label">Vind</div>
+          <div id="wind" class="weather-detail-value">-- km/h</div>
+        </div>
+
+        <div class="weather-detail">
+          <div class="weather-detail-label">Luftfuktighet</div>
+          <div id="humidity" class="weather-detail-value">--%</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1306,12 +1342,12 @@ async function weather(){
       'https://api.open-meteo.com/v1/forecast' +
       '?latitude=57.7210' +
       '&longitude=12.9401' +
-      '&current=temperature_2m,weather_code' +
+      '&current=temperature_2m,apparent_temperature,relative_humidity_2m,weather_code,wind_speed_10m' +
       '&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max' +
       '&timezone=Europe%2FStockholm' +
       '&forecast_days=1';
 
-    const response = await fetch(url);
+    const response = await fetch(url, { cache:'no-store' });
 
     if (!response.ok) {
       throw new Error(`Väderfel (${response.status})`);
@@ -1319,33 +1355,73 @@ async function weather(){
 
     const data = await response.json();
 
-    const names = {
-      0:'Klart',1:'Mestadels klart',2:'Delvis molnigt',
-      3:'Mulet',45:'Dimma',48:'Dimma',
-      51:'Duggregn',53:'Duggregn',55:'Duggregn',
-      61:'Regn',63:'Regn',65:'Kraftigt regn',
-      71:'Snö',73:'Snö',75:'Snö',
-      80:'Regnskurar',81:'Regnskurar',82:'Kraftiga regnskurar',
-      95:'Åska'
+    const weatherInfo = {
+      0:  {name:'Klart', icon:'☀️'},
+      1:  {name:'Mestadels klart', icon:'🌤️'},
+      2:  {name:'Delvis molnigt', icon:'⛅'},
+      3:  {name:'Mulet', icon:'☁️'},
+      45: {name:'Dimma', icon:'🌫️'},
+      48: {name:'Rimfrost och dimma', icon:'🌫️'},
+      51: {name:'Lätt duggregn', icon:'🌦️'},
+      53: {name:'Duggregn', icon:'🌦️'},
+      55: {name:'Kraftigt duggregn', icon:'🌧️'},
+      56: {name:'Underkylt duggregn', icon:'🌧️'},
+      57: {name:'Kraftigt underkylt duggregn', icon:'🌧️'},
+      61: {name:'Lätt regn', icon:'🌦️'},
+      63: {name:'Regn', icon:'🌧️'},
+      65: {name:'Kraftigt regn', icon:'🌧️'},
+      66: {name:'Underkylt regn', icon:'🌧️'},
+      67: {name:'Kraftigt underkylt regn', icon:'🌧️'},
+      71: {name:'Lätt snöfall', icon:'🌨️'},
+      73: {name:'Snöfall', icon:'❄️'},
+      75: {name:'Kraftigt snöfall', icon:'🌨️'},
+      77: {name:'Snökorn', icon:'❄️'},
+      80: {name:'Regnskurar', icon:'🌦️'},
+      81: {name:'Regnskurar', icon:'🌧️'},
+      82: {name:'Kraftiga regnskurar', icon:'⛈️'},
+      85: {name:'Snöbyar', icon:'🌨️'},
+      86: {name:'Kraftiga snöbyar', icon:'🌨️'},
+      95: {name:'Åska', icon:'⛈️'},
+      96: {name:'Åska med hagel', icon:'⛈️'},
+      99: {name:'Kraftig åska med hagel', icon:'⛈️'}
     };
 
-    document.getElementById('temp').textContent =
-      `${Math.round(data.current.temperature_2m)}°`;
+    const current = data.current;
+    const daily = data.daily;
+    const info = weatherInfo[current.weather_code] || {
+      name:'Väder',
+      icon:'🌡️'
+    };
 
-    document.getElementById('weather').textContent =
-      names[data.current.weather_code] || 'Väder';
+    document.getElementById('weatherIcon').textContent = info.icon;
+
+    document.getElementById('temp').textContent =
+      `${Math.round(current.temperature_2m)}°`;
+
+    document.getElementById('weather').textContent = info.name;
 
     document.getElementById('range').textContent =
-      `${Math.round(data.daily.temperature_2m_min[0])}° / ` +
-      `${Math.round(data.daily.temperature_2m_max[0])}° idag`;
+      `Idag: ${Math.round(daily.temperature_2m_min[0])}° – ${Math.round(daily.temperature_2m_max[0])}°`;
 
     document.getElementById('rain').textContent =
-      `Regnrisk: ${data.daily.precipitation_probability_max[0]}%`;
+      `Regnrisk: ${Math.round(daily.precipitation_probability_max[0] || 0)}%`;
+
+    document.getElementById('feelsLike').textContent =
+      `${Math.round(current.apparent_temperature)}°`;
+
+    document.getElementById('wind').textContent =
+      `${Math.round(current.wind_speed_10m)} km/h`;
+
+    document.getElementById('humidity').textContent =
+      `${Math.round(current.relative_humidity_2m)}%`;
 
   }catch(error){
     console.error('Väderfel:', error);
+
     document.getElementById('weather').textContent =
       'Väder ej tillgängligt';
+
+    document.getElementById('weatherIcon').textContent = '🌦️';
   }
 }
 
