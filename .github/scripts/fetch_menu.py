@@ -1,7 +1,8 @@
 import json
 import urllib.request
 import urllib.parse
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 
 DISTRIBUTOR_ID = "68d18b0e30b565aba61bf59e"
 
@@ -13,15 +14,18 @@ OUTPUT_FILE = "menu.json"
 def fetch_menu():
     print("Hämtar matsedel från Matilda API...")
 
-    # Hämta innevarande vecka, måndag till söndag
-    today = datetime.now(timezone.utc).date()
+    # Använd svensk lokal tid så att veckoberäkningen blir korrekt.
+    today = datetime.now(ZoneInfo("Europe/Stockholm")).date()
+
+    # Hämta två hela veckor:
+    # måndag i innevarande vecka till söndag veckan därpå.
     monday = today - timedelta(days=today.weekday())
-    sunday = monday + timedelta(days=6)
+    end_date = monday + timedelta(days=13)
 
     params = {
         "distributorId": DISTRIBUTOR_ID,
         "startDate": monday.isoformat(),
-        "endDate": sunday.isoformat(),
+        "endDate": end_date.isoformat(),
         "lang": "sv",
     }
 
@@ -79,7 +83,9 @@ def fetch_menu():
             )
 
     output = {
-        "updatedAt": datetime.now(timezone.utc).isoformat(),
+        "updatedAt": datetime.now(
+            ZoneInfo("Europe/Stockholm")
+        ).isoformat(),
         "source": url,
         "meals": result,
     }
