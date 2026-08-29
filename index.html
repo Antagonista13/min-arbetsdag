@@ -721,6 +721,44 @@ main{
   color:#8fae9b;
 }
 
+
+/* =========================================
+   FINJUSTERAD STARTLAYOUT
+   Nästa lov fyller den lediga högerspalten
+========================================= */
+@media(min-width:1151px){
+  .grid{
+    grid-template-columns:1.15fr .85fr .85fr;
+    grid-template-areas:
+      "calendar menu resursteam"
+      "weekstats weekstats break"
+      "weekcal weekcal quick"
+      "system system system";
+    align-items:start;
+  }
+
+  .day-calendar-card{grid-area:calendar}
+  .menu-card{grid-area:menu}
+  .resursteam-card{grid-area:resursteam}
+  .resursteam-week-card{grid-area:weekstats; grid-column:auto !important}
+  .break-card-compact{grid-area:break; grid-column:auto !important}
+  .week-calendar-card{grid-area:weekcal; grid-column:auto !important}
+  .quick-card{grid-area:quick}
+  .system-card{grid-area:system}
+
+  .week-calendar-card{
+    min-height:0 !important;
+  }
+}
+
+/* Den rullande arbetsveckan är avsiktligt kompakt */
+.week-calendar-card .weekday{
+  margin-top:7px;
+}
+.week-calendar-card .calendar-event{
+  margin:3px 0;
+}
+
 </style>
 </head>
 
@@ -829,7 +867,7 @@ main{
 
 <section class="grid">
 
-  <div class="card">
+  <div class="card day-calendar-card">
     <div class="title">DAGENS KALENDER</div>
     <div id="calendar"><div class="empty">Laddar...</div></div>
     <a class="button" href="https://www.icloud.com/calendar/" target="_blank" rel="noopener">
@@ -837,7 +875,7 @@ main{
     </a>
   </div>
 
-  <div class="card">
+  <div class="card menu-card">
     <div class="title">DAGENS MENY</div>
     <div class="muted">Gånghesterskolan</div>
     <div id="menu" class="menu-today"><div class="empty">Laddar meny...</div></div>
@@ -846,7 +884,7 @@ main{
     </a>
   </div>
 
-  <div class="card" onclick="openResursteam(event)" style="cursor:pointer">
+  <div class="card resursteam-card" onclick="openResursteam(event)" style="cursor:pointer">
     <div class="title">RESURSTEAMET</div>
     <div class="stats">
       <div class="stat">
@@ -917,19 +955,19 @@ main{
     </div>
   </div>
 
-  <div class="card">
-    <div class="title">VECKANS KALENDER</div>
+  <div class="card week-calendar-card">
+    <div class="title">KOMMANDE ARBETSVECKA</div>
     <div id="week"><div class="empty">Laddar...</div></div>
   </div>
 
-  <div class="card">
+  <div class="card quick-card">
     <div class="title">SNABBT</div>
     <a class="button" href="https://outlook.office.com/calendar/" target="_blank" rel="noopener">Outlook Kalender</a>
     <br>
     <a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank" rel="noopener">Matilda Menu</a>
   </div>
 
-  <div class="card">
+  <div class="card system-card">
     <div class="title">SYSTEMSTATUS</div>
     <div class="item">iCloud: <span id="status">kontrollerar...</span></div>
     <div class="item">Senast hämtad: <span id="updated">—</span></div>
@@ -1361,10 +1399,18 @@ async function calendar(){
         : new Date().toLocaleString('sv-SE');
 
     const days = [];
+    let workdaysAdded = 0;
+    let dayOffset = 0;
 
-    for(let i = 0; i < 30; i++){
+    // Visa alltid fem kommande arbetsdagar.
+    // Exempel på en onsdag: onsdag, torsdag, fredag, måndag, tisdag.
+    while(workdaysAdded < 5){
       const day = new Date(todayStart);
-      day.setDate(day.getDate() + i);
+      day.setDate(day.getDate() + dayOffset);
+      dayOffset++;
+
+      const isWeekendDay = day.getDay() === 0 || day.getDay() === 6;
+      if (isWeekendDay) continue;
 
       const nextDay = new Date(day);
       nextDay.setDate(nextDay.getDate() + 1);
@@ -1375,7 +1421,6 @@ async function calendar(){
         .sort((a,b) => new Date(a.start) - new Date(b.start));
 
       const isToday = day.getTime() === todayStart.getTime();
-      const isWeekendDay = day.getDay() === 0 || day.getDay() === 6;
 
       const dayClasses = [
         'weekday',
@@ -1418,6 +1463,8 @@ async function calendar(){
             }).join('')
           : '<div class="empty">Inga kalenderhändelser</div>'
       );
+
+      workdaysAdded++;
     }
 
     weekEl.innerHTML = days.join('');
