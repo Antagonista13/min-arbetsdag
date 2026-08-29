@@ -277,6 +277,57 @@ button:hover,a.button:hover{background:#3a5065}
   line-height:1.35;
 }
 
+
+/* NÄSTA LOV */
+.break-card{
+  background:linear-gradient(135deg,rgba(112,83,150,.24),rgba(255,255,255,.04));
+  border:1px solid rgba(180,150,220,.22);
+}
+.break-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+.break-left{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.break-icon{
+  font-size:38px;
+  line-height:1;
+}
+.break-name{
+  font-size:19px;
+  font-weight:750;
+  margin-bottom:4px;
+}
+.break-date{
+  color:#aeb9c5;
+  font-size:13px;
+}
+.break-days{
+  text-align:right;
+}
+.break-number{
+  font-size:30px;
+  font-weight:800;
+  line-height:1;
+}
+.break-label{
+  color:#9eacba;
+  font-size:11px;
+  margin-top:4px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+}
+@media(max-width:650px){
+  .break-wrap{align-items:flex-start}
+  .break-days{text-align:left}
+  .break-name{font-size:16px}
+}
+
 </style>
 </head>
 
@@ -356,6 +407,24 @@ button:hover,a.button:hover{background:#3a5065}
     <div class="title">NÄSTA HÄNDELSE</div>
     <div id="next" style="font-size:17px">Laddar kalender...</div>
     <div id="calstatus" class="muted"></div>
+  </div>
+</section>
+
+<section class="card break-card" style="margin-bottom:14px">
+  <div class="title">NÄSTA LOV</div>
+  <div class="break-wrap">
+    <div class="break-left">
+      <div class="break-icon" id="breakIcon">🎒</div>
+      <div>
+        <div class="break-name" id="breakName">Laddar...</div>
+        <div class="break-date" id="breakDate">Kontrollerar kommande lov</div>
+      </div>
+    </div>
+
+    <div class="break-days">
+      <div class="break-number" id="breakDays">--</div>
+      <div class="break-label">dagar kvar</div>
+    </div>
   </div>
 </section>
 
@@ -589,6 +658,100 @@ function updateNowPanel({
           ? '1 uppdrag behöver uppföljning'
           : `${followUp} uppdrag behöver uppföljning`;
   }
+}
+
+
+/* =========================
+   NÄSTA LOV
+========================= */
+function updateNextBreak(){
+  /*
+    Borås Stad – läsåret 2026/2027.
+    Lovdagar för kommunala grundskolor.
+  */
+  const breaks = [
+    {
+      name: 'Höstlov',
+      start: '2026-10-29',
+      end: '2026-10-30',
+      icon: '🍂'
+    },
+    {
+      name: 'Jullov',
+      start: '2026-12-19',
+      end: '2027-01-10',
+      icon: '🎄'
+    },
+    {
+      name: 'Sportlov',
+      start: '2027-02-15',
+      end: '2027-02-19',
+      icon: '❄️'
+    },
+    {
+      name: 'Påsklov',
+      start: '2027-03-26',
+      end: '2027-04-02',
+      icon: '🐣'
+    },
+    {
+      name: 'Lovdagar',
+      start: '2027-05-06',
+      end: '2027-05-07',
+      icon: '🌷'
+    },
+    {
+      name: 'Sommarlov',
+      start: '2027-06-12',
+      end: '2027-08-15',
+      icon: '☀️'
+    }
+  ];
+
+  const today = startOfDay(new Date());
+
+  const nextBreak = breaks.find(item => {
+    const end = new Date(item.end + 'T23:59:59');
+    return end >= today;
+  });
+
+  if (!nextBreak){
+    document.getElementById('breakName').textContent = 'Inga kommande lov registrerade';
+    document.getElementById('breakDate').textContent = '';
+    document.getElementById('breakDays').textContent = '--';
+    return;
+  }
+
+  const start = new Date(nextBreak.start + 'T00:00:00');
+  const end = new Date(nextBreak.end + 'T00:00:00');
+
+  const oneDay = 24 * 60 * 60 * 1000;
+  const daysUntil = Math.ceil((start - today) / oneDay);
+
+  const dateFormat = new Intl.DateTimeFormat('sv-SE',{
+    day:'numeric',
+    month:'long'
+  });
+
+  let dateText = '';
+
+  if (start.getTime() === end.getTime()){
+    dateText = dateFormat.format(start);
+  } else if (start.getMonth() === end.getMonth()){
+    dateText = `${start.getDate()}–${dateFormat.format(end)}`;
+  } else {
+    dateText = `${dateFormat.format(start)} – ${dateFormat.format(end)}`;
+  }
+
+  const isOngoing = today >= start && today <= end;
+
+  document.getElementById('breakIcon').textContent = nextBreak.icon;
+  document.getElementById('breakName').textContent = nextBreak.name;
+  document.getElementById('breakDate').textContent =
+    `${dateText} ${start.getFullYear()}`;
+
+  document.getElementById('breakDays').textContent =
+    isOngoing ? 'NU' : Math.max(0, daysUntil);
 }
 
 /* =========================
@@ -1201,6 +1364,8 @@ setInterval(calendar, 300000);
 setInterval(menu, 300000);
 setInterval(resursteam, 300000);
 setInterval(weather, 300000);
+
+updateNextBreak();
 </script>
 
 </body>
