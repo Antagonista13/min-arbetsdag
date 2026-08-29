@@ -3,7 +3,7 @@ name: Uppdatera iCloud-kalender
 on:
   workflow_dispatch:
   schedule:
-    - cron: "*/30 * * * *"
+    - cron: "*/10 * * * *"
 
 permissions:
   contents: write
