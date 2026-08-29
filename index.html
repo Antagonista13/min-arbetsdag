@@ -616,59 +616,89 @@ async function menu(){
     const data = await response.json();
     const mealsData = Array.isArray(data.meals) ? data.meals : [];
 
-    const today = new Date();
+    const today = startOfDay(new Date());
     const isWeekend = today.getDay() === 0 || today.getDay() === 6;
 
-    const targetDate = new Date(today);
+    /* Gör om datumet till ett riktigt Date-objekt */
+    const meals = mealsData
+      .map(item => {
+        const rawDate = String(item.date || '').slice(0,10);
+        const date = new Date(rawDate + 'T00:00:00');
 
-    /* På helgen visar vi nästa måndag */
-    if (today.getDay() === 6) targetDate.setDate(targetDate.getDate() + 2);
-    if (today.getDay() === 0) targetDate.setDate(targetDate.getDate() + 1);
+        return {
+          ...item,
+          dateObject: date,
+          dishes: Array.isArray(item.dishes)
+            ? item.dishes.filter(dish => String(dish || '').trim())
+            : []
+        };
+      })
+      .filter(item =>
+        !Number.isNaN(item.dateObject.getTime()) &&
+        item.dishes.length
+      )
+      .sort((a,b) => a.dateObject - b.dateObject);
 
-    const targetISO =
-      `${targetDate.getFullYear()}-${String(targetDate.getMonth()+1).padStart(2,'0')}-${String(targetDate.getDate()).padStart(2,'0')}`;
-
-    const targetMeal = mealsData.find(item =>
-      String(item.date || '').slice(0,10) === targetISO
+    /* Försök först hitta dagens meny */
+    const todayMeal = meals.find(item =>
+      item.dateObject.getTime() === today.getTime()
     );
 
-    const dishes = Array.isArray(targetMeal?.dishes)
-      ? targetMeal.dishes.filter(dish => String(dish || '').trim())
-      : [];
+    /* Om det inte finns någon meny idag, hitta nästa registrerade meny */
+    const nextMeal = meals.find(item =>
+      item.dateObject >= today
+    );
 
-    if (isWeekend) {
-      const dayName = targetDate.toLocaleDateString('sv-SE', {
+    const selectedMeal = todayMeal || nextMeal;
+
+    if (!selectedMeal){
+      menuEl.innerHTML =
+        '<div class="empty">Ingen kommande matsedel är tillgänglig.</div>';
+      return;
+    }
+
+    const isToday =
+      selectedMeal.dateObject.getTime() === today.getTime();
+
+    const mealDateText =
+      selectedMeal.dateObject.toLocaleDateString('sv-SE',{
         weekday:'long',
         day:'numeric',
         month:'long'
       });
 
+    if (!isToday) {
+      const intro = isWeekend
+        ? '🍽️ HELGMENY'
+        : '🍽️ NÄSTA MENY';
+
+      const message = isWeekend
+        ? 'Ingen skollunch idag. Här är nästa registrerade lunch.'
+        : 'Ingen lunch registrerad för idag. Här är nästa tillgängliga meny.';
+
       menuEl.innerHTML = `
         <div class="item" style="border-bottom:0">
           <div style="font-size:17px;font-weight:700;margin-bottom:7px">
-            🍽️ HELGMENY
+            ${intro}
           </div>
+
           <div class="muted" style="margin-bottom:12px">
-            Ingen skollunch under helgen.
+            ${message}
           </div>
+
           <div style="font-weight:650;margin-bottom:8px">
-            Nästa meny · ${dayName}
+            ${mealDateText.charAt(0).toUpperCase() + mealDateText.slice(1)}
           </div>
-          ${
-            dishes.length
-              ? dishes.map(dish => `
-                  <div class="item">${escapeHtml(dish)}</div>
-                `).join('')
-              : '<div class="empty">Måndagens meny är ännu inte tillgänglig.</div>'
-          }
+
+          ${selectedMeal.dishes.map(dish => `
+            <div class="item">${escapeHtml(dish)}</div>
+          `).join('')}
         </div>
       `;
     } else {
-      menuEl.innerHTML = dishes.length
-        ? dishes.map(dish => `
-            <div class="item">${escapeHtml(dish)}</div>
-          `).join('')
-        : '<div class="empty">Ingen meny registrerad för idag.</div>';
+      menuEl.innerHTML = selectedMeal.dishes.map(dish => `
+        <div class="item">${escapeHtml(dish)}</div>
+      `).join('');
     }
 
   }catch(error){
