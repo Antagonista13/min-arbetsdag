@@ -1,6 +1,6 @@
 {
-  "updatedAt": "2026-08-29T13:31:34.122147+00:00",
-  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-08-24&endDate=2026-08-30&lang=sv",
+  "updatedAt": "2026-08-29T16:02:48.734480+02:00",
+  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-08-24&endDate=2026-09-06&lang=sv",
   "meals": [
     {
       "date": "2026-08-24T00:00:00",
@@ -40,6 +40,46 @@
       "dishes": [
         "Tomatsoppa med pasta samt bröd & tillbehör",
         "Blomkålssoppa med rostade solrosfrön samt bröd & tillbehör"
+      ]
+    },
+    {
+      "date": "2026-08-31T00:00:00",
+      "name": "",
+      "dishes": [
+        "Currykyckling med Kornris",
+        "Soltorkade tomatbiffar med potatisgratäng"
+      ]
+    },
+    {
+      "date": "2026-09-01T00:00:00",
+      "name": "",
+      "dishes": [
+        "Stekt panerad fisk med remouladsås & kokt potatis",
+        "Pad Thai wok med rostade solrosfrön"
+      ]
+    },
+    {
+      "date": "2026-09-02T00:00:00",
+      "name": "",
+      "dishes": [
+        "Stekt falukorv med stuvade makaroner",
+        "Moussaka"
+      ]
+    },
+    {
+      "date": "2026-09-03T00:00:00",
+      "name": "",
+      "dishes": [
+        "Pytt i panna med rödbetor",
+        "Kikärtsbiff med vitlökssås & bulgur"
+      ]
+    },
+    {
+      "date": "2026-09-04T00:00:00",
+      "name": "",
+      "dishes": [
+        "Italiensk ostsoppa med pasta samt skinka med bröd & tillbehör",
+        "Spicy linssoppa med ingefära & kokosgrädde med bröd & tillbehör"
       ]
     }
   ]
