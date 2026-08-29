@@ -731,23 +731,46 @@ main{
     grid-template-columns:1.15fr .85fr .85fr;
     grid-template-areas:
       "calendar menu resursteam"
-      "weekstats weekstats break"
-      "weekcal weekcal quick"
+      "weekstats break quick"
+      "weekcal weekcal weekcal"
       "system system system";
     align-items:start;
   }
 
-  .day-calendar-card{grid-area:calendar}
-  .menu-card{grid-area:menu}
-  .resursteam-card{grid-area:resursteam}
-  .resursteam-week-card{grid-area:weekstats; grid-column:auto !important}
-  .break-card-compact{grid-area:break; grid-column:auto !important}
-  .week-calendar-card{grid-area:weekcal; grid-column:auto !important}
-  .quick-card{grid-area:quick}
-  .system-card{grid-area:system}
+  .day-calendar-card{
+    grid-area:calendar;
+  }
+
+  .menu-card{
+    grid-area:menu;
+  }
+
+  .resursteam-card{
+    grid-area:resursteam;
+  }
+
+  .resursteam-week-card{
+    grid-area:weekstats;
+    grid-column:auto !important;
+  }
+
+  .break-card-compact{
+    grid-area:break;
+    grid-column:auto !important;
+  }
+
+  .quick-card{
+    grid-area:quick;
+  }
 
   .week-calendar-card{
+    grid-area:weekcal;
+    grid-column:auto !important;
     min-height:0 !important;
+  }
+
+  .system-card{
+    grid-area:system;
   }
 }
 
