@@ -905,47 +905,21 @@ async function calendar(){
 
 async function menu(){
 
+  const menuEl = document.getElementById('menu');
+
   try{
 
     const r = await fetch(
       'menu.json?t=' + Date.now()
     );
 
-
     if(!r.ok){
       throw Error();
     }
 
-
     const j = await r.json();
 
-
-    /*
-      fetch_menu.py sparar numera:
-
-      {
-        "updatedAt": "...",
-        "source": "...",
-        "meals": [
-          {
-            "date": "2026-08-27",
-            "name": "...",
-            "dishes": [
-              "...",
-              "..."
-            ]
-          }
-        ]
-      }
-
-      Därför letar vi efter dagens datum
-      istället för "day" och "meals".
-    */
-
-
-    const today =
-      new Date();
-
+    const today = new Date();
 
     const todayISO =
       today.getFullYear()
@@ -958,9 +932,7 @@ async function menu(){
           today.getDate()
         ).padStart(2,'0');
 
-
     let meals = [];
-
 
     if(
       Array.isArray(j.meals)
@@ -973,7 +945,6 @@ async function menu(){
             ===
             todayISO
         );
-
 
       if(
         todayMeal &&
@@ -988,6 +959,49 @@ async function menu(){
           );
 
       }
+
+    }
+
+    if(meals.length){
+
+      menuEl.innerHTML =
+        meals
+          .map(
+            meal =>
+              `<div class="event">
+                ${meal}
+              </div>`
+          )
+          .join('');
+
+    }else{
+
+      menuEl.innerHTML =
+        `<div class="empty">
+          Ingen meny registrerad för idag.
+        </div>`;
+
+    }
+
+  }catch(e){
+
+    console.error(
+      'Kunde inte läsa dagens meny:',
+      e
+    );
+
+    if(menuEl){
+
+      menuEl.innerHTML =
+        `<div class="empty">
+          Kunde inte läsa dagens meny.
+        </div>`;
+
+    }
+
+  }
+
+}
     async function visaAllaUppdrag(){
 
     try{
