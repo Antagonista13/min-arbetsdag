@@ -116,15 +116,80 @@ button:hover,a.button:hover{background:#3a5065}
 .stat.clickable:hover{transform:translateY(-2px);background:#34404c}
 .num{font-size:22px;font-weight:700}
 .weekday{
-  font-weight:700;
-  margin-top:14px;
-  padding-top:8px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  font-weight:750;
+  margin-top:16px;
+  padding:9px 11px;
   color:#dfe6ec;
-  border-top:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.045);
+  border-left:3px solid rgba(143,181,214,.45);
+  border-radius:9px;
   text-transform:capitalize;
 }
-.weekday:first-child{border-top:0;margin-top:0}
-.empty{color:#73818d;font-size:13px;padding:5px 0}
+.weekday:first-child{margin-top:0}
+.weekday.today{
+  background:rgba(143,181,214,.16);
+  border-left-color:#8fb5d6;
+  box-shadow:inset 0 0 0 1px rgba(143,181,214,.14);
+}
+.weekday.weekend{
+  color:#8f9ca8;
+  background:rgba(255,255,255,.025);
+  border-left-color:rgba(255,255,255,.15);
+}
+.weekday-label{display:flex;align-items:center;gap:8px}
+.today-badge{
+  font-size:10px;
+  font-weight:750;
+  letter-spacing:.45px;
+  padding:3px 7px;
+  border-radius:999px;
+  color:#dcecf9;
+  background:rgba(143,181,214,.2);
+}
+.weekday-weekend-label{
+  font-size:10px;
+  color:#75828d;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+}
+.calendar-event{
+  display:grid;
+  grid-template-columns:24px minmax(58px,auto) 1fr;
+  align-items:center;
+  gap:6px;
+  margin:5px 0;
+  padding:9px 10px;
+  background:rgba(0,0,0,.10);
+  border-radius:9px;
+  border:1px solid rgba(255,255,255,.045);
+  line-height:1.35;
+}
+.calendar-event.event-multiday{
+  background:rgba(143,181,214,.075);
+  border-color:rgba(143,181,214,.12);
+}
+.calendar-event.event-today{
+  background:rgba(143,181,214,.10);
+}
+.event-marker{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  color:#8fb5d6;
+  background:rgba(143,181,214,.12);
+  font-size:11px;
+  font-weight:bold;
+}
+.event-time{color:#8fb5d6;font-weight:700}
+.event-title{color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.weekday + .calendar-event{}
+.empty{color:#73818d;font-size:13px;padding:8px 10px}
 .menu-today{font-size:15px;color:#e5ebf0;line-height:1.45}
 .footer{
   text-align:center;
@@ -988,9 +1053,22 @@ async function calendar(){
         .filter(event => getEventDayStatus(event, day) !== 'outside')
         .sort((a,b) => new Date(a.start) - new Date(b.start));
 
+      const isToday = day.getTime() === todayStart.getTime();
+      const isWeekendDay = day.getDay() === 0 || day.getDay() === 6;
+
+      const dayClasses = [
+        'weekday',
+        isToday ? 'today' : '',
+        isWeekendDay ? 'weekend' : ''
+      ].filter(Boolean).join(' ');
+
       days.push(`
-        <div class="weekday">
-          ${weekdays[day.getDay()]} ${day.getDate()}/${day.getMonth()+1}
+        <div class="${dayClasses}">
+          <div class="weekday-label">
+            <span>${weekdays[day.getDay()]} ${day.getDate()}/${day.getMonth()+1}</span>
+            ${isToday ? '<span class="today-badge">IDAG</span>' : ''}
+          </div>
+          ${isWeekendDay ? '<span class="weekday-weekend-label">Helg</span>' : ''}
         </div>
       `);
 
@@ -1003,15 +1081,21 @@ async function calendar(){
                 status === 'middle' ? '↔' :
                 status === 'end' ? '◀' : '•';
 
+              const eventClasses = [
+                'calendar-event',
+                status !== 'single' ? 'event-multiday' : '',
+                isToday ? 'event-today' : ''
+              ].filter(Boolean).join(' ');
+
               return `
-                <div class="calendar-event">
+                <div class="${eventClasses}">
                   <span class="event-marker">${marker}</span>
                   <span class="event-time">${escapeHtml(formatEventTime(event))}</span>
-                  <span class="event-title">${escapeHtml(event.title || 'Kalenderhändelse')}</span>
+                  <span class="event-title" title="${escapeHtml(event.title || 'Kalenderhändelse')}">${escapeHtml(event.title || 'Kalenderhändelse')}</span>
                 </div>
               `;
             }).join('')
-          : '<div class="empty">–</div>'
+          : '<div class="empty">Inga kalenderhändelser</div>'
       );
     }
 
@@ -1446,3 +1530,4 @@ updateNextBreak();
 
 </body>
 </html>
+
