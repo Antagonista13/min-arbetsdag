@@ -703,82 +703,22 @@ main{
 }
 
 
-
 /* =========================================
-   FIT-SCREEN – FÅ MED MER PÅ STARTSKÄRMEN
-   Gäller främst större informationsskärmar
+   AUTOMATISK UPPDATERING + STATUSINDIKATOR
 ========================================= */
-@media (min-width:1151px) and (min-height:700px){
-  header{
-    max-width:1600px;
-    padding:14px 18px 10px;
-  }
-  h1{font-size:27px}
-  .clock{font-size:28px}
-
-  main{
-    padding:8px 18px 16px;
-  }
-
-  .card{padding:12px}
-  .title{margin-bottom:7px}
-
-  /* JUST NU */
-  .now-card{margin-bottom:8px !important}
-  .now-grid{gap:7px}
-  .now-item{
-    min-height:60px;
-    padding:7px 9px;
-    border-radius:10px;
-  }
-  .now-icon{font-size:15px;margin-bottom:1px}
-  .now-label{font-size:9px;margin-bottom:1px}
-  .now-value{font-size:13px}
-  .now-sub{font-size:10px;margin-top:1px}
-
-  /* Väder + nästa händelse */
-  .hero{gap:8px;margin-bottom:8px}
-  .weather{gap:6px}
-  .weather-icon{font-size:32px}
-  .temp{font-size:34px}
-  .weathername{font-size:14px}
-  .weather-detail{padding:6px 8px}
-  .weather-detail-label{font-size:8px;margin-bottom:2px}
-  .weather-detail-value{font-size:12px}
-  .weather-summary{font-size:10px}
-  #next{font-size:15px !important}
-
-  /* Huvudrutor */
-  .grid{gap:8px}
-  .grid > .card:nth-child(1),
-  .grid > .card:nth-child(2),
-  .grid > .card:nth-child(3){min-height:145px}
-
-  .item{padding:6px 0}
-  .weekday{margin-top:8px;padding:6px 8px}
-  .calendar-event{padding:5px 7px;margin:3px 0}
-
-  button,a.button{
-    padding:6px 9px;
-    margin-top:6px;
-    font-size:11px;
-  }
-
-  /* Resursteamet */
-  .stats{gap:5px}
-  .stat{padding:6px 5px}
-  .num{font-size:21px}
-  .resursteam-week{gap:6px}
-  .res-week-item{padding:7px}
-  .res-week-number{font-size:19px;margin-bottom:2px}
-  .res-week-label{font-size:10px}
-  .res-week-sub{font-size:8px;margin-top:1px}
-
-  /* Nästa lov */
-  .grid > .break-card-compact{padding:10px 12px}
-  .break-card-compact .break-icon{font-size:24px}
-  .break-card-compact .break-name{font-size:15px}
-  .break-card-compact .break-number{font-size:25px}
+.footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.last-updated{
+  font-size:10px;
+  color:#7f8d98;
+  white-space:nowrap;
+}
+.last-updated.is-fresh{
+  color:#8fae9b;
 }
 
 </style>
@@ -999,6 +939,10 @@ main{
 </section>
 
 <div class="footer">Resursteamet Borås · Digital anslagstavla</div>
+<div class="footer">
+  <span>Resursteamet • Borås</span>
+  <span id="lastUpdated" class="last-updated">● Uppdaterar...</span>
+</div>
 </main>
 
 <div id="resursteamModal" onclick="closeResursteam(event)">
@@ -1886,6 +1830,98 @@ async function weather(){
   }
 }
 
+
+/* =========================
+   AUTOMATISK SIDUPPDATERING
+========================= */
+
+const AUTO_REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minuter
+const REFRESH_CHECK_INTERVAL = 60 * 1000; // kontroll varje minut
+
+let pageOpenedAt = Date.now();
+let hiddenSince = null;
+let refreshInProgress = false;
+
+function updateLastUpdatedIndicator() {
+  const el = document.getElementById('lastUpdated');
+  if (!el) return;
+
+  const now = new Date();
+  const time = now.toLocaleTimeString('sv-SE', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+
+  el.textContent = `● Senast uppdaterad ${time}`;
+  el.classList.add('is-fresh');
+}
+
+function refreshDashboard() {
+  if (refreshInProgress) return;
+  refreshInProgress = true;
+
+  // Spara aktuell scrollposition på mobil innan omladdning
+  try {
+    sessionStorage.setItem('dashboardScrollY', String(window.scrollY));
+  } catch (e) {}
+
+  window.location.reload();
+}
+
+function checkAutoRefresh() {
+  // Uppdatera bara när sidan faktiskt är synlig
+  if (document.hidden) return;
+
+  const elapsed = Date.now() - pageOpenedAt;
+
+  if (elapsed >= AUTO_REFRESH_INTERVAL) {
+    refreshDashboard();
+  }
+}
+
+// Visa när sidan senast laddades
+updateLastUpdatedIndicator();
+
+// Kontrollera varje minut om det är dags att uppdatera
+setInterval(checkAutoRefresh, REFRESH_CHECK_INTERVAL);
+
+// Om användaren lämnar sidan noterar vi tidpunkten
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) {
+    hiddenSince = Date.now();
+    return;
+  }
+
+  // När användaren kommer tillbaka:
+  // uppdatera om sidan varit borta i minst 10 minuter
+  if (hiddenSince) {
+    const awayTime = Date.now() - hiddenSince;
+
+    if (awayTime >= AUTO_REFRESH_INTERVAL) {
+      refreshDashboard();
+      return;
+    }
+
+    hiddenSince = null;
+  }
+
+  checkAutoRefresh();
+});
+
+// Återställ scrollposition efter automatisk omladdning
+window.addEventListener('load', () => {
+  try {
+    const savedScroll = sessionStorage.getItem('dashboardScrollY');
+    if (savedScroll !== null) {
+      sessionStorage.removeItem('dashboardScrollY');
+      window.scrollTo({
+        top: Number(savedScroll),
+        behavior: 'instant'
+      });
+    }
+  } catch (e) {}
+});
+
 /* =========================
    START
 ========================= */
@@ -1905,49 +1941,6 @@ setInterval(weather, 300000);
 updateNextBreak();
 </script>
 
-<script>
-  // Automatisk uppdatering av dashboarden
-  const AUTO_REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minuter
-
-  let refreshTimer;
-
-  function startAutoRefresh() {
-    clearInterval(refreshTimer);
-
-    refreshTimer = setInterval(() => {
-      // Uppdatera bara om sidan är synlig
-      if (!document.hidden) {
-        window.location.reload();
-      }
-    }, AUTO_REFRESH_INTERVAL);
-  }
-
-  // Starta automatisk uppdatering
-  startAutoRefresh();
-
-  // När användaren återvänder till sidan:
-  // kontrollera om sidan varit borta länge
-  let hiddenSince = null;
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      hiddenSince = Date.now();
-    } else {
-      if (hiddenSince) {
-        const awayTime = Date.now() - hiddenSince;
-
-        // Om sidan varit i bakgrunden längre än 10 minuter
-        if (awayTime >= AUTO_REFRESH_INTERVAL) {
-          window.location.reload();
-        }
-
-        hiddenSince = null;
-      }
-    }
-  });
-</script>  
-  
 </body>
 </html>
-
 
