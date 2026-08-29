@@ -580,7 +580,36 @@ a.button{
 
 
 <script>
-document.getElementById('calendar').innerHTML = 'JavaScript startar';
+window.onerror = function(message, source, lineno, colno, error) {
+
+  document.getElementById('calendar').innerHTML =
+    '<div class="empty">JavaScript-fel: ' +
+    message +
+    '<br>Rad: ' +
+    lineno +
+    '</div>';
+
+  document.getElementById('status').textContent =
+    'Fel på rad ' + lineno;
+
+};
+
+
+window.addEventListener('unhandledrejection', function(event) {
+
+  document.getElementById('calendar').innerHTML =
+    '<div class="empty">Async-fel: ' +
+    event.reason +
+    '</div>';
+
+  document.getElementById('status').textContent =
+    'Async-fel upptäckt';
+
+});
+
+
+document.getElementById('calendar').innerHTML =
+  'JavaScript startar';
   
 /* =========================
    GEMENSAMMA FUNKTIONER
