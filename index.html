@@ -451,18 +451,60 @@ async function calendar(){
     const tomorrow = new Date(todayStart);
     tomorrow.setDate(tomorrow.getDate() + 1);
 
-    const todayEvents = events
-      .filter(event => overlapsDay(event, todayStart, tomorrow))
+    const isWeekend = now.getDay() === 0 || now.getDay() === 6;
+
+    /* Nästa arbetsdag: måndag om det är helg, annars idag */
+    const focusDay = new Date(todayStart);
+    if (now.getDay() === 6) focusDay.setDate(focusDay.getDate() + 2);
+    if (now.getDay() === 0) focusDay.setDate(focusDay.getDate() + 1);
+
+    const focusNextDay = new Date(focusDay);
+    focusNextDay.setDate(focusNextDay.getDate() + 1);
+
+    const focusEvents = events
+      .filter(event => overlapsDay(event, focusDay, focusNextDay))
       .sort((a,b) => new Date(a.start) - new Date(b.start));
 
-    calendarEl.innerHTML = todayEvents.length
-      ? todayEvents.map(event => `
-          <div class="item">
-            <span class="time">${escapeHtml(formatEventTime(event))}</span>
-            ${escapeHtml(event.title || 'Kalenderhändelse')}
+    if (isWeekend) {
+      const dayName = focusDay.toLocaleDateString('sv-SE', {
+        weekday:'long',
+        day:'numeric',
+        month:'long'
+      });
+
+      calendarEl.innerHTML = `
+        <div class="item" style="border-bottom:0">
+          <div style="font-size:18px;font-weight:700;margin-bottom:7px">
+            ☀️ HELGLÄGE
           </div>
-        `).join('')
-      : '<div class="empty">Inga kalenderhändelser idag.</div>';
+          <div class="muted" style="margin-bottom:12px">
+            Inga schemalagda aktiviteter idag.
+          </div>
+          <div style="font-weight:650;margin-bottom:8px">
+            Nästa arbetsdag: ${dayName}
+          </div>
+          ${
+            focusEvents.length
+              ? focusEvents.slice(0,4).map(event => `
+                  <div class="item">
+                    <span class="time">${escapeHtml(formatEventTime(event))}</span>
+                    ${escapeHtml(event.title || 'Kalenderhändelse')}
+                  </div>
+                `).join('')
+              : '<div class="empty">Inga kalenderhändelser registrerade för nästa arbetsdag.</div>'
+          }
+        </div>
+      `;
+    } else {
+      calendarEl.innerHTML = focusEvents.length
+        ? focusEvents.map(event => `
+            <div class="item">
+              <span class="time">${escapeHtml(formatEventTime(event))}</span>
+              ${escapeHtml(event.title || 'Kalenderhändelse')}
+            </div>
+          `).join('')
+        : '<div class="empty">Inga kalenderhändelser idag.</div>';
+    }
 
     const upcoming = events
       .filter(event => eventEnd(event) > now)
@@ -470,12 +512,24 @@ async function calendar(){
 
     const next = upcoming[0];
 
-    nextEl.textContent = next
-      ? `${formatEventTime(next)} · ${next.title || 'Kalenderhändelse'}`
-      : 'Inga fler händelser';
+    if (isWeekend) {
+      const firstWorkEvent = upcoming.find(event =>
+        overlapsDay(event, focusDay, focusNextDay)
+      );
+
+      nextEl.innerHTML = firstWorkEvent
+        ? `<strong>☀️ Helgläge</strong><br><span class="muted">Nästa arbetsdag: ${focusDay.toLocaleDateString('sv-SE',{weekday:'long',day:'numeric',month:'long'})}</span><br>${escapeHtml(formatEventTime(firstWorkEvent))} · ${escapeHtml(firstWorkEvent.title || 'Kalenderhändelse')}`
+        : `<strong>☀️ Helgläge</strong><br><span class="muted">Nästa arbetsdag: ${focusDay.toLocaleDateString('sv-SE',{weekday:'long',day:'numeric',month:'long'})}</span>`;
+    } else {
+      nextEl.textContent = next
+        ? `${formatEventTime(next)} · ${next.title || 'Kalenderhändelse'}`
+        : 'Inga fler händelser';
+    }
 
     document.getElementById('calstatus').textContent =
-      events.length ? `${events.length} händelser tillgängliga` : '';
+      isWeekend
+        ? 'Dashboarden visar nästa arbetsdag'
+        : (events.length ? `${events.length} händelser tillgängliga` : '');
 
     document.getElementById('status').textContent = 'ansluten';
 
@@ -563,22 +617,59 @@ async function menu(){
     const mealsData = Array.isArray(data.meals) ? data.meals : [];
 
     const today = new Date();
-    const todayISO =
-      `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+    const isWeekend = today.getDay() === 0 || today.getDay() === 6;
 
-    const todayMeal = mealsData.find(item =>
-      String(item.date || '').slice(0,10) === todayISO
+    const targetDate = new Date(today);
+
+    /* På helgen visar vi nästa måndag */
+    if (today.getDay() === 6) targetDate.setDate(targetDate.getDate() + 2);
+    if (today.getDay() === 0) targetDate.setDate(targetDate.getDate() + 1);
+
+    const targetISO =
+      `${targetDate.getFullYear()}-${String(targetDate.getMonth()+1).padStart(2,'0')}-${String(targetDate.getDate()).padStart(2,'0')}`;
+
+    const targetMeal = mealsData.find(item =>
+      String(item.date || '').slice(0,10) === targetISO
     );
 
-    const dishes = Array.isArray(todayMeal?.dishes)
-      ? todayMeal.dishes.filter(dish => String(dish || '').trim())
+    const dishes = Array.isArray(targetMeal?.dishes)
+      ? targetMeal.dishes.filter(dish => String(dish || '').trim())
       : [];
 
-    menuEl.innerHTML = dishes.length
-      ? dishes.map(dish => `
-          <div class="item">${escapeHtml(dish)}</div>
-        `).join('')
-      : '<div class="empty">Ingen meny registrerad för idag.</div>';
+    if (isWeekend) {
+      const dayName = targetDate.toLocaleDateString('sv-SE', {
+        weekday:'long',
+        day:'numeric',
+        month:'long'
+      });
+
+      menuEl.innerHTML = `
+        <div class="item" style="border-bottom:0">
+          <div style="font-size:17px;font-weight:700;margin-bottom:7px">
+            🍽️ HELGMENY
+          </div>
+          <div class="muted" style="margin-bottom:12px">
+            Ingen skollunch under helgen.
+          </div>
+          <div style="font-weight:650;margin-bottom:8px">
+            Nästa meny · ${dayName}
+          </div>
+          ${
+            dishes.length
+              ? dishes.map(dish => `
+                  <div class="item">${escapeHtml(dish)}</div>
+                `).join('')
+              : '<div class="empty">Måndagens meny är ännu inte tillgänglig.</div>'
+          }
+        </div>
+      `;
+    } else {
+      menuEl.innerHTML = dishes.length
+        ? dishes.map(dish => `
+            <div class="item">${escapeHtml(dish)}</div>
+          `).join('')
+        : '<div class="empty">Ingen meny registrerad för idag.</div>';
+    }
 
   }catch(error){
     console.error('Matsedelsfel:', error);
