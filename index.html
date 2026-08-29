@@ -1905,6 +1905,48 @@ setInterval(weather, 300000);
 updateNextBreak();
 </script>
 
+<script>
+  // Automatisk uppdatering av dashboarden
+  const AUTO_REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minuter
+
+  let refreshTimer;
+
+  function startAutoRefresh() {
+    clearInterval(refreshTimer);
+
+    refreshTimer = setInterval(() => {
+      // Uppdatera bara om sidan är synlig
+      if (!document.hidden) {
+        window.location.reload();
+      }
+    }, AUTO_REFRESH_INTERVAL);
+  }
+
+  // Starta automatisk uppdatering
+  startAutoRefresh();
+
+  // När användaren återvänder till sidan:
+  // kontrollera om sidan varit borta länge
+  let hiddenSince = null;
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      hiddenSince = Date.now();
+    } else {
+      if (hiddenSince) {
+        const awayTime = Date.now() - hiddenSince;
+
+        // Om sidan varit i bakgrunden längre än 10 minuter
+        if (awayTime >= AUTO_REFRESH_INTERVAL) {
+          window.location.reload();
+        }
+
+        hiddenSince = null;
+      }
+    }
+  });
+</script>  
+  
 </body>
 </html>
 
