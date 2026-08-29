@@ -406,6 +406,233 @@ button:hover,a.button:hover{background:#3a5065}
   .break-name{font-size:16px}
 }
 
+
+/* =========================================
+   KOMPAKT LAYOUT – OPTIMERAD FÖR EN SKÄRM
+========================================= */
+main{
+  max-width:1600px;
+  padding:14px 18px 24px;
+}
+.card{
+  padding:14px;
+}
+.title{
+  font-size:12px;
+  margin-bottom:9px;
+  letter-spacing:.7px;
+}
+
+/* JUST NU */
+.now-card{
+  margin-bottom:10px !important;
+}
+.now-grid{
+  gap:8px;
+}
+.now-item{
+  min-height:70px;
+  padding:9px 11px;
+}
+.now-icon{
+  font-size:17px;
+  margin-bottom:2px;
+}
+.now-label{
+  font-size:10px;
+  margin-bottom:2px;
+}
+.now-value{
+  font-size:14px;
+}
+.now-sub{
+  font-size:11px;
+  margin-top:2px;
+}
+
+/* Väder + nästa händelse */
+.hero{
+  grid-template-columns:1.2fr .8fr;
+  gap:10px;
+  margin-bottom:10px;
+}
+.hero .card{
+  min-height:0;
+}
+
+/* Nästa lov */
+.break-card{
+  margin-bottom:10px !important;
+  padding:11px 14px;
+}
+.break-card .title{
+  margin-bottom:6px;
+}
+.break-wrap{
+  min-height:54px;
+}
+.break-icon{
+  font-size:30px;
+}
+.break-name{
+  font-size:17px;
+  margin-bottom:2px;
+}
+.break-number{
+  font-size:25px;
+}
+
+/* Smartare väder – mindre höjd */
+.weather{
+  gap:8px;
+}
+.weather-icon{
+  font-size:36px;
+}
+.temp{
+  font-size:38px;
+}
+.weathername{
+  font-size:15px;
+}
+.weather-details{
+  gap:6px;
+}
+.weather-detail{
+  padding:7px 9px;
+}
+.weather-detail-label{
+  font-size:9px;
+}
+.weather-detail-value{
+  font-size:13px;
+}
+.weather-summary{
+  font-size:11px;
+}
+
+/* Huvudinnehåll i tre kolumner */
+.grid{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  align-items:start;
+}
+.grid .card{
+  margin:0;
+}
+
+/* Första raden: dagens viktigaste */
+.grid > .card:nth-child(1),
+.grid > .card:nth-child(2),
+.grid > .card:nth-child(3){
+  min-height:170px;
+}
+
+/* Resursteamet denna vecka får hela bredden av två kolumner */
+.grid > .resursteam-week-card{
+  grid-column:span 2;
+}
+
+/* Veckans kalender får två kolumner */
+.grid > .card:nth-child(5){
+  grid-column:span 2;
+}
+
+/* Systemstatus och snabbt hålls kompakta */
+.grid > .card:nth-child(6),
+.grid > .card:nth-child(7){
+  min-height:0;
+}
+
+/* Statistik */
+.stats{
+  gap:6px;
+}
+.stat{
+  padding:7px 4px;
+}
+.num{
+  font-size:24px;
+}
+.muted{
+  font-size:12px;
+}
+
+/* Resursteamet denna vecka */
+.resursteam-week{
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+.res-week-item{
+  padding:8px;
+}
+.res-week-icon{
+  font-size:14px;
+  margin-bottom:2px;
+}
+.res-week-number{
+  font-size:21px;
+  margin-bottom:3px;
+}
+.res-week-label{
+  font-size:11px;
+}
+.res-week-sub{
+  font-size:9px;
+  margin-top:2px;
+}
+
+/* Knappar */
+.button{
+  padding:7px 10px;
+  font-size:12px;
+  margin-top:7px;
+}
+
+/* Kalenderkort längre ned får naturligt ta plats */
+.weekday{
+  margin-top:10px;
+  padding:7px 9px;
+}
+.calendar-event{
+  padding:7px 8px;
+  margin:4px 0;
+}
+
+/* Anpassning för mindre skärmar */
+@media(max-width:1150px){
+  .grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .grid > .resursteam-week-card,
+  .grid > .card:nth-child(5){
+    grid-column:span 1;
+  }
+  .grid > .card:nth-child(1){
+    grid-column:span 2;
+  }
+}
+
+@media(max-width:750px){
+  main{
+    padding:10px;
+  }
+  .hero,
+  .grid{
+    grid-template-columns:1fr;
+  }
+  .grid > .card:nth-child(1){
+    grid-column:span 1;
+  }
+  .grid > .resursteam-week-card,
+  .grid > .card:nth-child(5){
+    grid-column:span 1;
+  }
+  .resursteam-week{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
 </style>
 </head>
 
@@ -1530,4 +1757,5 @@ updateNextBreak();
 
 </body>
 </html>
+
 
