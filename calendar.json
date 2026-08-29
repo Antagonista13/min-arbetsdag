@@ -1,18 +1,6 @@
 {
-  "updatedAt": "2026-08-28T23:31:24.434168+00:00",
+  "updatedAt": "2026-08-29T00:01:50.266070+00:00",
   "events": [
-    {
-      "title": "Observation - Sjöboskolan",
-      "start": "2026-08-28T08:00:00",
-      "end": "2026-08-28T14:00:00",
-      "location": "Sjöboskolan"
-    },
-    {
-      "title": "Handledning",
-      "start": "2026-08-28T08:00:00",
-      "end": "2026-08-28T14:00:00",
-      "location": "Dalsjöskolan KSU"
-    },
     {
       "title": "Avstämning med APT",
       "start": "2026-08-31T14:30:00",
