@@ -633,6 +633,75 @@ main{
   }
 }
 
+
+/* =========================================
+   NÄSTA LOV – KOMPAKT KORT UNDER RESURSTEAMET
+========================================= */
+.grid > .break-card-compact{
+  grid-column:span 1 !important;
+  min-height:0 !important;
+  margin:0 !important;
+  padding:12px 14px;
+  align-self:stretch;
+}
+
+.break-card-compact .title{
+  margin-bottom:7px;
+}
+
+.break-card-compact .break-wrap{
+  min-height:0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.break-card-compact .break-left{
+  gap:10px;
+}
+
+.break-card-compact .break-icon{
+  font-size:28px;
+  line-height:1;
+}
+
+.break-card-compact .break-name{
+  font-size:16px;
+  margin-bottom:2px;
+}
+
+.break-card-compact .break-date{
+  font-size:11px;
+}
+
+.break-card-compact .break-days{
+  min-width:62px;
+  text-align:right;
+}
+
+.break-card-compact .break-number{
+  font-size:28px;
+  line-height:1;
+}
+
+.break-card-compact .break-label{
+  font-size:9px;
+  margin-top:3px;
+}
+
+@media(max-width:1150px){
+  .grid > .break-card-compact{
+    grid-column:span 1 !important;
+  }
+}
+
+@media(max-width:750px){
+  .grid > .break-card-compact{
+    grid-column:span 1 !important;
+  }
+}
+
 </style>
 </head>
 
@@ -738,23 +807,6 @@ main{
   </div>
 </section>
 
-<section class="card break-card" style="margin-bottom:14px">
-  <div class="title">NÄSTA LOV</div>
-  <div class="break-wrap">
-    <div class="break-left">
-      <div class="break-icon" id="breakIcon">🎒</div>
-      <div>
-        <div class="break-name" id="breakName">Laddar...</div>
-        <div class="break-date" id="breakDate">Kontrollerar kommande lov</div>
-      </div>
-    </div>
-
-    <div class="break-days">
-      <div class="break-number" id="breakDays">--</div>
-      <div class="break-label">dagar kvar</div>
-    </div>
-  </div>
-</section>
 
 <section class="grid">
 
@@ -823,6 +875,25 @@ main{
         <div class="res-week-number" id="weekEndingSoon">0</div>
         <div class="res-week-label">Avslutas snart</div>
         <div class="res-week-sub">Inom de närmaste 14 dagarna</div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="card break-card break-card-compact">
+    <div class="title">NÄSTA LOV</div>
+    <div class="break-wrap">
+      <div class="break-left">
+        <div class="break-icon" id="breakIcon">🎒</div>
+        <div>
+          <div class="break-name" id="breakName">Laddar...</div>
+          <div class="break-date" id="breakDate">Kontrollerar kommande lov</div>
+        </div>
+      </div>
+
+      <div class="break-days">
+        <div class="break-number" id="breakDays">--</div>
+        <div class="break-label">dagar kvar</div>
       </div>
     </div>
   </div>
