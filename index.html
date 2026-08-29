@@ -194,6 +194,52 @@ button:hover,a.button:hover{background:#3a5065}
   main{padding:0 12px 24px}
   #resursteamModal{padding:12px}
 }
+
+/* JUST NU */
+.now-card{
+  background:linear-gradient(135deg,rgba(70,105,135,.34),rgba(255,255,255,.07));
+  border:1px solid rgba(143,181,214,.28);
+}
+.now-grid{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+}
+.now-item{
+  background:rgba(0,0,0,.14);
+  border-radius:12px;
+  padding:12px;
+  min-height:88px;
+}
+.now-icon{
+  font-size:20px;
+  margin-bottom:5px;
+}
+.now-label{
+  color:#9eacba;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  margin-bottom:4px;
+}
+.now-value{
+  font-size:15px;
+  font-weight:650;
+  line-height:1.3;
+}
+.now-sub{
+  color:#aeb9c5;
+  font-size:12px;
+  margin-top:3px;
+  line-height:1.3;
+}
+@media(max-width:1000px){
+  .now-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:650px){
+  .now-grid{grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 
@@ -210,7 +256,49 @@ button:hover,a.button:hover{background:#3a5065}
   </div>
 </header>
 
+
 <main>
+
+<section class="card now-card" style="margin-bottom:14px">
+  <div class="title">JUST NU</div>
+  <div class="now-grid">
+    <div class="now-item">
+      <div class="now-icon">🕒</div>
+      <div class="now-label">Tid & datum</div>
+      <div id="nowTime" class="now-value">--:--</div>
+      <div id="nowDate" class="now-sub">Laddar...</div>
+    </div>
+
+    <div class="now-item">
+      <div class="now-icon">📅</div>
+      <div class="now-label">Nästa aktivitet</div>
+      <div id="nowNext" class="now-value">Laddar...</div>
+      <div id="nowNextSub" class="now-sub"></div>
+    </div>
+
+    <div class="now-item">
+      <div class="now-icon">🍽️</div>
+      <div class="now-label">Lunch</div>
+      <div id="nowLunch" class="now-value">Laddar...</div>
+      <div id="nowLunchSub" class="now-sub"></div>
+    </div>
+
+    <div class="now-item">
+      <div class="now-icon">👥</div>
+      <div class="now-label">Aktiva uppdrag</div>
+      <div id="nowAssignments" class="now-value">0</div>
+      <div id="nowAssignmentsSub" class="now-sub">Resursteamet</div>
+    </div>
+
+    <div class="now-item">
+      <div class="now-icon">⚠️</div>
+      <div class="now-label">Att följa upp</div>
+      <div id="nowFollowUp" class="now-value">0</div>
+      <div id="nowFollowUpSub" class="now-sub">Inga uppdrag att följa upp</div>
+    </div>
+  </div>
+</section>
+
 
 <section class="hero">
   <div class="card">
@@ -369,6 +457,67 @@ function tick(){
       month:'long',
       year:'numeric'
     });
+
+  document.getElementById('nowTime').textContent =
+    d.toLocaleTimeString('sv-SE',{
+      hour:'2-digit',
+      minute:'2-digit'
+    });
+
+  document.getElementById('nowDate').textContent =
+    d.toLocaleDateString('sv-SE',{
+      weekday:'long',
+      day:'numeric',
+      month:'long'
+    });
+}
+
+
+function shortText(value, maxLength){
+  const text = String(value || '').trim();
+  if (!text) return '';
+  return text.length > maxLength
+    ? text.slice(0, maxLength - 1).trimEnd() + '…'
+    : text;
+}
+
+function updateNowPanel({
+  nextTitle,
+  nextSub,
+  lunchTitle,
+  lunchSub,
+  activeAssignments,
+  followUp
+} = {}){
+  if (nextTitle !== undefined) {
+    document.getElementById('nowNext').textContent = nextTitle || 'Inget planerat';
+  }
+
+  if (nextSub !== undefined) {
+    document.getElementById('nowNextSub').textContent = nextSub || '';
+  }
+
+  if (lunchTitle !== undefined) {
+    document.getElementById('nowLunch').textContent = lunchTitle || 'Ingen meny';
+  }
+
+  if (lunchSub !== undefined) {
+    document.getElementById('nowLunchSub').textContent = lunchSub || '';
+  }
+
+  if (activeAssignments !== undefined) {
+    document.getElementById('nowAssignments').textContent = activeAssignments;
+  }
+
+  if (followUp !== undefined) {
+    document.getElementById('nowFollowUp').textContent = followUp;
+    document.getElementById('nowFollowUpSub').textContent =
+      Number(followUp) === 0
+        ? 'Inga uppdrag att följa upp'
+        : Number(followUp) === 1
+          ? '1 uppdrag behöver uppföljning'
+          : `${followUp} uppdrag behöver uppföljning`;
+  }
 }
 
 /* =========================
@@ -511,6 +660,23 @@ async function calendar(){
       .sort((a,b) => new Date(a.start) - new Date(b.start));
 
     const next = upcoming[0];
+
+    const nowNextEvent = isWeekend
+      ? upcoming.find(event => overlapsDay(event, focusDay, focusNextDay))
+      : next;
+
+    const nowNextDate = nowNextEvent
+      ? new Date(nowNextEvent.start)
+      : null;
+
+    updateNowPanel({
+      nextTitle: nowNextEvent
+        ? shortText(nowNextEvent.title || 'Kalenderhändelse', 42)
+        : 'Inget planerat',
+      nextSub: nowNextEvent
+        ? `${isWeekend ? 'Nästa arbetsdag · ' : ''}${nowNextEvent.allDay ? 'Heldag' : fmtTime(nowNextEvent.start)}${nowNextDate ? ' · ' + nowNextDate.toLocaleDateString('sv-SE',{weekday:'short',day:'numeric',month:'short'}) : ''}`
+        : (isWeekend ? 'Nästa arbetsdag visas när något finns planerat' : 'Inga kommande händelser')
+    });
 
     if (isWeekend) {
       const firstWorkEvent = upcoming.find(event =>
@@ -667,6 +833,15 @@ async function menu(){
         month:'long'
       });
 
+    updateNowPanel({
+      lunchTitle: selectedMeal.dishes.length
+        ? shortText(selectedMeal.dishes[0], 42)
+        : 'Ingen meny',
+      lunchSub: isToday
+        ? 'Dagens lunch'
+        : `${isWeekend ? 'Nästa lunch · ' : 'Nästa meny · '}${mealDateText.charAt(0).toUpperCase() + mealDateText.slice(1)}`
+    });
+
     if (!isToday) {
       const intro = isWeekend
         ? '🍽️ HELGMENY'
@@ -743,6 +918,11 @@ async function resursteam(){
     document.getElementById('activeAssignments').textContent = active;
     document.getElementById('followUp').textContent = follow;
     document.getElementById('totalAssignments').textContent = assignments.length;
+
+    updateNowPanel({
+      activeAssignments: active,
+      followUp: follow
+    });
 
   }catch(error){
     console.error('Resursteamfel:', error);
