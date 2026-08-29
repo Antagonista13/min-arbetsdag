@@ -8,100 +8,226 @@
 
 <style>
 :root{
-  font-family:Segoe UI,Arial,sans-serif;
-  color:#fff;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color:#f3f6f8;
   background:#10161d;
 }
 *{box-sizing:border-box}
+html{background:#10161d}
 body{
   margin:0;
   min-height:100vh;
   background:linear-gradient(145deg,#0f151b,#1b2732);
 }
 header{
-  max-width:1250px;
+  max-width:1600px;
   margin:auto;
-  padding:22px;
+  padding:22px 22px 14px;
   display:flex;
   justify-content:space-between;
+  align-items:flex-start;
 }
-h1{margin:0;font-size:29px}
-.muted{color:#aeb9c5;font-size:13px}
-.clock{font-size:31px;font-weight:650}
-main{max-width:1250px;margin:auto;padding:0 18px 30px}
-.hero{
-  display:grid;
-  grid-template-columns:1.7fr 1fr;
-  gap:14px;
-  margin-bottom:14px;
+h1{
+  margin:0;
+  font-size:30px;
+  letter-spacing:.4px;
 }
-.grid{
-  display:grid;
-  grid-template-columns:1.15fr .85fr .85fr;
-  gap:14px;
+.clock{
+  font-size:34px;
+  font-weight:750;
+  line-height:1;
+}
+.muted{
+  color:#aeb9c5;
+  font-size:13px;
+  line-height:1.45;
+}
+main{
+  max-width:1600px;
+  margin:auto;
+  padding:0 18px 24px;
 }
 .card{
   background:rgba(255,255,255,.065);
-  border:1px solid rgba(255,255,255,.075);
-  border-radius:18px;
-  padding:17px;
+  border:1px solid rgba(255,255,255,.09);
+  border-radius:20px;
+  padding:16px;
   box-shadow:0 10px 30px rgba(0,0,0,.14);
 }
 .title{
+  color:#aeb9c5;
   font-size:12px;
-  font-weight:750;
-  letter-spacing:.5px;
-  color:#9eacba;
+  font-weight:800;
+  letter-spacing:.8px;
   margin-bottom:10px;
 }
-.weather{display:flex;flex-direction:column;gap:14px}
-.weather-top{display:flex;align-items:center;justify-content:space-between;gap:18px}
-.weather-main{display:flex;align-items:center;gap:14px}
-.weather-icon{font-size:46px;line-height:1}
-.temp{font-size:47px;font-weight:750;line-height:1}
-.weathername{font-size:18px;margin-top:3px}
-.weather-details{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%}
-.weather-detail{background:rgba(0,0,0,.12);border-radius:10px;padding:9px 10px}
-.weather-detail-label{color:#9eacba;font-size:10px;text-transform:uppercase;letter-spacing:.35px;margin-bottom:4px}
-.weather-detail-value{font-size:14px;font-weight:650}
-.weather-summary{color:#aeb9c5;font-size:12px;line-height:1.4}
-@media(max-width:650px){
-  .weather-top{align-items:flex-start}
-  .weather-details{grid-template-columns:1fr 1fr 1fr}
-  .weather-detail{padding:8px}
-}
-.item{
-  padding:9px 0;
-  border-bottom:1px solid rgba(255,255,255,.075);
-  line-height:1.35;
-}
-.time{
-  color:#8fb5d6;
-  font-weight:700;
-  display:inline-block;
-  min-width:72px;
-}
-.badge{
-  display:inline-block;
-  border-radius:99px;
-  background:#314352;
-  padding:4px 8px;
-  font-size:11px;
-  margin-left:6px;
+.empty{
+  color:#83909b;
+  font-size:13px;
+  padding:8px 0;
 }
 button,a.button{
   display:inline-block;
-  background:#2c3c4c;
+  background:#2d4052;
   color:#fff;
   border:0;
-  border-radius:8px;
-  padding:9px 11px;
+  border-radius:10px;
+  padding:10px 14px;
   margin-top:10px;
   text-decoration:none;
-  font-size:13px;
+  font-size:14px;
   cursor:pointer;
 }
-button:hover,a.button:hover{background:#3a5065}
+button:hover,a.button:hover{background:#3b5369}
+
+/* =========================
+   HEADER / JUST NU
+========================= */
+.now-card{
+  margin-bottom:10px;
+  padding:14px;
+  background:linear-gradient(135deg,rgba(70,105,135,.34),rgba(255,255,255,.07));
+  border-color:rgba(143,181,214,.28);
+}
+.now-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:10px;
+}
+.now-item{
+  background:rgba(0,0,0,.14);
+  border-radius:14px;
+  padding:11px 13px;
+  min-height:84px;
+}
+.now-icon{
+  font-size:18px;
+  margin-bottom:4px;
+}
+.now-label{
+  color:#9eacba;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:4px;
+}
+.now-value{
+  font-size:15px;
+  font-weight:700;
+  line-height:1.3;
+}
+.now-sub{
+  color:#aeb9c5;
+  font-size:12px;
+  margin-top:3px;
+  line-height:1.3;
+}
+
+/* =========================
+   WEATHER / NEXT EVENT
+========================= */
+.hero{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:10px;
+  margin-bottom:10px;
+}
+.weather{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.weather-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+.weather-main{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+.weather-icon{
+  font-size:40px;
+  line-height:1;
+}
+.temp{
+  font-size:42px;
+  font-weight:800;
+  line-height:1;
+}
+.weathername{
+  font-size:16px;
+  margin-top:3px;
+}
+.weather-summary{
+  color:#aeb9c5;
+  font-size:12px;
+  line-height:1.45;
+  text-align:right;
+}
+.weather-details{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+}
+.weather-detail{
+  background:rgba(0,0,0,.12);
+  border-radius:11px;
+  padding:8px 10px;
+}
+.weather-detail-label{
+  color:#9eacba;
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:4px;
+}
+.weather-detail-value{
+  font-size:14px;
+  font-weight:700;
+}
+
+/* =========================
+   HUVUDLAYOUT
+========================= */
+.grid{
+  display:grid;
+  grid-template-columns:1.18fr .88fr .88fr;
+  grid-template-areas:
+    "calendar menu resources"
+    "calendar menu break"
+    "weekcal weekstats quick";
+  gap:10px;
+  align-items:start;
+}
+.day-calendar-card{grid-area:calendar}
+.menu-card{grid-area:menu}
+.resursteam-card{grid-area:resources}
+.break-card{grid-area:break}
+.week-calendar-card{grid-area:weekcal}
+.resursteam-week-card{grid-area:weekstats}
+.quick-card{grid-area:quick}
+
+/* =========================
+   DAGENS KALENDER
+========================= */
+.item{
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,.075);
+  line-height:1.4;
+}
+.time{
+  color:#9fc3e5;
+  font-weight:750;
+  display:inline-block;
+  min-width:72px;
+}
+
+/* =========================
+   RESURSTEAMET
+========================= */
 .stats{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -109,112 +235,210 @@ button:hover,a.button:hover{background:#3a5065}
 }
 .stat{
   background:rgba(255,255,255,.045);
-  padding:10px;
-  border-radius:10px;
+  padding:12px 10px;
+  border-radius:12px;
 }
-.stat.clickable{cursor:pointer;transition:.15s}
-.stat.clickable:hover{transform:translateY(-2px);background:#34404c}
-.num{font-size:22px;font-weight:700}
-.weekday{
+.stat.clickable{
+  cursor:pointer;
+  transition:.15s;
+}
+.stat.clickable:hover{
+  transform:translateY(-2px);
+  background:#34404c;
+}
+.num{
+  font-size:26px;
+  font-weight:800;
+  line-height:1.1;
+}
+
+/* =========================
+   NÄSTA LOV
+========================= */
+.break-card{
+  background:linear-gradient(135deg,rgba(112,83,150,.24),rgba(255,255,255,.04));
+  border-color:rgba(180,150,220,.24);
+}
+.break-wrap{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  font-weight:750;
-  margin-top:16px;
-  padding:9px 11px;
-  color:#dfe6ec;
-  background:rgba(255,255,255,.045);
-  border-left:3px solid rgba(143,181,214,.45);
-  border-radius:9px;
-  text-transform:capitalize;
+  gap:16px;
 }
-.weekday:first-child{margin-top:0}
-.weekday.today{
-  background:rgba(143,181,214,.16);
-  border-left-color:#8fb5d6;
-  box-shadow:inset 0 0 0 1px rgba(143,181,214,.14);
-}
-.weekday.weekend{
-  color:#8f9ca8;
-  background:rgba(255,255,255,.025);
-  border-left-color:rgba(255,255,255,.15);
-}
-.weekday-label{display:flex;align-items:center;gap:8px}
-.today-badge{
-  font-size:10px;
-  font-weight:750;
-  letter-spacing:.45px;
-  padding:3px 7px;
-  border-radius:999px;
-  color:#dcecf9;
-  background:rgba(143,181,214,.2);
-}
-.weekday-weekend-label{
-  font-size:10px;
-  color:#75828d;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-}
-.calendar-event{
-  display:grid;
-  grid-template-columns:24px minmax(58px,auto) 1fr;
-  align-items:center;
-  gap:6px;
-  margin:5px 0;
-  padding:9px 10px;
-  background:rgba(0,0,0,.10);
-  border-radius:9px;
-  border:1px solid rgba(255,255,255,.045);
-  line-height:1.35;
-}
-.calendar-event.event-multiday{
-  background:rgba(143,181,214,.075);
-  border-color:rgba(143,181,214,.12);
-}
-.calendar-event.event-today{
-  background:rgba(143,181,214,.10);
-}
-.event-marker{
+.break-left{
   display:flex;
   align-items:center;
-  justify-content:center;
-  width:22px;
-  height:22px;
-  border-radius:50%;
-  color:#8fb5d6;
-  background:rgba(143,181,214,.12);
-  font-size:11px;
-  font-weight:bold;
+  gap:12px;
 }
-.event-time{color:#8fb5d6;font-weight:700}
-.event-title{color:#fff;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.weekday + .calendar-event{}
-.empty{color:#73818d;font-size:13px;padding:8px 10px}
-.menu-today{font-size:15px;color:#e5ebf0;line-height:1.45}
-.footer{
-  text-align:center;
-  color:#687783;
-  font-size:11px;
-  margin-top:16px;
+.break-icon{
+  font-size:34px;
+  line-height:1;
 }
-.event-marker{
-  display:inline-block;
-  width:20px;
-  color:#8fb5d6;
-  font-weight:bold;
+.break-name{
+  font-size:19px;
+  font-weight:800;
+  margin-bottom:3px;
 }
-.calendar-event{
-  padding:8px 0;
-  border-bottom:1px solid rgba(255,255,255,.075);
+.break-date{
+  color:#aeb9c5;
+  font-size:12px;
+}
+.break-days{text-align:right}
+.break-number{
+  font-size:32px;
+  font-weight:850;
+  line-height:1;
+}
+.break-label{
+  color:#aeb9c5;
+  font-size:10px;
+  margin-top:4px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+
+/* =========================
+   RESURSTEAMET DENNA VECKA
+========================= */
+.resursteam-week-card{
+  border-color:rgba(143,181,214,.24);
+}
+.resursteam-week{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+.res-week-item{
+  background:rgba(255,255,255,.045);
+  border-radius:12px;
+  padding:10px;
+  border:1px solid rgba(255,255,255,.05);
+}
+.res-week-icon{
+  font-size:16px;
+  margin-bottom:4px;
+}
+.res-week-number{
+  font-size:24px;
+  font-weight:800;
+  line-height:1;
+  margin-bottom:5px;
+}
+.res-week-label{
+  font-size:12px;
+  font-weight:700;
+}
+.res-week-sub{
+  color:#9eacba;
+  font-size:10px;
+  margin-top:4px;
   line-height:1.35;
 }
-.event-time{color:#8fb5d6;font-weight:700;margin-right:6px}
-.event-title{color:#fff}
+
+/* =========================
+   KOMMANDE ARBETSVECKA
+========================= */
+.week-calendar-card{
+  min-height:260px;
+}
+.week-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:8px;
+}
+.week-day{
+  background:rgba(0,0,0,.11);
+  border:1px solid rgba(255,255,255,.05);
+  border-radius:12px;
+  overflow:hidden;
+  min-width:0;
+}
+.week-day-header{
+  padding:10px;
+  font-weight:800;
+  background:rgba(255,255,255,.045);
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.week-day.today .week-day-header{
+  border-left:3px solid #8fb5d6;
+  padding-left:7px;
+}
+.week-events{
+  padding:6px 8px 8px;
+}
+.week-event{
+  display:grid;
+  grid-template-columns:9px 1fr;
+  gap:6px;
+  align-items:start;
+  padding:7px 0;
+  font-size:11px;
+  line-height:1.35;
+}
+.week-event + .week-event{
+  border-top:1px solid rgba(255,255,255,.06);
+}
+.week-event-marker{
+  width:7px;
+  height:7px;
+  margin-top:5px;
+  border-radius:50%;
+  background:#6ea8e0;
+}
+.week-event-time{
+  color:#9fc3e5;
+  font-weight:700;
+  margin-bottom:2px;
+}
+.week-event-title{
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.week-empty{
+  color:#77848f;
+  font-size:11px;
+  padding:8px 0;
+}
+
+/* =========================
+   SNABBT
+========================= */
+.quick-card{
+  min-height:160px;
+}
+.quick-card .button{
+  margin-top:8px;
+}
+.quick-card .button:first-of-type{
+  margin-top:0;
+}
+
+/* =========================
+   FOOTER
+========================= */
+.footer-bar{
+  max-width:1600px;
+  margin:12px auto 0;
+  padding:11px 16px;
+  border-radius:14px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.06);
+  color:#9eacba;
+  font-size:11px;
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+}
+.last-updated.is-fresh{color:#91b49d}
+
+/* =========================
+   MODAL
+========================= */
 #resursteamModal{
   display:none;
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.75);
+  background:rgba(0,0,0,.78);
   z-index:9999;
   padding:30px;
   overflow-y:auto;
@@ -248,11 +472,18 @@ button:hover,a.button:hover{background:#3a5065}
   gap:15px;
   align-items:flex-start;
 }
-.assignment-school{font-size:20px;font-weight:600;margin-bottom:5px}
-.assignment-student{color:#9fb4c8;margin-bottom:12px}
+.assignment-school{
+  font-size:20px;
+  font-weight:650;
+  margin-bottom:5px;
+}
+.assignment-student{
+  color:#9fb4c8;
+  margin-bottom:12px;
+}
 .assignment-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
   gap:12px;
   margin-top:12px;
 }
@@ -264,525 +495,72 @@ button:hover,a.button:hover{background:#3a5065}
   font-size:12px;
   white-space:nowrap;
 }
-@media(max-width:850px){
-  header{padding:16px 14px 10px}
-  .hero,.grid{grid-template-columns:1fr}
-  .clock{font-size:25px}
-  .card{padding:15px}
-  main{padding:0 12px 24px}
-  #resursteamModal{padding:12px}
-}
 
-/* JUST NU */
-.now-card{
-  background:linear-gradient(135deg,rgba(70,105,135,.34),rgba(255,255,255,.07));
-  border:1px solid rgba(143,181,214,.28);
-}
-.now-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:10px;
-}
-.now-item{
-  background:rgba(0,0,0,.14);
-  border-radius:12px;
-  padding:12px;
-  min-height:88px;
-}
-.now-icon{
-  font-size:20px;
-  margin-bottom:5px;
-}
-.now-label{
-  color:#9eacba;
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-  margin-bottom:4px;
-}
-.now-value{
-  font-size:15px;
-  font-weight:650;
-  line-height:1.3;
-}
-.now-sub{
-  color:#aeb9c5;
-  font-size:12px;
-  margin-top:3px;
-  line-height:1.3;
-}
-@media(max-width:1000px){
-  .now-grid{grid-template-columns:repeat(3,1fr)}
-}
-@media(max-width:650px){
-  .now-grid{grid-template-columns:1fr 1fr}
-}
-
-
-/* RESURSTEAMET – DENNA VECKA */
-.resursteam-week-card{
-  border:1px solid rgba(143,181,214,.24);
-}
-.resursteam-week{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-.res-week-item{
-  background:rgba(255,255,255,.045);
-  border-radius:12px;
-  padding:13px;
-  border:1px solid rgba(255,255,255,.05);
-}
-.res-week-icon{
-  font-size:18px;
-  margin-bottom:5px;
-}
-.res-week-number{
-  font-size:26px;
-  font-weight:750;
-  line-height:1;
-  margin-bottom:5px;
-}
-.res-week-label{
-  font-size:13px;
-  font-weight:600;
-}
-.res-week-sub{
-  color:#9eacba;
-  font-size:11px;
-  margin-top:4px;
-  line-height:1.35;
-}
-
-
-/* NÄSTA LOV */
-.break-card{
-  background:linear-gradient(135deg,rgba(112,83,150,.24),rgba(255,255,255,.04));
-  border:1px solid rgba(180,150,220,.22);
-}
-.break-wrap{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:18px;
-}
-.break-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-.break-icon{
-  font-size:38px;
-  line-height:1;
-}
-.break-name{
-  font-size:19px;
-  font-weight:750;
-  margin-bottom:4px;
-}
-.break-date{
-  color:#aeb9c5;
-  font-size:13px;
-}
-.break-days{
-  text-align:right;
-}
-.break-number{
-  font-size:30px;
-  font-weight:800;
-  line-height:1;
-}
-.break-label{
-  color:#9eacba;
-  font-size:11px;
-  margin-top:4px;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-}
-@media(max-width:650px){
-  .break-wrap{align-items:flex-start}
-  .break-days{text-align:left}
-  .break-name{font-size:16px}
-}
-
-
-/* =========================================
-   KOMPAKT LAYOUT – OPTIMERAD FÖR EN SKÄRM
-========================================= */
-main{
-  max-width:1600px;
-  padding:14px 18px 24px;
-}
-.card{
-  padding:14px;
-}
-.title{
-  font-size:12px;
-  margin-bottom:9px;
-  letter-spacing:.7px;
-}
-
-/* JUST NU */
-.now-card{
-  margin-bottom:10px !important;
-}
-.now-grid{
-  gap:8px;
-}
-.now-item{
-  min-height:70px;
-  padding:9px 11px;
-}
-.now-icon{
-  font-size:17px;
-  margin-bottom:2px;
-}
-.now-label{
-  font-size:10px;
-  margin-bottom:2px;
-}
-.now-value{
-  font-size:14px;
-}
-.now-sub{
-  font-size:11px;
-  margin-top:2px;
-}
-
-/* Väder + nästa händelse */
-.hero{
-  grid-template-columns:1.2fr .8fr;
-  gap:10px;
-  margin-bottom:10px;
-}
-.hero .card{
-  min-height:0;
-}
-
-/* Nästa lov */
-.break-card{
-  margin-bottom:10px !important;
-  padding:11px 14px;
-}
-.break-card .title{
-  margin-bottom:6px;
-}
-.break-wrap{
-  min-height:54px;
-}
-.break-icon{
-  font-size:30px;
-}
-.break-name{
-  font-size:17px;
-  margin-bottom:2px;
-}
-.break-number{
-  font-size:25px;
-}
-
-/* Smartare väder – mindre höjd */
-.weather{
-  gap:8px;
-}
-.weather-icon{
-  font-size:36px;
-}
-.temp{
-  font-size:38px;
-}
-.weathername{
-  font-size:15px;
-}
-.weather-details{
-  gap:6px;
-}
-.weather-detail{
-  padding:7px 9px;
-}
-.weather-detail-label{
-  font-size:9px;
-}
-.weather-detail-value{
-  font-size:13px;
-}
-.weather-summary{
-  font-size:11px;
-}
-
-/* Huvudinnehåll i tre kolumner */
-.grid{
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;
-  align-items:start;
-}
-.grid .card{
-  margin:0;
-}
-
-/* Första raden: dagens viktigaste */
-.grid > .card:nth-child(1),
-.grid > .card:nth-child(2),
-.grid > .card:nth-child(3){
-  min-height:170px;
-}
-
-/* Resursteamet denna vecka får hela bredden av två kolumner */
-.grid > .resursteam-week-card{
-  grid-column:span 2;
-}
-
-/* Veckans kalender får två kolumner */
-.grid > .card:nth-child(5){
-  grid-column:span 2;
-}
-
-/* Systemstatus och snabbt hålls kompakta */
-.grid > .card:nth-child(6),
-.grid > .card:nth-child(7){
-  min-height:0;
-}
-
-/* Statistik */
-.stats{
-  gap:6px;
-}
-.stat{
-  padding:7px 4px;
-}
-.num{
-  font-size:24px;
-}
-.muted{
-  font-size:12px;
-}
-
-/* Resursteamet denna vecka */
-.resursteam-week{
-  grid-template-columns:repeat(4,1fr);
-  gap:7px;
-}
-.res-week-item{
-  padding:8px;
-}
-.res-week-icon{
-  font-size:14px;
-  margin-bottom:2px;
-}
-.res-week-number{
-  font-size:21px;
-  margin-bottom:3px;
-}
-.res-week-label{
-  font-size:11px;
-}
-.res-week-sub{
-  font-size:9px;
-  margin-top:2px;
-}
-
-/* Knappar */
-.button{
-  padding:7px 10px;
-  font-size:12px;
-  margin-top:7px;
-}
-
-/* Kalenderkort längre ned får naturligt ta plats */
-.weekday{
-  margin-top:10px;
-  padding:7px 9px;
-}
-.calendar-event{
-  padding:7px 8px;
-  margin:4px 0;
-}
-
-/* Anpassning för mindre skärmar */
+/* =========================
+   RESPONSIVT
+========================= */
 @media(max-width:1150px){
   .grid{
     grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-areas:
+      "calendar menu"
+      "resources break"
+      "weekcal weekcal"
+      "weekstats quick";
   }
-  .grid > .resursteam-week-card,
-  .grid > .card:nth-child(5){
-    grid-column:span 1;
-  }
-  .grid > .card:nth-child(1){
-    grid-column:span 2;
+  .week-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
   }
 }
-
-@media(max-width:750px){
-  main{
-    padding:10px;
+@media(max-width:850px){
+  header{
+    padding:16px 14px 10px;
   }
-  .hero,
-  .grid{
+  h1{font-size:25px}
+  .clock{font-size:28px}
+  main{padding:0 12px 20px}
+  .now-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+  .hero{
     grid-template-columns:1fr;
   }
-  .grid > .card:nth-child(1){
-    grid-column:span 1;
+  #resursteamModal{padding:12px}
+}
+@media(max-width:650px){
+  .now-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
-  .grid > .resursteam-week-card,
-  .grid > .card:nth-child(5){
-    grid-column:span 1;
+  .grid{
+    grid-template-columns:1fr;
+    grid-template-areas:
+      "calendar"
+      "menu"
+      "resources"
+      "break"
+      "weekcal"
+      "weekstats"
+      "quick";
+  }
+  .stats{
+    grid-template-columns:repeat(3,minmax(0,1fr));
   }
   .resursteam-week{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .week-grid{
+    grid-template-columns:1fr;
+  }
+  .weather-summary{text-align:left}
+  .weather-top{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .footer-bar{
+    margin:10px 10px 0;
+    flex-direction:column;
   }
 }
-
-
-/* =========================================
-   NÄSTA LOV – KOMPAKT KORT UNDER RESURSTEAMET
-========================================= */
-.grid > .break-card-compact{
-  grid-column:span 1 !important;
-  min-height:0 !important;
-  margin:0 !important;
-  padding:12px 14px;
-  align-self:stretch;
-}
-
-.break-card-compact .title{
-  margin-bottom:7px;
-}
-
-.break-card-compact .break-wrap{
-  min-height:0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-
-.break-card-compact .break-left{
-  gap:10px;
-}
-
-.break-card-compact .break-icon{
-  font-size:28px;
-  line-height:1;
-}
-
-.break-card-compact .break-name{
-  font-size:16px;
-  margin-bottom:2px;
-}
-
-.break-card-compact .break-date{
-  font-size:11px;
-}
-
-.break-card-compact .break-days{
-  min-width:62px;
-  text-align:right;
-}
-
-.break-card-compact .break-number{
-  font-size:28px;
-  line-height:1;
-}
-
-.break-card-compact .break-label{
-  font-size:9px;
-  margin-top:3px;
-}
-
-@media(max-width:1150px){
-  .grid > .break-card-compact{
-    grid-column:span 1 !important;
-  }
-}
-
-@media(max-width:750px){
-  .grid > .break-card-compact{
-    grid-column:span 1 !important;
-  }
-}
-
-
-/* =========================================
-   AUTOMATISK UPPDATERING + STATUSINDIKATOR
-========================================= */
-.footer{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-.last-updated{
-  font-size:10px;
-  color:#7f8d98;
-  white-space:nowrap;
-}
-.last-updated.is-fresh{
-  color:#8fae9b;
-}
-
-
-/* =========================================
-   FINJUSTERAD STARTLAYOUT
-   Nästa lov fyller den lediga högerspalten
-========================================= */
-@media(min-width:1151px){
-  .grid{
-    grid-template-columns:1.15fr .85fr .85fr;
-    grid-template-areas:
-        "calendar menu resursteam"
-        "calendar menu break"
-        "weekstats weekstats ."
-        "weekcal weekcal quick"
-        "system system system";
-    align-items:start;
-  }
-
-  .day-calendar-card{
-    grid-area:calendar;
-  }
-
-  .menu-card{
-    grid-area:menu;
-  }
-
-  .resursteam-card{
-    grid-area:resursteam;
-  }
-
-  .resursteam-week-card{
-    grid-area:weekstats;
-    grid-column:auto !important;
-  }
-
-  .break-card-compact{
-    grid-area:break;
-    grid-column:auto !important;
-  }
-
-  .quick-card{
-    grid-area:quick;
-  }
-
-  .week-calendar-card{
-    grid-area:weekcal;
-    grid-column:auto !important;
-    min-height:0 !important;
-  }
-
-  .system-card{
-    grid-area:system;
-  }
-}
-
-/* Den rullande arbetsveckan är avsiktligt kompakt */
-.week-calendar-card .weekday{
-  margin-top:7px;
-}
-.week-calendar-card .calendar-event{
-  margin:3px 0;
-}
-
 </style>
 </head>
 
@@ -799,212 +577,196 @@ main{
   </div>
 </header>
 
-
 <main>
 
-<section class="card now-card" style="margin-bottom:14px">
-  <div class="title">JUST NU</div>
-  <div class="now-grid">
-    <div class="now-item">
-      <div class="now-icon">🕒</div>
-      <div class="now-label">Tid & datum</div>
-      <div id="nowTime" class="now-value">--:--</div>
-      <div id="nowDate" class="now-sub">Laddar...</div>
+  <section class="card now-card">
+    <div class="title">JUST NU</div>
+    <div class="now-grid">
+      <div class="now-item">
+        <div class="now-icon">🕒</div>
+        <div class="now-label">Tid & datum</div>
+        <div id="nowTime" class="now-value">--:--</div>
+        <div id="nowDate" class="now-sub">Laddar...</div>
+      </div>
+
+      <div class="now-item">
+        <div class="now-icon">📅</div>
+        <div class="now-label">Nästa aktivitet</div>
+        <div id="nowNext" class="now-value">Laddar...</div>
+        <div id="nowNextSub" class="now-sub"></div>
+      </div>
+
+      <div class="now-item">
+        <div class="now-icon">🍽️</div>
+        <div class="now-label">Lunch</div>
+        <div id="nowLunch" class="now-value">Laddar...</div>
+        <div id="nowLunchSub" class="now-sub"></div>
+      </div>
+
+      <div class="now-item">
+        <div class="now-icon">👥</div>
+        <div class="now-label">Aktiva uppdrag</div>
+        <div id="nowAssignments" class="now-value">0</div>
+        <div class="now-sub">Resursteamet</div>
+      </div>
+
+      <div class="now-item">
+        <div class="now-icon">⚠️</div>
+        <div class="now-label">Att följa upp</div>
+        <div id="nowFollowUp" class="now-value">0</div>
+        <div id="nowFollowUpSub" class="now-sub">Inga uppdrag att följa upp</div>
+      </div>
     </div>
+  </section>
 
-    <div class="now-item">
-      <div class="now-icon">📅</div>
-      <div class="now-label">Nästa aktivitet</div>
-      <div id="nowNext" class="now-value">Laddar...</div>
-      <div id="nowNextSub" class="now-sub"></div>
-    </div>
-
-    <div class="now-item">
-      <div class="now-icon">🍽️</div>
-      <div class="now-label">Lunch</div>
-      <div id="nowLunch" class="now-value">Laddar...</div>
-      <div id="nowLunchSub" class="now-sub"></div>
-    </div>
-
-    <div class="now-item">
-      <div class="now-icon">👥</div>
-      <div class="now-label">Aktiva uppdrag</div>
-      <div id="nowAssignments" class="now-value">0</div>
-      <div id="nowAssignmentsSub" class="now-sub">Resursteamet</div>
-    </div>
-
-    <div class="now-item">
-      <div class="now-icon">⚠️</div>
-      <div class="now-label">Att följa upp</div>
-      <div id="nowFollowUp" class="now-value">0</div>
-      <div id="nowFollowUpSub" class="now-sub">Inga uppdrag att följa upp</div>
-    </div>
-  </div>
-</section>
-
-
-<section class="hero">
-  <div class="card">
-    <div class="title">DAGENS ÖVERSIKT</div>
-    <div class="weather">
-      <div class="weather-top">
-        <div class="weather-main">
-          <div id="weatherIcon" class="weather-icon">🌤️</div>
-          <div>
-            <div id="temp" class="temp">--°</div>
-            <div id="weather" class="weathername">Hämtar väder...</div>
+  <section class="hero">
+    <div class="card">
+      <div class="title">DAGENS ÖVERSIKT</div>
+      <div class="weather">
+        <div class="weather-top">
+          <div class="weather-main">
+            <div id="weatherIcon" class="weather-icon">🌤️</div>
+            <div>
+              <div id="temp" class="temp">--°</div>
+              <div id="weather" class="weathername">Hämtar väder...</div>
+            </div>
+          </div>
+          <div class="weather-summary">
+            <div id="range">--</div>
+            <div id="rain">--</div>
           </div>
         </div>
 
-        <div class="weather-summary">
-          <div id="range">--</div>
-          <div id="rain">--</div>
-        </div>
-      </div>
-
-      <div class="weather-details">
-        <div class="weather-detail">
-          <div class="weather-detail-label">Känns som</div>
-          <div id="feelsLike" class="weather-detail-value">--°</div>
-        </div>
-
-        <div class="weather-detail">
-          <div class="weather-detail-label">Vind</div>
-          <div id="wind" class="weather-detail-value">-- km/h</div>
-        </div>
-
-        <div class="weather-detail">
-          <div class="weather-detail-label">Luftfuktighet</div>
-          <div id="humidity" class="weather-detail-value">--%</div>
+        <div class="weather-details">
+          <div class="weather-detail">
+            <div class="weather-detail-label">Känns som</div>
+            <div id="feelsLike" class="weather-detail-value">--°</div>
+          </div>
+          <div class="weather-detail">
+            <div class="weather-detail-label">Vind</div>
+            <div id="wind" class="weather-detail-value">-- km/h</div>
+          </div>
+          <div class="weather-detail">
+            <div class="weather-detail-label">Luftfuktighet</div>
+            <div id="humidity" class="weather-detail-value">--%</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="card">
-    <div class="title">NÄSTA HÄNDELSE</div>
-    <div id="next" style="font-size:17px">Laddar kalender...</div>
-    <div id="calstatus" class="muted"></div>
-  </div>
-</section>
-
-
-<section class="grid">
-
-  <div class="card day-calendar-card">
-    <div class="title">DAGENS KALENDER</div>
-    <div id="calendar"><div class="empty">Laddar...</div></div>
-    <a class="button" href="https://www.icloud.com/calendar/" target="_blank" rel="noopener">
-      Öppna iCloud Kalender
-    </a>
-  </div>
-
-  <div class="card menu-card">
-    <div class="title">DAGENS MENY</div>
-    <div class="muted">Gånghesterskolan</div>
-    <div id="menu" class="menu-today"><div class="empty">Laddar meny...</div></div>
-    <a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank" rel="noopener">
-      Visa veckans meny
-    </a>
-  </div>
-
-  <div class="card resursteam-card" onclick="openResursteam(event)" style="cursor:pointer">
-    <div class="title">RESURSTEAMET</div>
-    <div class="stats">
-      <div class="stat">
-        <div class="num" id="activeAssignments">0</div>
-        <div class="muted">Aktiva uppdrag</div>
-      </div>
-      <div class="stat">
-        <div class="num" id="followUp">0</div>
-        <div class="muted">Följa upp</div>
-      </div>
-      <div class="stat clickable" onclick="visaAllaUppdrag(event)">
-        <div class="num" id="totalAssignments">0</div>
-        <div class="muted">Totalt antal uppdrag</div>
-      </div>
+    <div class="card">
+      <div class="title">NÄSTA HÄNDELSE</div>
+      <div id="next" style="font-size:18px">Laddar kalender...</div>
+      <div id="calstatus" class="muted" style="margin-top:5px"></div>
     </div>
-  </div>
+  </section>
 
-  <div class="card resursteam-week-card">
-    <div class="title">RESURSTEAMET · DENNA VECKA</div>
+  <section class="grid">
 
-    <div class="resursteam-week">
-      <div class="res-week-item">
-        <div class="res-week-icon">🆕</div>
-        <div class="res-week-number" id="weekNewAssignments">0</div>
-        <div class="res-week-label">Nya uppdrag</div>
-        <div class="res-week-sub">Startar denna vecka</div>
-      </div>
-
-      <div class="res-week-item">
-        <div class="res-week-icon">🟢</div>
-        <div class="res-week-number" id="weekActiveAssignments">0</div>
-        <div class="res-week-label">Pågående</div>
-        <div class="res-week-sub">Aktiva just nu</div>
-      </div>
-
-      <div class="res-week-item">
-        <div class="res-week-icon">🟠</div>
-        <div class="res-week-number" id="weekFollowUp">0</div>
-        <div class="res-week-label">Följa upp</div>
-        <div class="res-week-sub" id="weekFollowUpText">Inga uppdrag markerade</div>
-      </div>
-
-      <div class="res-week-item">
-        <div class="res-week-icon">🔴</div>
-        <div class="res-week-number" id="weekEndingSoon">0</div>
-        <div class="res-week-label">Avslutas snart</div>
-        <div class="res-week-sub">Inom de närmaste 14 dagarna</div>
-      </div>
+    <!-- Vänster: stor ruta -->
+    <div class="card day-calendar-card">
+      <div class="title">DAGENS KALENDER</div>
+      <div id="calendar"><div class="empty">Laddar...</div></div>
+      <a class="button" href="https://www.icloud.com/calendar/" target="_blank" rel="noopener">Öppna iCloud Kalender</a>
     </div>
-  </div>
 
+    <!-- Mitten: stor ruta -->
+    <div class="card menu-card">
+      <div class="title">DAGENS MENY</div>
+      <div class="muted">Gånghesterskolan</div>
+      <div id="menu" style="font-size:15px"><div class="empty">Laddar meny...</div></div>
+      <a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank" rel="noopener">Visa veckans meny</a>
+    </div>
 
-  <div class="card break-card break-card-compact">
-    <div class="title">NÄSTA LOV</div>
-    <div class="break-wrap">
-      <div class="break-left">
-        <div class="break-icon" id="breakIcon">🎒</div>
-        <div>
-          <div class="break-name" id="breakName">Laddar...</div>
-          <div class="break-date" id="breakDate">Kontrollerar kommande lov</div>
+    <!-- Höger: överst -->
+    <div class="card resursteam-card" onclick="openResursteam(event)" style="cursor:pointer">
+      <div class="title">RESURSTEAMET</div>
+      <div class="stats">
+        <div class="stat">
+          <div class="num" id="activeAssignments">0</div>
+          <div class="muted">Aktiva uppdrag</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="followUp">0</div>
+          <div class="muted">Följa upp</div>
+        </div>
+        <div class="stat clickable" onclick="visaAllaUppdrag(event)">
+          <div class="num" id="totalAssignments">0</div>
+          <div class="muted">Totalt antal uppdrag</div>
         </div>
       </div>
+    </div>
 
-      <div class="break-days">
-        <div class="break-number" id="breakDays">--</div>
-        <div class="break-label">dagar kvar</div>
+    <!-- Höger: direkt under Resursteamet -->
+    <div class="card break-card">
+      <div class="title">NÄSTA LOV</div>
+      <div class="break-wrap">
+        <div class="break-left">
+          <div class="break-icon" id="breakIcon">🎒</div>
+          <div>
+            <div class="break-name" id="breakName">Laddar...</div>
+            <div class="break-date" id="breakDate">Kontrollerar kommande lov</div>
+          </div>
+        </div>
+        <div class="break-days">
+          <div class="break-number" id="breakDays">--</div>
+          <div class="break-label">dagar kvar</div>
+        </div>
       </div>
     </div>
+
+    <!-- Nederst vänster -->
+    <div class="card week-calendar-card">
+      <div class="title">KOMMANDE ARBETSVECKA</div>
+      <div id="week" class="week-grid"><div class="empty">Laddar...</div></div>
+    </div>
+
+    <!-- Nederst mitten -->
+    <div class="card resursteam-week-card">
+      <div class="title">RESURSTEAMET · DENNA VECKA</div>
+      <div class="resursteam-week">
+        <div class="res-week-item">
+          <div class="res-week-icon">🆕</div>
+          <div class="res-week-number" id="weekNewAssignments">0</div>
+          <div class="res-week-label">Nya uppdrag</div>
+          <div class="res-week-sub">Startar denna vecka</div>
+        </div>
+        <div class="res-week-item">
+          <div class="res-week-icon">🟢</div>
+          <div class="res-week-number" id="weekActiveAssignments">0</div>
+          <div class="res-week-label">Pågående</div>
+          <div class="res-week-sub">Aktiva just nu</div>
+        </div>
+        <div class="res-week-item">
+          <div class="res-week-icon">🟠</div>
+          <div class="res-week-number" id="weekFollowUp">0</div>
+          <div class="res-week-label">Följa upp</div>
+          <div class="res-week-sub" id="weekFollowUpText">Inga uppdrag markerade</div>
+        </div>
+        <div class="res-week-item">
+          <div class="res-week-icon">🔴</div>
+          <div class="res-week-number" id="weekEndingSoon">0</div>
+          <div class="res-week-label">Avslutas snart</div>
+          <div class="res-week-sub">Inom 14 dagar</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nederst höger -->
+    <div class="card quick-card">
+      <div class="title">SNABBT</div>
+      <a class="button" href="https://outlook.office.com/calendar/" target="_blank" rel="noopener">Outlook Kalender</a>
+      <br>
+      <a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank" rel="noopener">Matilda Menu</a>
+    </div>
+
+  </section>
+
+  <div class="footer-bar">
+    <span id="lastUpdated" class="last-updated">● Uppdaterar...</span>
+    <span>Data uppdateras automatiskt var 10:e minut</span>
   </div>
 
-  <div class="card week-calendar-card">
-    <div class="title">KOMMANDE ARBETSVECKA</div>
-    <div id="week"><div class="empty">Laddar...</div></div>
-  </div>
-
-  <div class="card quick-card">
-    <div class="title">SNABBT</div>
-    <a class="button" href="https://outlook.office.com/calendar/" target="_blank" rel="noopener">Outlook Kalender</a>
-    <br>
-    <a class="button" href="https://menu.matildaplatform.com/meals/week/68d18b0e30b565aba61bf59e_boras-ganghesterskolan-kok" target="_blank" rel="noopener">Matilda Menu</a>
-  </div>
-
-  <div class="card system-card">
-    <div class="title">SYSTEMSTATUS</div>
-    <div class="item">iCloud: <span id="status">kontrollerar...</span></div>
-    <div class="item">Senast hämtad: <span id="updated">—</span></div>
-    <div class="muted">Kalender och matsedel hämtas automatiskt.</div>
-  </div>
-
-</section>
-
-<div class="footer">Resursteamet Borås · Digital anslagstavla</div>
-<div class="footer">
-  <span>Resursteamet • Borås</span>
-  <span id="lastUpdated" class="last-updated">● Uppdaterar...</span>
-</div>
 </main>
 
 <div id="resursteamModal" onclick="closeResursteam(event)">
@@ -1024,7 +786,6 @@ main{
 /* =========================
    HJÄLPFUNKTIONER
 ========================= */
-
 const weekdays = [
   'söndag','måndag','tisdag','onsdag',
   'torsdag','fredag','lördag'
@@ -1039,20 +800,12 @@ function escapeHtml(value){
 
 function fmtTime(value){
   const d = new Date(value);
-  return Number.isNaN(d.getTime())
-    ? ''
-    : d.toLocaleTimeString('sv-SE',{
-        hour:'2-digit',
-        minute:'2-digit'
-      });
+  return Number.isNaN(d.getTime()) ? '' :
+    d.toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});
 }
 
 function startOfDay(date){
-  return new Date(
-    date.getFullYear(),
-    date.getMonth(),
-    date.getDate()
-  );
+  return new Date(date.getFullYear(),date.getMonth(),date.getDate());
 }
 
 function eventEnd(event){
@@ -1061,146 +814,80 @@ function eventEnd(event){
   return Number.isNaN(end.getTime()) ? start : end;
 }
 
-/* =========================
-   KLOCKA OCH DATUM
-========================= */
-
-function tick(){
-  const d = new Date();
-
-  document.getElementById('clock').textContent =
-    d.toLocaleTimeString('sv-SE',{
-      hour:'2-digit',
-      minute:'2-digit'
-    });
-
-  document.getElementById('date').textContent =
-    d.toLocaleDateString('sv-SE',{
-      weekday:'long',
-      day:'numeric',
-      month:'long',
-      year:'numeric'
-    });
-
-  document.getElementById('nowTime').textContent =
-    d.toLocaleTimeString('sv-SE',{
-      hour:'2-digit',
-      minute:'2-digit'
-    });
-
-  document.getElementById('nowDate').textContent =
-    d.toLocaleDateString('sv-SE',{
-      weekday:'long',
-      day:'numeric',
-      month:'long'
-    });
-}
-
-
-function shortText(value, maxLength){
+function shortText(value,maxLength){
   const text = String(value || '').trim();
-  if (!text) return '';
+  if(!text) return '';
   return text.length > maxLength
-    ? text.slice(0, maxLength - 1).trimEnd() + '…'
+    ? text.slice(0,maxLength-1).trimEnd() + '…'
     : text;
 }
 
 function updateNowPanel({
-  nextTitle,
-  nextSub,
-  lunchTitle,
-  lunchSub,
-  activeAssignments,
-  followUp
+  nextTitle,nextSub,lunchTitle,lunchSub,activeAssignments,followUp
 } = {}){
-  if (nextTitle !== undefined) {
+  if(nextTitle !== undefined)
     document.getElementById('nowNext').textContent = nextTitle || 'Inget planerat';
-  }
-
-  if (nextSub !== undefined) {
+  if(nextSub !== undefined)
     document.getElementById('nowNextSub').textContent = nextSub || '';
-  }
-
-  if (lunchTitle !== undefined) {
+  if(lunchTitle !== undefined)
     document.getElementById('nowLunch').textContent = lunchTitle || 'Ingen meny';
-  }
-
-  if (lunchSub !== undefined) {
+  if(lunchSub !== undefined)
     document.getElementById('nowLunchSub').textContent = lunchSub || '';
-  }
-
-  if (activeAssignments !== undefined) {
+  if(activeAssignments !== undefined)
     document.getElementById('nowAssignments').textContent = activeAssignments;
-  }
-
-  if (followUp !== undefined) {
+  if(followUp !== undefined){
     document.getElementById('nowFollowUp').textContent = followUp;
     document.getElementById('nowFollowUpSub').textContent =
-      Number(followUp) === 0
-        ? 'Inga uppdrag att följa upp'
-        : Number(followUp) === 1
-          ? '1 uppdrag behöver uppföljning'
-          : `${followUp} uppdrag behöver uppföljning`;
+      Number(followUp) === 0 ? 'Inga uppdrag att följa upp' :
+      Number(followUp) === 1 ? '1 uppdrag behöver uppföljning' :
+      `${followUp} uppdrag behöver uppföljning`;
   }
 }
 
+/* =========================
+   KLOCKA
+========================= */
+function tick(){
+  const d = new Date();
+
+  document.getElementById('clock').textContent =
+    d.toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});
+
+  document.getElementById('date').textContent =
+    d.toLocaleDateString('sv-SE',{
+      weekday:'long',day:'numeric',month:'long',year:'numeric'
+    });
+
+  document.getElementById('nowTime').textContent =
+    d.toLocaleTimeString('sv-SE',{hour:'2-digit',minute:'2-digit'});
+
+  document.getElementById('nowDate').textContent =
+    d.toLocaleDateString('sv-SE',{
+      weekday:'long',day:'numeric',month:'long'
+    });
+}
 
 /* =========================
    NÄSTA LOV
 ========================= */
 function updateNextBreak(){
-  /*
-    Borås Stad – läsåret 2026/2027.
-    Lovdagar för kommunala grundskolor.
-  */
   const breaks = [
-    {
-      name: 'Höstlov',
-      start: '2026-10-29',
-      end: '2026-10-30',
-      icon: '🍂'
-    },
-    {
-      name: 'Jullov',
-      start: '2026-12-19',
-      end: '2027-01-10',
-      icon: '🎄'
-    },
-    {
-      name: 'Sportlov',
-      start: '2027-02-15',
-      end: '2027-02-19',
-      icon: '❄️'
-    },
-    {
-      name: 'Påsklov',
-      start: '2027-03-26',
-      end: '2027-04-02',
-      icon: '🐣'
-    },
-    {
-      name: 'Lovdagar',
-      start: '2027-05-06',
-      end: '2027-05-07',
-      icon: '🌷'
-    },
-    {
-      name: 'Sommarlov',
-      start: '2027-06-12',
-      end: '2027-08-15',
-      icon: '☀️'
-    }
+    {name:'Höstlov',start:'2026-10-29',end:'2026-10-30',icon:'🍂'},
+    {name:'Jullov',start:'2026-12-19',end:'2027-01-10',icon:'🎄'},
+    {name:'Sportlov',start:'2027-02-15',end:'2027-02-19',icon:'❄️'},
+    {name:'Påsklov',start:'2027-03-26',end:'2027-04-02',icon:'🐣'},
+    {name:'Lovdagar',start:'2027-05-06',end:'2027-05-07',icon:'🌷'},
+    {name:'Sommarlov',start:'2027-06-12',end:'2027-08-15',icon:'☀️'}
   ];
 
   const today = startOfDay(new Date());
+  const nextBreak = breaks.find(item =>
+    new Date(item.end + 'T23:59:59') >= today
+  );
 
-  const nextBreak = breaks.find(item => {
-    const end = new Date(item.end + 'T23:59:59');
-    return end >= today;
-  });
-
-  if (!nextBreak){
-    document.getElementById('breakName').textContent = 'Inga kommande lov registrerade';
+  if(!nextBreak){
+    document.getElementById('breakName').textContent =
+      'Inga kommande lov registrerade';
     document.getElementById('breakDate').textContent = '';
     document.getElementById('breakDays').textContent = '--';
     return;
@@ -1208,23 +895,20 @@ function updateNextBreak(){
 
   const start = new Date(nextBreak.start + 'T00:00:00');
   const end = new Date(nextBreak.end + 'T00:00:00');
-
-  const oneDay = 24 * 60 * 60 * 1000;
+  const oneDay = 86400000;
   const daysUntil = Math.ceil((start - today) / oneDay);
 
-  const dateFormat = new Intl.DateTimeFormat('sv-SE',{
-    day:'numeric',
-    month:'long'
+  const formatter = new Intl.DateTimeFormat('sv-SE',{
+    day:'numeric',month:'long'
   });
 
   let dateText = '';
-
-  if (start.getTime() === end.getTime()){
-    dateText = dateFormat.format(start);
-  } else if (start.getMonth() === end.getMonth()){
-    dateText = `${start.getDate()}–${dateFormat.format(end)}`;
-  } else {
-    dateText = `${dateFormat.format(start)} – ${dateFormat.format(end)}`;
+  if(start.getTime() === end.getTime()){
+    dateText = formatter.format(start);
+  }else if(start.getMonth() === end.getMonth()){
+    dateText = `${start.getDate()}–${formatter.format(end)}`;
+  }else{
+    dateText = `${formatter.format(start)} – ${formatter.format(end)}`;
   }
 
   const isOngoing = today >= start && today <= end;
@@ -1233,26 +917,17 @@ function updateNextBreak(){
   document.getElementById('breakName').textContent = nextBreak.name;
   document.getElementById('breakDate').textContent =
     `${dateText} ${start.getFullYear()}`;
-
   document.getElementById('breakDays').textContent =
-    isOngoing ? 'NU' : Math.max(0, daysUntil);
+    isOngoing ? 'NU' : Math.max(0,daysUntil);
 }
 
 /* =========================
    KALENDER
 ========================= */
-
-function overlapsDay(event, from, to){
+function overlapsDay(event,from,to){
   const start = new Date(event.start);
-  let finish = eventEnd(event);
-
-  if (Number.isNaN(start.getTime())) return false;
-
-  /* iCalendar använder ofta exklusivt slutdatum för heldagar */
-  if (event.allDay && finish > start) {
-    return start < to && finish > from;
-  }
-
+  const finish = eventEnd(event);
+  if(Number.isNaN(start.getTime())) return false;
   return start < to && finish > from;
 }
 
@@ -1260,9 +935,9 @@ function formatEventTime(event){
   const start = new Date(event.start);
   const finish = eventEnd(event);
 
-  if (event.allDay) return 'Heldag';
+  if(event.allDay) return 'Heldag';
 
-  if (
+  if(
     start.getHours() === 0 &&
     start.getMinutes() === 0 &&
     finish.getHours() === 0 &&
@@ -1270,29 +945,10 @@ function formatEventTime(event){
     finish > start
   ) return 'Heldag';
 
-  if (!event.end || finish.getTime() === start.getTime()) {
+  if(!event.end || finish.getTime() === start.getTime())
     return fmtTime(event.start);
-  }
 
   return `${fmtTime(event.start)}–${fmtTime(event.end)}`;
-}
-
-function getEventDayStatus(event, day){
-  const start = startOfDay(new Date(event.start));
-  const finish = startOfDay(eventEnd(event));
-  const current = startOfDay(day);
-
-  if (start.getTime() === finish.getTime()) return 'single';
-  if (current.getTime() === start.getTime()) return 'start';
-
-  /* Heldagar har normalt exklusivt slutdatum */
-  if (
-    event.allDay &&
-    current.getTime() === finish.getTime()
-  ) return 'outside';
-
-  if (current.getTime() === finish.getTime()) return 'end';
-  return 'middle';
 }
 
 async function calendar(){
@@ -1301,75 +957,59 @@ async function calendar(){
   const nextEl = document.getElementById('next');
 
   try{
-    const response = await fetch(
-      `calendar.json?t=${Date.now()}`,
-      { cache:'no-store' }
-    );
+    const response = await fetch(`calendar.json?t=${Date.now()}`,{
+      cache:'no-store'
+    });
 
-    if (!response.ok) {
+    if(!response.ok)
       throw new Error(`calendar.json kunde inte hämtas (${response.status})`);
-    }
 
     const data = await response.json();
     const events = Array.isArray(data.events) ? data.events : [];
 
     const now = new Date();
     const todayStart = startOfDay(now);
-    const tomorrow = new Date(todayStart);
-    tomorrow.setDate(tomorrow.getDate() + 1);
-
     const isWeekend = now.getDay() === 0 || now.getDay() === 6;
 
-    /* Nästa arbetsdag: måndag om det är helg, annars idag */
     const focusDay = new Date(todayStart);
-    if (now.getDay() === 6) focusDay.setDate(focusDay.getDate() + 2);
-    if (now.getDay() === 0) focusDay.setDate(focusDay.getDate() + 1);
+    if(now.getDay() === 6) focusDay.setDate(focusDay.getDate()+2);
+    if(now.getDay() === 0) focusDay.setDate(focusDay.getDate()+1);
 
     const focusNextDay = new Date(focusDay);
-    focusNextDay.setDate(focusNextDay.getDate() + 1);
+    focusNextDay.setDate(focusNextDay.getDate()+1);
 
     const focusEvents = events
-      .filter(event => overlapsDay(event, focusDay, focusNextDay))
+      .filter(event => overlapsDay(event,focusDay,focusNextDay))
       .sort((a,b) => new Date(a.start) - new Date(b.start));
 
-    if (isWeekend) {
-      const dayName = focusDay.toLocaleDateString('sv-SE', {
-        weekday:'long',
-        day:'numeric',
-        month:'long'
+    if(isWeekend){
+      const dayName = focusDay.toLocaleDateString('sv-SE',{
+        weekday:'long',day:'numeric',month:'long'
       });
 
       calendarEl.innerHTML = `
-        <div class="item" style="border-bottom:0">
-          <div style="font-size:18px;font-weight:700;margin-bottom:7px">
-            ☀️ HELGLÄGE
-          </div>
-          <div class="muted" style="margin-bottom:12px">
-            Inga schemalagda aktiviteter idag.
-          </div>
-          <div style="font-weight:650;margin-bottom:8px">
-            Nästa arbetsdag: ${dayName}
-          </div>
-          ${
-            focusEvents.length
-              ? focusEvents.slice(0,4).map(event => `
-                  <div class="item">
-                    <span class="time">${escapeHtml(formatEventTime(event))}</span>
-                    ${escapeHtml(event.title || 'Kalenderhändelse')}
-                  </div>
-                `).join('')
-              : '<div class="empty">Inga kalenderhändelser registrerade för nästa arbetsdag.</div>'
-          }
-        </div>
+        <div style="font-size:18px;font-weight:800;margin-bottom:7px">☀️ HELGLÄGE</div>
+        <div class="muted" style="margin-bottom:12px">Inga schemalagda aktiviteter idag.</div>
+        <div style="font-weight:700;margin-bottom:8px">Nästa arbetsdag: ${dayName}</div>
+        ${
+          focusEvents.length
+            ? focusEvents.slice(0,4).map(event => `
+              <div class="item">
+                <span class="time">${escapeHtml(formatEventTime(event))}</span>
+                ${escapeHtml(event.title || 'Kalenderhändelse')}
+              </div>
+            `).join('')
+            : '<div class="empty">Inga kalenderhändelser registrerade för nästa arbetsdag.</div>'
+        }
       `;
-    } else {
+    }else{
       calendarEl.innerHTML = focusEvents.length
         ? focusEvents.map(event => `
-            <div class="item">
-              <span class="time">${escapeHtml(formatEventTime(event))}</span>
-              ${escapeHtml(event.title || 'Kalenderhändelse')}
-            </div>
-          `).join('')
+          <div class="item">
+            <span class="time">${escapeHtml(formatEventTime(event))}</span>
+            ${escapeHtml(event.title || 'Kalenderhändelse')}
+          </div>
+        `).join('')
         : '<div class="empty">Inga kalenderhändelser idag.</div>';
     }
 
@@ -1378,33 +1018,30 @@ async function calendar(){
       .sort((a,b) => new Date(a.start) - new Date(b.start));
 
     const next = upcoming[0];
-
     const nowNextEvent = isWeekend
-      ? upcoming.find(event => overlapsDay(event, focusDay, focusNextDay))
+      ? upcoming.find(event => overlapsDay(event,focusDay,focusNextDay))
       : next;
 
-    const nowNextDate = nowNextEvent
-      ? new Date(nowNextEvent.start)
-      : null;
+    const nowNextDate = nowNextEvent ? new Date(nowNextEvent.start) : null;
 
     updateNowPanel({
       nextTitle: nowNextEvent
-        ? shortText(nowNextEvent.title || 'Kalenderhändelse', 42)
+        ? shortText(nowNextEvent.title || 'Kalenderhändelse',42)
         : 'Inget planerat',
       nextSub: nowNextEvent
         ? `${isWeekend ? 'Nästa arbetsdag · ' : ''}${nowNextEvent.allDay ? 'Heldag' : fmtTime(nowNextEvent.start)}${nowNextDate ? ' · ' + nowNextDate.toLocaleDateString('sv-SE',{weekday:'short',day:'numeric',month:'short'}) : ''}`
         : (isWeekend ? 'Nästa arbetsdag visas när något finns planerat' : 'Inga kommande händelser')
     });
 
-    if (isWeekend) {
+    if(isWeekend){
       const firstWorkEvent = upcoming.find(event =>
-        overlapsDay(event, focusDay, focusNextDay)
+        overlapsDay(event,focusDay,focusNextDay)
       );
 
       nextEl.innerHTML = firstWorkEvent
-        ? `<strong>☀️ Helgläge</strong><br><span class="muted">Nästa arbetsdag: ${focusDay.toLocaleDateString('sv-SE',{weekday:'long',day:'numeric',month:'long'})}</span><br>${escapeHtml(formatEventTime(firstWorkEvent))} · ${escapeHtml(firstWorkEvent.title || 'Kalenderhändelse')}`
+        ? `<strong>☀️ Helgläge</strong><br><span class="muted">Nästa arbetsdag: ${focusDay.toLocaleDateString('sv-SE',{weekday:'long',day:'numeric',month:'long'})}</span><br><span style="font-size:20px">${escapeHtml(formatEventTime(firstWorkEvent))} · ${escapeHtml(firstWorkEvent.title || 'Kalenderhändelse')}</span>`
         : `<strong>☀️ Helgläge</strong><br><span class="muted">Nästa arbetsdag: ${focusDay.toLocaleDateString('sv-SE',{weekday:'long',day:'numeric',month:'long'})}</span>`;
-    } else {
+    }else{
       nextEl.textContent = next
         ? `${formatEventTime(next)} · ${next.title || 'Kalenderhändelse'}`
         : 'Inga fler händelser';
@@ -1415,132 +1052,86 @@ async function calendar(){
         ? 'Dashboarden visar nästa arbetsdag'
         : (events.length ? `${events.length} händelser tillgängliga` : '');
 
-    document.getElementById('status').textContent = 'ansluten';
+    const workdays = [];
+    let added = 0;
+    let offset = 0;
 
-    document.getElementById('updated').textContent =
-      data.updatedAt
-        ? new Date(data.updatedAt).toLocaleString('sv-SE')
-        : new Date().toLocaleString('sv-SE');
-
-    const days = [];
-    let workdaysAdded = 0;
-    let dayOffset = 0;
-
-    // Visa alltid fem kommande arbetsdagar.
-    // Exempel på en onsdag: onsdag, torsdag, fredag, måndag, tisdag.
-    while(workdaysAdded < 5){
+    while(added < 5){
       const day = new Date(todayStart);
-      day.setDate(day.getDate() + dayOffset);
-      dayOffset++;
-
-      const isWeekendDay = day.getDay() === 0 || day.getDay() === 6;
-      if (isWeekendDay) continue;
+      day.setDate(day.getDate()+offset++);
+      if(day.getDay() === 0 || day.getDay() === 6) continue;
 
       const nextDay = new Date(day);
-      nextDay.setDate(nextDay.getDate() + 1);
+      nextDay.setDate(nextDay.getDate()+1);
 
       const dayEvents = events
-        .filter(event => overlapsDay(event, day, nextDay))
-        .filter(event => getEventDayStatus(event, day) !== 'outside')
-        .sort((a,b) => new Date(a.start) - new Date(b.start));
+        .filter(event => overlapsDay(event,day,nextDay))
+        .sort((a,b) => new Date(a.start)-new Date(b.start));
 
       const isToday = day.getTime() === todayStart.getTime();
+      const label = `${weekdays[day.getDay()].charAt(0).toUpperCase() + weekdays[day.getDay()].slice(1)} ${day.getDate()}/${day.getMonth()+1}`;
 
-      const dayClasses = [
-        'weekday',
-        isToday ? 'today' : '',
-        isWeekendDay ? 'weekend' : ''
-      ].filter(Boolean).join(' ');
-
-      days.push(`
-        <div class="${dayClasses}">
-          <div class="weekday-label">
-            <span>${weekdays[day.getDay()]} ${day.getDate()}/${day.getMonth()+1}</span>
-            ${isToday ? '<span class="today-badge">IDAG</span>' : ''}
+      workdays.push(`
+        <div class="week-day ${isToday ? 'today' : ''}">
+          <div class="week-day-header">${label}</div>
+          <div class="week-events">
+            ${
+              dayEvents.length
+                ? dayEvents.map(event => `
+                  <div class="week-event">
+                    <span class="week-event-marker"></span>
+                    <div>
+                      <div class="week-event-time">${escapeHtml(formatEventTime(event))}</div>
+                      <div class="week-event-title">${escapeHtml(event.title || 'Kalenderhändelse')}</div>
+                    </div>
+                  </div>
+                `).join('')
+                : '<div class="week-empty">Inga händelser</div>'
+            }
           </div>
-          ${isWeekendDay ? '<span class="weekday-weekend-label">Helg</span>' : ''}
         </div>
       `);
 
-      days.push(
-        dayEvents.length
-          ? dayEvents.map(event => {
-              const status = getEventDayStatus(event, day);
-              const marker =
-                status === 'start' ? '▶' :
-                status === 'middle' ? '↔' :
-                status === 'end' ? '◀' : '•';
-
-              const eventClasses = [
-                'calendar-event',
-                status !== 'single' ? 'event-multiday' : '',
-                isToday ? 'event-today' : ''
-              ].filter(Boolean).join(' ');
-
-              return `
-                <div class="${eventClasses}">
-                  <span class="event-marker">${marker}</span>
-                  <span class="event-time">${escapeHtml(formatEventTime(event))}</span>
-                  <span class="event-title" title="${escapeHtml(event.title || 'Kalenderhändelse')}">${escapeHtml(event.title || 'Kalenderhändelse')}</span>
-                </div>
-              `;
-            }).join('')
-          : '<div class="empty">Inga kalenderhändelser</div>'
-      );
-
-      workdaysAdded++;
+      added++;
     }
 
-    weekEl.innerHTML = days.join('');
+    weekEl.innerHTML = workdays.join('');
 
   }catch(error){
-    console.error('Kalenderfel:', error);
-
-    calendarEl.innerHTML =
-      '<div class="empty">Kalendern kunde inte hämtas.</div>';
-
-    weekEl.innerHTML =
-      '<div class="empty">Kalendern kunde inte hämtas.</div>';
-
+    console.error('Kalenderfel:',error);
+    calendarEl.innerHTML = '<div class="empty">Kalendern kunde inte hämtas.</div>';
+    weekEl.innerHTML = '<div class="empty">Kalendern kunde inte hämtas.</div>';
     nextEl.textContent = 'Kalendern kunde inte hämtas';
-
-    document.getElementById('status').textContent = 'kalenderfel';
+    document.getElementById('calstatus').textContent = 'Kontrollera kalenderkopplingen';
   }
 }
 
 /* =========================
    MATSEDEL
 ========================= */
-
 async function menu(){
   const menuEl = document.getElementById('menu');
 
   try{
-    const response = await fetch(
-      `menu.json?t=${Date.now()}`,
-      { cache:'no-store' }
-    );
+    const response = await fetch(`menu.json?t=${Date.now()}`,{
+      cache:'no-store'
+    });
 
-    if (!response.ok) {
+    if(!response.ok)
       throw new Error(`menu.json kunde inte hämtas (${response.status})`);
-    }
 
     const data = await response.json();
     const mealsData = Array.isArray(data.meals) ? data.meals : [];
-
     const today = startOfDay(new Date());
     const isWeekend = today.getDay() === 0 || today.getDay() === 6;
 
-    /* Gör om datumet till ett riktigt Date-objekt */
     const meals = mealsData
       .map(item => {
         const rawDate = String(item.date || '').slice(0,10);
-        const date = new Date(rawDate + 'T00:00:00');
-
         return {
           ...item,
-          dateObject: date,
-          dishes: Array.isArray(item.dishes)
+          dateObject:new Date(rawDate + 'T00:00:00'),
+          dishes:Array.isArray(item.dishes)
             ? item.dishes.filter(dish => String(dish || '').trim())
             : []
         };
@@ -1549,129 +1140,105 @@ async function menu(){
         !Number.isNaN(item.dateObject.getTime()) &&
         item.dishes.length
       )
-      .sort((a,b) => a.dateObject - b.dateObject);
+      .sort((a,b) => a.dateObject-b.dateObject);
 
-    /* Försök först hitta dagens meny */
     const todayMeal = meals.find(item =>
       item.dateObject.getTime() === today.getTime()
     );
 
-    /* Om det inte finns någon meny idag, hitta nästa registrerade meny */
     const nextMeal = meals.find(item =>
       item.dateObject >= today
     );
 
     const selectedMeal = todayMeal || nextMeal;
 
-    if (!selectedMeal){
-      menuEl.innerHTML =
-        '<div class="empty">Ingen kommande matsedel är tillgänglig.</div>';
+    if(!selectedMeal){
+      menuEl.innerHTML = '<div class="empty">Ingen kommande matsedel är tillgänglig.</div>';
+      updateNowPanel({lunchTitle:'Ingen meny',lunchSub:''});
       return;
     }
 
-    const isToday =
-      selectedMeal.dateObject.getTime() === today.getTime();
+    const isToday = selectedMeal.dateObject.getTime() === today.getTime();
 
-    const mealDateText =
-      selectedMeal.dateObject.toLocaleDateString('sv-SE',{
-        weekday:'long',
-        day:'numeric',
-        month:'long'
+    const mealDateText = selectedMeal.dateObject
+      .toLocaleDateString('sv-SE',{
+        weekday:'long',day:'numeric',month:'long'
       });
 
+    const capitalizedDate =
+      mealDateText.charAt(0).toUpperCase()+mealDateText.slice(1);
+
     updateNowPanel({
-      lunchTitle: selectedMeal.dishes.length
-        ? shortText(selectedMeal.dishes[0], 42)
+      lunchTitle:selectedMeal.dishes.length
+        ? shortText(selectedMeal.dishes[0],42)
         : 'Ingen meny',
-      lunchSub: isToday
+      lunchSub:isToday
         ? 'Dagens lunch'
-        : `${isWeekend ? 'Nästa lunch · ' : 'Nästa meny · '}${mealDateText.charAt(0).toUpperCase() + mealDateText.slice(1)}`
+        : `${isWeekend ? 'Nästa lunch · ' : 'Nästa meny · '}${capitalizedDate}`
     });
 
-    if (!isToday) {
-      const intro = isWeekend
-        ? '🍽️ HELGMENY'
-        : '🍽️ NÄSTA MENY';
-
-      const message = isWeekend
-        ? 'Ingen skollunch idag. Här är nästa registrerade lunch.'
-        : 'Ingen lunch registrerad för idag. Här är nästa tillgängliga meny.';
-
+    if(!isToday){
       menuEl.innerHTML = `
-        <div class="item" style="border-bottom:0">
-          <div style="font-size:17px;font-weight:700;margin-bottom:7px">
-            ${intro}
-          </div>
-
-          <div class="muted" style="margin-bottom:12px">
-            ${message}
-          </div>
-
-          <div style="font-weight:650;margin-bottom:8px">
-            ${mealDateText.charAt(0).toUpperCase() + mealDateText.slice(1)}
-          </div>
-
-          ${selectedMeal.dishes.map(dish => `
-            <div class="item">${escapeHtml(dish)}</div>
-          `).join('')}
+        <div style="font-size:17px;font-weight:800;margin:10px 0 7px">
+          🍽️ ${isWeekend ? 'HELGMENY' : 'NÄSTA MENY'}
         </div>
+        <div class="muted" style="margin-bottom:12px">
+          ${isWeekend
+            ? 'Ingen skollunch idag. Här är nästa registrerade lunch.'
+            : 'Ingen lunch registrerad för idag. Här är nästa tillgängliga meny.'}
+        </div>
+        <div style="font-weight:750;margin-bottom:7px">${capitalizedDate}</div>
+        ${selectedMeal.dishes.map(dish => `
+          <div class="item">${escapeHtml(dish)}</div>
+        `).join('')}
       `;
-    } else {
+    }else{
       menuEl.innerHTML = selectedMeal.dishes.map(dish => `
         <div class="item">${escapeHtml(dish)}</div>
       `).join('');
     }
 
   }catch(error){
-    console.error('Matsedelsfel:', error);
-    menuEl.innerHTML =
-      '<div class="empty">Matsedeln kunde inte hämtas.</div>';
+    console.error('Matsedelsfel:',error);
+    menuEl.innerHTML = '<div class="empty">Matsedeln kunde inte hämtas.</div>';
   }
 }
 
 /* =========================
    RESURSTEAMET
 ========================= */
-
 async function getAssignments(){
-  const response = await fetch(
-    `resursteam.json?t=${Date.now()}`,
-    { cache:'no-store' }
-  );
+  const response = await fetch(`resursteam.json?t=${Date.now()}`,{
+    cache:'no-store'
+  });
 
-  if (!response.ok) {
+  if(!response.ok)
     throw new Error(`resursteam.json kunde inte hämtas (${response.status})`);
-  }
 
   return response.json();
 }
 
-
 function parseAssignmentDate(value){
-  if (!value) return null;
-
-  const text = String(value).slice(0,10);
-  const date = new Date(text + 'T00:00:00');
-
+  if(!value) return null;
+  const date = new Date(String(value).slice(0,10)+'T00:00:00');
   return Number.isNaN(date.getTime()) ? null : date;
 }
 
 function startOfWeek(date){
   const result = startOfDay(new Date(date));
   const day = result.getDay();
-  const diff = day === 0 ? -6 : 1 - day;
-  result.setDate(result.getDate() + diff);
+  result.setDate(result.getDate() + (day === 0 ? -6 : 1-day));
   return result;
 }
 
-function updateResursteamWeek(assignments, activeCount, followCount){
+function updateResursteamWeek(assignments,activeCount,followCount){
   const now = new Date();
   const weekStart = startOfWeek(now);
   const weekEnd = new Date(weekStart);
-  weekEnd.setDate(weekEnd.getDate() + 7);
+  weekEnd.setDate(weekEnd.getDate()+7);
 
   const soonEnd = startOfDay(now);
-  soonEnd.setDate(soonEnd.getDate() + 14);
+  soonEnd.setDate(soonEnd.getDate()+14);
 
   const newAssignments = assignments.filter(item => {
     const start = parseAssignmentDate(item.start);
@@ -1689,11 +1256,9 @@ function updateResursteamWeek(assignments, activeCount, followCount){
   document.getElementById('weekEndingSoon').textContent = endingSoon;
 
   document.getElementById('weekFollowUpText').textContent =
-    followCount === 0
-      ? 'Inga uppdrag markerade'
-      : followCount === 1
-        ? '1 uppdrag behöver uppföljning'
-        : `${followCount} uppdrag behöver uppföljning`;
+    followCount === 0 ? 'Inga uppdrag markerade' :
+    followCount === 1 ? '1 uppdrag behöver uppföljning' :
+    `${followCount} uppdrag behöver uppföljning`;
 }
 
 async function resursteam(){
@@ -1716,14 +1281,14 @@ async function resursteam(){
     document.getElementById('totalAssignments').textContent = assignments.length;
 
     updateNowPanel({
-      activeAssignments: active,
-      followUp: follow
+      activeAssignments:active,
+      followUp:follow
     });
 
-    updateResursteamWeek(assignments, active, follow);
+    updateResursteamWeek(assignments,active,follow);
 
   }catch(error){
-    console.error('Resursteamfel:', error);
+    console.error('Resursteamfel:',error);
   }
 }
 
@@ -1742,9 +1307,8 @@ async function openResursteam(event){
       ? data.assignments
       : [];
 
-    if (!assignments.length){
-      details.innerHTML =
-        '<div class="empty">Inga uppdrag finns registrerade.</div>';
+    if(!assignments.length){
+      details.innerHTML = '<div class="empty">Inga uppdrag finns registrerade.</div>';
       return;
     }
 
@@ -1752,9 +1316,7 @@ async function openResursteam(event){
       <div class="assignment">
         <div class="assignment-top">
           <div>
-            <div class="assignment-school">
-              ${escapeHtml(item.school || 'Ingen skola angiven')}
-            </div>
+            <div class="assignment-school">${escapeHtml(item.school || 'Ingen skola angiven')}</div>
             <div class="assignment-student">
               ${escapeHtml(item.student || 'Elev ej angiven')}
               ${item.grade ? ` · Årskurs ${escapeHtml(item.grade)}` : ''}
@@ -1792,9 +1354,8 @@ async function openResursteam(event){
     `).join('');
 
   }catch(error){
-    console.error('Detaljvyfel:', error);
-    details.innerHTML =
-      '<div class="empty">Kunde inte läsa Resursteamets uppdrag.</div>';
+    console.error('Detaljvyfel:',error);
+    details.innerHTML = '<div class="empty">Kunde inte läsa Resursteamets uppdrag.</div>';
   }
 }
 
@@ -1811,7 +1372,6 @@ async function visaAllaUppdrag(event){
 /* =========================
    VÄDER
 ========================= */
-
 async function weather(){
   try{
     const url =
@@ -1823,193 +1383,153 @@ async function weather(){
       '&timezone=Europe%2FStockholm' +
       '&forecast_days=1';
 
-    const response = await fetch(url, { cache:'no-store' });
-
-    if (!response.ok) {
-      throw new Error(`Väderfel (${response.status})`);
-    }
+    const response = await fetch(url,{cache:'no-store'});
+    if(!response.ok) throw new Error(`Väderfel (${response.status})`);
 
     const data = await response.json();
 
     const weatherInfo = {
-      0:  {name:'Klart', icon:'☀️'},
-      1:  {name:'Mestadels klart', icon:'🌤️'},
-      2:  {name:'Delvis molnigt', icon:'⛅'},
-      3:  {name:'Mulet', icon:'☁️'},
-      45: {name:'Dimma', icon:'🌫️'},
-      48: {name:'Rimfrost och dimma', icon:'🌫️'},
-      51: {name:'Lätt duggregn', icon:'🌦️'},
-      53: {name:'Duggregn', icon:'🌦️'},
-      55: {name:'Kraftigt duggregn', icon:'🌧️'},
-      56: {name:'Underkylt duggregn', icon:'🌧️'},
-      57: {name:'Kraftigt underkylt duggregn', icon:'🌧️'},
-      61: {name:'Lätt regn', icon:'🌦️'},
-      63: {name:'Regn', icon:'🌧️'},
-      65: {name:'Kraftigt regn', icon:'🌧️'},
-      66: {name:'Underkylt regn', icon:'🌧️'},
-      67: {name:'Kraftigt underkylt regn', icon:'🌧️'},
-      71: {name:'Lätt snöfall', icon:'🌨️'},
-      73: {name:'Snöfall', icon:'❄️'},
-      75: {name:'Kraftigt snöfall', icon:'🌨️'},
-      77: {name:'Snökorn', icon:'❄️'},
-      80: {name:'Regnskurar', icon:'🌦️'},
-      81: {name:'Regnskurar', icon:'🌧️'},
-      82: {name:'Kraftiga regnskurar', icon:'⛈️'},
-      85: {name:'Snöbyar', icon:'🌨️'},
-      86: {name:'Kraftiga snöbyar', icon:'🌨️'},
-      95: {name:'Åska', icon:'⛈️'},
-      96: {name:'Åska med hagel', icon:'⛈️'},
-      99: {name:'Kraftig åska med hagel', icon:'⛈️'}
+      0:{name:'Klart',icon:'☀️'},
+      1:{name:'Mestadels klart',icon:'🌤️'},
+      2:{name:'Delvis molnigt',icon:'⛅'},
+      3:{name:'Mulet',icon:'☁️'},
+      45:{name:'Dimma',icon:'🌫️'},
+      48:{name:'Rimfrost och dimma',icon:'🌫️'},
+      51:{name:'Lätt duggregn',icon:'🌦️'},
+      53:{name:'Duggregn',icon:'🌦️'},
+      55:{name:'Kraftigt duggregn',icon:'🌧️'},
+      56:{name:'Underkylt duggregn',icon:'🌧️'},
+      57:{name:'Kraftigt underkylt duggregn',icon:'🌧️'},
+      61:{name:'Lätt regn',icon:'🌦️'},
+      63:{name:'Regn',icon:'🌧️'},
+      65:{name:'Kraftigt regn',icon:'🌧️'},
+      66:{name:'Underkylt regn',icon:'🌧️'},
+      67:{name:'Kraftigt underkylt regn',icon:'🌧️'},
+      71:{name:'Lätt snöfall',icon:'🌨️'},
+      73:{name:'Snöfall',icon:'❄️'},
+      75:{name:'Kraftigt snöfall',icon:'🌨️'},
+      77:{name:'Snökorn',icon:'❄️'},
+      80:{name:'Regnskurar',icon:'🌦️'},
+      81:{name:'Regnskurar',icon:'🌧️'},
+      82:{name:'Kraftiga regnskurar',icon:'⛈️'},
+      85:{name:'Snöbyar',icon:'🌨️'},
+      86:{name:'Kraftiga snöbyar',icon:'🌨️'},
+      95:{name:'Åska',icon:'⛈️'},
+      96:{name:'Åska med hagel',icon:'⛈️'},
+      99:{name:'Kraftig åska med hagel',icon:'⛈️'}
     };
 
     const current = data.current;
     const daily = data.daily;
     const info = weatherInfo[current.weather_code] || {
-      name:'Väder',
-      icon:'🌡️'
+      name:'Väder',icon:'🌡️'
     };
 
     document.getElementById('weatherIcon').textContent = info.icon;
-
     document.getElementById('temp').textContent =
       `${Math.round(current.temperature_2m)}°`;
-
     document.getElementById('weather').textContent = info.name;
-
     document.getElementById('range').textContent =
       `Idag: ${Math.round(daily.temperature_2m_min[0])}° – ${Math.round(daily.temperature_2m_max[0])}°`;
-
     document.getElementById('rain').textContent =
       `Regnrisk: ${Math.round(daily.precipitation_probability_max[0] || 0)}%`;
-
     document.getElementById('feelsLike').textContent =
       `${Math.round(current.apparent_temperature)}°`;
-
     document.getElementById('wind').textContent =
       `${Math.round(current.wind_speed_10m)} km/h`;
-
     document.getElementById('humidity').textContent =
       `${Math.round(current.relative_humidity_2m)}%`;
 
   }catch(error){
-    console.error('Väderfel:', error);
-
-    document.getElementById('weather').textContent =
-      'Väder ej tillgängligt';
-
+    console.error('Väderfel:',error);
+    document.getElementById('weather').textContent = 'Väder ej tillgängligt';
     document.getElementById('weatherIcon').textContent = '🌦️';
   }
 }
 
-
 /* =========================
-   AUTOMATISK SIDUPPDATERING
+   AUTOMATISK UPPDATERING
 ========================= */
-
-const AUTO_REFRESH_INTERVAL = 10 * 60 * 1000; // 10 minuter
-const REFRESH_CHECK_INTERVAL = 60 * 1000; // kontroll varje minut
+const AUTO_REFRESH_INTERVAL = 10 * 60 * 1000;
+const REFRESH_CHECK_INTERVAL = 60 * 1000;
 
 let pageOpenedAt = Date.now();
 let hiddenSince = null;
 let refreshInProgress = false;
 
-function updateLastUpdatedIndicator() {
+function updateLastUpdatedIndicator(){
   const el = document.getElementById('lastUpdated');
-  if (!el) return;
-
   const now = new Date();
-  const time = now.toLocaleTimeString('sv-SE', {
-    hour: '2-digit',
-    minute: '2-digit'
+  const time = now.toLocaleTimeString('sv-SE',{
+    hour:'2-digit',minute:'2-digit'
   });
 
   el.textContent = `● Senast uppdaterad ${time}`;
   el.classList.add('is-fresh');
 }
 
-function refreshDashboard() {
-  if (refreshInProgress) return;
+function refreshDashboard(){
+  if(refreshInProgress) return;
   refreshInProgress = true;
 
-  // Spara aktuell scrollposition på mobil innan omladdning
-  try {
-    sessionStorage.setItem('dashboardScrollY', String(window.scrollY));
-  } catch (e) {}
+  try{
+    sessionStorage.setItem('dashboardScrollY',String(window.scrollY));
+  }catch(e){}
 
   window.location.reload();
 }
 
-function checkAutoRefresh() {
-  // Uppdatera bara när sidan faktiskt är synlig
-  if (document.hidden) return;
+function checkAutoRefresh(){
+  if(document.hidden) return;
 
-  const elapsed = Date.now() - pageOpenedAt;
-
-  if (elapsed >= AUTO_REFRESH_INTERVAL) {
+  if(Date.now() - pageOpenedAt >= AUTO_REFRESH_INTERVAL)
     refreshDashboard();
-  }
 }
 
-// Visa när sidan senast laddades
-updateLastUpdatedIndicator();
-
-// Kontrollera varje minut om det är dags att uppdatera
-setInterval(checkAutoRefresh, REFRESH_CHECK_INTERVAL);
-
-// Om användaren lämnar sidan noterar vi tidpunkten
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden) {
+document.addEventListener('visibilitychange',() => {
+  if(document.hidden){
     hiddenSince = Date.now();
     return;
   }
 
-  // När användaren kommer tillbaka:
-  // uppdatera om sidan varit borta i minst 10 minuter
-  if (hiddenSince) {
-    const awayTime = Date.now() - hiddenSince;
-
-    if (awayTime >= AUTO_REFRESH_INTERVAL) {
+  if(hiddenSince){
+    if(Date.now() - hiddenSince >= AUTO_REFRESH_INTERVAL){
       refreshDashboard();
       return;
     }
-
     hiddenSince = null;
   }
 
   checkAutoRefresh();
 });
 
-// Återställ scrollposition efter automatisk omladdning
-window.addEventListener('load', () => {
-  try {
+window.addEventListener('load',() => {
+  try{
     const savedScroll = sessionStorage.getItem('dashboardScrollY');
-    if (savedScroll !== null) {
+    if(savedScroll !== null){
       sessionStorage.removeItem('dashboardScrollY');
-      window.scrollTo({
-        top: Number(savedScroll),
-        behavior: 'instant'
-      });
+      window.scrollTo(0,Number(savedScroll));
     }
-  } catch (e) {}
+  }catch(e){}
 });
 
 /* =========================
    START
 ========================= */
-
 tick();
 calendar();
 menu();
 resursteam();
 weather();
-
-setInterval(tick, 30000);
-setInterval(calendar, 300000);
-setInterval(menu, 300000);
-setInterval(resursteam, 300000);
-setInterval(weather, 300000);
-
 updateNextBreak();
+updateLastUpdatedIndicator();
+
+setInterval(tick,30000);
+setInterval(calendar,300000);
+setInterval(menu,300000);
+setInterval(resursteam,300000);
+setInterval(weather,300000);
+setInterval(checkAutoRefresh,REFRESH_CHECK_INTERVAL);
 </script>
 
 </body>
