@@ -1,47 +1,7 @@
 {
-  "updatedAt": "2026-08-30T23:50:23.971020+02:00",
-  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-08-24&endDate=2026-09-06&lang=sv",
+  "updatedAt": "2026-08-31T00:07:55.410648+02:00",
+  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-08-31&endDate=2026-09-13&lang=sv",
   "meals": [
-    {
-      "date": "2026-08-24T00:00:00",
-      "name": "",
-      "dishes": [
-        "Pasta med ostsås & rökt hönskött",
-        "Zuccinibiffar med Tzatsiki & rostad kulpotatis"
-      ]
-    },
-    {
-      "date": "2026-08-25T00:00:00",
-      "name": "",
-      "dishes": [
-        "Chili con carne med ris",
-        "Okonomiyaki (Japansk kålpannkaka) med edamamebönor, picklad rödlök & sojamajo"
-      ]
-    },
-    {
-      "date": "2026-08-26T00:00:00",
-      "name": "",
-      "dishes": [
-        "Stekta köttbullar med makaroner",
-        "Morotsbiffar med böncréme & rostade rotfrukter"
-      ]
-    },
-    {
-      "date": "2026-08-27T00:00:00",
-      "name": "",
-      "dishes": [
-        "Fiskgratäng med pepparrot & västerbottensost serveras med potatismos",
-        "Grönsaksnuggets med ajvar & fetaostsås med bulgur"
-      ]
-    },
-    {
-      "date": "2026-08-28T00:00:00",
-      "name": "",
-      "dishes": [
-        "Tomatsoppa med pasta samt bröd & tillbehör",
-        "Blomkålssoppa med rostade solrosfrön samt bröd & tillbehör"
-      ]
-    },
     {
       "date": "2026-08-31T00:00:00",
       "name": "",
@@ -80,6 +40,37 @@
       "dishes": [
         "Italiensk ostsoppa med pasta samt skinka med bröd & tillbehör",
         "Spicy linssoppa med ingefära & kokosgrädde med bröd & tillbehör"
+      ]
+    },
+    {
+      "date": "2026-09-07T00:00:00",
+      "name": "",
+      "dishes": [
+        "Kockens val"
+      ]
+    },
+    {
+      "date": "2026-09-08T00:00:00",
+      "name": "",
+      "dishes": [
+        "Fiskbullar i dillsås & kokt potatis",
+        "Mozzarellabiffar med äppelcoleslaw & rostade rotfrukter"
+      ]
+    },
+    {
+      "date": "2026-09-09T00:00:00",
+      "name": "",
+      "dishes": [
+        "Fransk fläskköttsgryta med ris",
+        "BBQ-blomkål med kidneybönor, bulgursallad & vitlöksdressing"
+      ]
+    },
+    {
+      "date": "2026-09-10T00:00:00",
+      "name": "",
+      "dishes": [
+        "Högsbosoppa med bröd & tillbehör",
+        "Spenatsoppa, ägghalvor med bröd & tillbehör"
       ]
     }
   ]
