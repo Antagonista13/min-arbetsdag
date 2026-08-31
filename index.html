@@ -2675,7 +2675,58 @@ function updateResursteamWeek(
 
 }
 
+function updateResursteamLists(assignments, requests){
 
+  const activeSchoolsEl =
+    document.getElementById('activeSchools');
+
+  const requestSchoolsEl =
+    document.getElementById('requestSchools');
+
+
+  const activeSchools = [
+    ...new Set(
+      assignments
+        .filter(isAssignmentActive)
+        .map(item => String(item.school || '').trim())
+        .filter(Boolean)
+    )
+  ];
+
+
+  const requestSchools = [
+    ...new Set(
+      requests
+        .map(item => String(item.school || '').trim())
+        .filter(Boolean)
+    )
+  ];
+
+
+  activeSchoolsEl.innerHTML =
+    activeSchools.length
+      ? activeSchools.map(school =>
+          `<div class="resursteam-school">
+            ${escapeHtml(school)}
+          </div>`
+        ).join('')
+      : `<div class="resursteam-none">
+          Inga aktiva uppdrag
+        </div>`;
+
+
+  requestSchoolsEl.innerHTML =
+    requestSchools.length
+      ? requestSchools.map(school =>
+          `<div class="resursteam-school">
+            ${escapeHtml(school)}
+          </div>`
+        ).join('')
+      : `<div class="resursteam-none">
+          Inga aktuella förfrågningar
+        </div>`;
+}
+  
 async function resursteam() {
 
   try {
