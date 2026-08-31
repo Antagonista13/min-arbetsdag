@@ -960,39 +960,64 @@ a.button:hover {
   </div>
 
 
-  <!-- RESURSTEAM -->
+ <!-- RESURSTEAM -->
+<div
+  class="card resursteam-card"
+  onclick="openResursteam(event)"
+  style="cursor:pointer"
+>
+  <div class="title">RESURSTEAMET</div>
 
-  <div
-    class="card resursteam-card"
-    onclick="openResursteam(event)"
-    style="cursor:pointer"
-  >
+  <div class="stats">
 
-    <div class="title">RESURSTEAMET</div>
+    <div class="stat">
+      <div class="num" id="activeAssignments">0</div>
+      <div class="muted">Aktiva uppdrag</div>
+    </div>
 
-    <div class="stats">
+    <div class="stat">
+      <div class="num" id="followUp">0</div>
+      <div class="muted">Följa upp</div>
+    </div>
 
-      <div class="stat">
-        <div class="num" id="activeAssignments">0</div>
-        <div class="muted">Aktiva uppdrag</div>
-      </div>
-
-      <div class="stat">
-        <div class="num" id="followUp">0</div>
-        <div class="muted">Följa upp</div>
-      </div>
-
-      <div
-        class="stat clickable"
-        onclick="visaAllaUppdrag(event)"
-      >
-        <div class="num" id="totalAssignments">0</div>
-        <div class="muted">Totalt antal uppdrag</div>
-      </div>
-
+    <div
+      class="stat clickable"
+      onclick="visaAllaUppdrag(event)"
+    >
+      <div class="num" id="totalAssignments">0</div>
+      <div class="muted">Totalt antal uppdrag</div>
     </div>
 
   </div>
+
+  <div class="resursteam-lists">
+
+    <div class="resursteam-list">
+      <div class="resursteam-list-title">
+        Aktiva uppdrag
+      </div>
+
+      <div id="activeSchools">
+        <div class="resursteam-none">
+          Laddar...
+        </div>
+      </div>
+    </div>
+
+    <div class="resursteam-list">
+      <div class="resursteam-list-title">
+        Förfrågningar
+      </div>
+
+      <div id="requestSchools">
+        <div class="resursteam-none">
+          Laddar...
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
   <!-- NEXT BREAK -->
