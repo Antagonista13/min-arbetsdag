@@ -295,8 +295,9 @@ a.button:hover {
     grid-template-columns: 1.18fr .88fr .88fr;
     grid-template-areas:
         "calendar menu resources"
+        "weekcal weekstats resources"
         "weekcal weekstats break"
-        "weekcal quick quick";
+        "quick quick quick";
     gap: 10px;
     align-items: start;
 }
@@ -813,11 +814,7 @@ a.button:hover {
 }
 
 /* Lyft upp veckorutorna på stora skärmar */
-@media (min-width: 1151px) {
-    .week-calendar-card,
-    .resursteam-week-card {
-        transform: translateY(-220px);
-        margin-bottom: -220px;
+
     }
 }
   
