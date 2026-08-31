@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T13:10:34.852772+00:00",
+  "updatedAt": "2026-08-31T13:15:13.557919+00:00",
   "events": [
     {
       "title": "Observation - Sjöboskolan",
@@ -14,10 +14,22 @@
       "location": "Resursteamet"
     },
     {
+      "title": "Besöka KSU Byttorp",
+      "start": "2026-09-01T14:30:00",
+      "end": "2026-09-01T15:30:00",
+      "location": ""
+    },
+    {
       "title": "Tisdagsmöte",
       "start": "2026-09-01T14:30:00",
       "end": "2026-09-01T15:30:00",
       "location": ""
+    },
+    {
+      "title": "APT",
+      "start": "2026-09-07T14:30:00",
+      "end": "2026-09-07T16:30:00",
+      "location": "Gånghesterskolan"
     },
     {
       "title": "TMO - utbildning",
@@ -36,6 +48,24 @@
       "start": "2026-09-15T14:30:00",
       "end": "2026-09-15T15:00:00",
       "location": "Teams"
+    },
+    {
+      "title": "Webbinarium",
+      "start": "2026-09-17T15:30:00",
+      "end": "2026-09-17T16:30:00",
+      "location": ""
+    },
+    {
+      "title": "Samverkansmöte",
+      "start": "2026-09-21T14:30:00",
+      "end": "2026-09-21T16:00:00",
+      "location": "Olovholm \"Sjöbo\""
+    },
+    {
+      "title": "Handledning",
+      "start": "2026-10-08T14:30:00",
+      "end": "2026-10-08T15:30:00",
+      "location": "Gånghesterskolan"
     }
   ]
 }
