@@ -1233,34 +1233,71 @@ function startOfWeek(date){
   return result;
 }
 
-function updateResursteamWeek(assignments,activeCount,followCount){
+function updateResursteamWeek(
+  assignments,
+  activeCount,
+  followCount,
+  requestCount
+){
+
   const now = new Date();
-  const weekStart = startOfWeek(now);
-  const weekEnd = new Date(weekStart);
-  weekEnd.setDate(weekEnd.getDate()+7);
 
   const soonEnd = startOfDay(now);
-  soonEnd.setDate(soonEnd.getDate()+14);
-
-  const newAssignments = assignments.filter(item => {
-    const start = parseAssignmentDate(item.start);
-    return start && start >= weekStart && start < weekEnd;
-  }).length;
+  soonEnd.setDate(
+    soonEnd.getDate() + 14
+  );
 
   const endingSoon = assignments.filter(item => {
-    const end = parseAssignmentDate(item.end);
-    return end && end >= startOfDay(now) && end <= soonEnd;
+
+    const end = parseAssignmentDate(
+      item.end
+    );
+
+    return (
+      end &&
+      end >= startOfDay(now) &&
+      end <= soonEnd
+    );
+
   }).length;
 
-  document.getElementById('weekNewAssignments').textContent = newAssignments;
-  document.getElementById('weekActiveAssignments').textContent = activeCount;
-  document.getElementById('weekFollowUp').textContent = followCount;
-  document.getElementById('weekEndingSoon').textContent = endingSoon;
+  document.getElementById(
+    'weekRequests'
+  ).textContent = requestCount;
 
-  document.getElementById('weekFollowUpText').textContent =
-    followCount === 0 ? 'Inga uppdrag markerade' :
-    followCount === 1 ? '1 uppdrag behöver uppföljning' :
-    `${followCount} uppdrag behöver uppföljning`;
+  document.getElementById(
+    'weekActiveAssignments'
+  ).textContent = activeCount;
+
+  document.getElementById(
+    'weekFollowUp'
+  ).textContent = followCount;
+
+  document.getElementById(
+    'weekEndingSoon'
+  ).textContent = endingSoon;
+
+
+  const requestsText =
+    requestCount === 0
+      ? 'Inga nya förfrågningar'
+      : requestCount === 1
+        ? '1 ärende på väg in'
+        : `${requestCount} ärenden på väg in`;
+
+  document.getElementById(
+    'weekRequestsText'
+  ).textContent = requestsText;
+
+
+  document.getElementById(
+    'weekFollowUpText'
+  ).textContent =
+    followCount === 0
+      ? 'Inga uppdrag markerade'
+      : followCount === 1
+        ? '1 uppdrag behöver uppföljning'
+        : `${followCount} uppdrag behöver uppföljning`;
 }
 
 async function resursteam(){
