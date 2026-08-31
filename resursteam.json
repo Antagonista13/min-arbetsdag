@@ -1,9 +1,9 @@
 {
-  "updatedAt": "2026-08-31T09:57:53.783042+00:00",
+  "updatedAt": "2026-08-31T10:19:59.248894+00:00",
   "summary": {
     "activeAssignments": 3,
     "totalAssignments": 3,
-    "requests": 0,
+    "requests": 3,
     "followUp": 3
   },
   "assignments": [
@@ -47,5 +47,45 @@
       "needsFollowUp": true
     }
   ],
-  "requests": []
+  "requests": [
+    {
+      "school": "Dalsjöskolan 7-9",
+      "student": "",
+      "grade": null,
+      "description": "Förfrågan",
+      "start": "2026-08-31",
+      "end": null,
+      "priority": null,
+      "responsible": "",
+      "placement": "",
+      "notes": "rektor kommer att höra av sig",
+      "needsFollowUp": false
+    },
+    {
+      "school": "Viskaforsskolan",
+      "student": "",
+      "grade": null,
+      "description": "Förfrågan",
+      "start": "2026-08-31",
+      "end": null,
+      "priority": null,
+      "responsible": "",
+      "placement": "",
+      "notes": "tidigare elev avstängd. Hemundervisning",
+      "needsFollowUp": false
+    },
+    {
+      "school": "Dalsjöskolan 4-6",
+      "student": "Love",
+      "grade": null,
+      "description": "Förfrågan",
+      "start": null,
+      "end": null,
+      "priority": null,
+      "responsible": "",
+      "placement": "",
+      "notes": "",
+      "needsFollowUp": false
+    }
+  ]
 }
