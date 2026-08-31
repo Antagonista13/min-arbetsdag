@@ -1327,7 +1327,12 @@ async function resursteam(){
       followUp:follow
     });
 
-    updateResursteamWeek(assignments,active,follow);
+    updateResursteamWeek(
+      assignments,
+      active,
+      follow,
+      requests
+);
 
   }catch(error){
     console.error('Resursteamfel:',error);
