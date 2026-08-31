@@ -1314,6 +1314,9 @@ async function resursteam(){
     const follow =
       data.summary?.followUp ??
       assignments.filter(item => item.needsFollowUp).length;
+      const requests =
+      data.summary?.requests ??
+      0;
 
     document.getElementById('activeAssignments').textContent = active;
     document.getElementById('followUp').textContent = follow;
