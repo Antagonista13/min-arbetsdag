@@ -40,7 +40,7 @@ def is_request(row):
         .lower()
     )
 
-    return description == "förfrågan""
+    return description == "förfrågan"
 
 
 def is_active(row):
