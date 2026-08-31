@@ -2818,6 +2818,49 @@ async function resursteam(){
     document.getElementById('totalAssignments').textContent =
       assignments.length;
 
+    const activeSchools = [...new Set(
+  assignments
+    .filter(isAssignmentActive)
+    .map(item => item.school)
+    .filter(Boolean)
+)];
+
+const requestSchools = [...new Set(
+  assignments
+    .filter(isRequest)
+    .map(item => item.school)
+    .filter(Boolean)
+)];
+
+document.getElementById('activeSchools').innerHTML =
+  activeSchools.length
+    ? `
+      <div class="resursteam-section">
+        <div class="resursteam-section-title">Aktiva uppdrag</div>
+        ${activeSchools.map(school => `
+          <div class="resursteam-school active">
+            <span class="resursteam-dot"></span>
+            ${escapeHtml(school)}
+          </div>
+        `).join('')}
+      </div>
+    `
+    : '';
+
+document.getElementById('requestSchools').innerHTML =
+  requestSchools.length
+    ? `
+      <div class="resursteam-section">
+        <div class="resursteam-section-title">Förfrågningar</div>
+        ${requestSchools.map(school => `
+          <div class="resursteam-school request">
+            <span class="resursteam-dot"></span>
+            ${escapeHtml(school)}
+          </div>
+        `).join('')}
+      </div>
+    `
+    : '';
 
     updateNowPanel({
       activeAssignments: active,
