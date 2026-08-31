@@ -1,8 +1,9 @@
 {
-  "updatedAt": "2026-08-31T06:19:27.808588+00:00",
+  "updatedAt": "2026-08-31T06:27:46.971846+00:00",
   "summary": {
     "activeAssignments": 3,
     "totalAssignments": 3,
+    "requests": 0,
     "followUp": 3
   },
   "assignments": [
@@ -45,5 +46,6 @@
       "notes": "stötta inskolning",
       "needsFollowUp": true
     }
-  ]
+  ],
+  "requests": []
 }
