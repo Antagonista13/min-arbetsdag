@@ -299,6 +299,50 @@ a.button:hover {
   display: grid;
   grid-template-columns: repeat(3,1fr);
   gap: 8px;
+  .resursteam-lists{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-top:12px;
+}
+
+.resursteam-list{
+  background:rgba(0,0,0,.12);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:12px;
+  padding:10px;
+}
+
+.resursteam-list-title{
+  color:#9eacba;
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  margin-bottom:7px;
+}
+
+.resursteam-school{
+  font-size:13px;
+  font-weight:700;
+  padding:6px 0;
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.resursteam-school:last-child{
+  border-bottom:0;
+  padding-bottom:0;
+}
+
+.resursteam-school:first-of-type{
+  padding-top:0;
+}
+
+.resursteam-none{
+  color:#77848f;
+  font-size:12px;
+  padding:4px 0;
+}
 }
 
 .stat {
@@ -672,6 +716,9 @@ a.button:hover {
 
   .now-grid {
     grid-template-columns: repeat(2,minmax(0,1fr));
+    .resursteam-lists{
+  grid-template-columns:1fr;
+}
   }
 
   .grid {
@@ -3588,3 +3635,6 @@ setInterval(
 
 </body>
 </html>
+
+
+Lägger till layout för uppdragslistor
