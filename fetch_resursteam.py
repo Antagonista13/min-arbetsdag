@@ -26,14 +26,21 @@ def serialize_date(value):
 def is_request(row):
     """
     Räknas som förfrågan om UPPDRAGSBESKRIVNING
-    är satt till 'Förfrågan'.
+    innehåller värdet 'Förfrågan'.
     """
 
     description = str(
         row.get("UPPDRAGSBESKRIVNING") or ""
-    ).strip().lower()
+    )
 
-    return description == "förfrågan"
+    description = (
+        description
+        .replace("\xa0", " ")
+        .strip()
+        .lower()
+    )
+
+    return description == "förfrågan""
 
 
 def is_active(row):
@@ -104,6 +111,11 @@ def load_assignments(path=INPUT_FILE):
     ):
 
         row = dict(zip(headers, values))
+        if row.get("UPPDRAGSBESKRIVNING"):
+            print(
+                "UPPDRAGSBESKRIVNING:",
+                repr(row.get("UPPDRAGSBESKRIVNING"))
+    )
 
         # Hoppa över helt tomma rader
         if not any(
