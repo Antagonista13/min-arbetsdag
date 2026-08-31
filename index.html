@@ -2727,72 +2727,50 @@ function updateResursteamLists(assignments, requests){
         </div>`;
 }
   
-async function resursteam() {
+async function resursteam(){
 
-  try {
+  try{
 
-    const data =
-      await getAssignments();
+    const data = await getAssignments();
 
+    const assignments = Array.isArray(data.assignments)
+      ? data.assignments
+      : [];
 
-    const assignments =
-      Array.isArray(data.assignments)
-        ? data.assignments
-        : [];
-
-
-    const requests =
-      Array.isArray(data.requests)
-        ? data.requests
-        : [];
+    const requestItems = Array.isArray(data.requests)
+      ? data.requests
+      : [];
 
 
-    const active =
-      assignments
-        .filter(isAssignmentActive)
-        .length;
+    const active = assignments
+      .filter(isAssignmentActive)
+      .length;
 
 
-    const follow =
-      assignments
-        .filter(
-          item =>
-            isAssignmentActive(item) &&
-            item.needsFollowUp === true
-        )
-        .length;
+    const follow = assignments
+      .filter(item =>
+        isAssignmentActive(item) &&
+        item.needsFollowUp === true
+      )
+      .length;
 
 
-    const requestCount =
-      requests.length;
+    const requests = requestItems.length;
 
 
-    document.getElementById(
-      'activeAssignments'
-    ).textContent =
+    document.getElementById('activeAssignments').textContent =
       active;
 
-
-    document.getElementById(
-      'followUp'
-    ).textContent =
+    document.getElementById('followUp').textContent =
       follow;
 
-
-    document.getElementById(
-      'totalAssignments'
-    ).textContent =
+    document.getElementById('totalAssignments').textContent =
       assignments.length;
 
 
     updateNowPanel({
-
-      activeAssignments:
-        active,
-
-      followUp:
-        follow
-
+      activeAssignments: active,
+      followUp: follow
     });
 
 
@@ -2800,46 +2778,43 @@ async function resursteam() {
       assignments,
       active,
       follow,
-      requestCount
+      requests
     );
 
 
-    updateLastUpdatedIndicator(
-      data.updatedAt
+    updateResursteamLists(
+      assignments,
+      requestItems
     );
 
 
-  } catch (error) {
+    updateLastUpdatedIndicator(data.updatedAt);
 
-    console.error(
-      'Resursteamfel:',
-      error
-    );
+  }catch(error){
 
+    console.error('Resursteamfel:', error);
 
-    const el =
-      document.getElementById(
-        'lastUpdated'
-      );
-
+    const el = document.getElementById('lastUpdated');
 
     el.textContent =
       '● Resursteamets data kunde inte uppdateras';
-
 
     el.classList.remove(
       'is-fresh',
       'is-stale'
     );
 
+    el.classList.add('is-error');
 
-    el.classList.add(
-      'is-error'
-    );
+
+    document.getElementById('activeSchools').innerHTML =
+      '<div class="resursteam-none">Kunde inte läsa uppdrag</div>';
+
+    document.getElementById('requestSchools').innerHTML =
+      '<div class="resursteam-none">Kunde inte läsa förfrågningar</div>';
 
   }
 
-}
 
 
 /* =====================================================
