@@ -1,47 +1,7 @@
 {
-  "updatedAt": "2026-09-06T23:52:45.740515+02:00",
-  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-08-31&endDate=2026-09-13&lang=sv",
+  "updatedAt": "2026-09-07T00:14:36.415606+02:00",
+  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-09-07&endDate=2026-09-20&lang=sv",
   "meals": [
-    {
-      "date": "2026-08-31T00:00:00",
-      "name": "",
-      "dishes": [
-        "Currykyckling med Kornris",
-        "Soltorkade tomatbiffar med potatisgratäng"
-      ]
-    },
-    {
-      "date": "2026-09-01T00:00:00",
-      "name": "",
-      "dishes": [
-        "Stekt panerad fisk med remouladsås & kokt potatis",
-        "Pad Thai wok med rostade solrosfrön"
-      ]
-    },
-    {
-      "date": "2026-09-02T00:00:00",
-      "name": "",
-      "dishes": [
-        "Stekt falukorv med stuvade makaroner",
-        "Moussaka"
-      ]
-    },
-    {
-      "date": "2026-09-03T00:00:00",
-      "name": "",
-      "dishes": [
-        "Pytt i panna med rödbetor",
-        "Kikärtsbiff med vitlökssås & bulgur"
-      ]
-    },
-    {
-      "date": "2026-09-04T00:00:00",
-      "name": "",
-      "dishes": [
-        "Italiensk ostsoppa med pasta samt skinka med bröd & tillbehör",
-        "Spicy linssoppa med ingefära & kokosgrädde med bröd & tillbehör"
-      ]
-    },
     {
       "date": "2026-09-07T00:00:00",
       "name": "",
@@ -71,6 +31,45 @@
       "dishes": [
         "Högsbosoppa med bröd & tillbehör",
         "Spenatsoppa, ägghalvor med bröd & tillbehör"
+      ]
+    },
+    {
+      "date": "2026-09-14T00:00:00",
+      "name": "",
+      "dishes": [
+        "Kockens val"
+      ]
+    },
+    {
+      "date": "2026-09-15T00:00:00",
+      "name": "",
+      "dishes": [
+        "Spaghetti & köttfärssås",
+        "Falafel med yoghurtdressing, picklad rödlök & bulgur"
+      ]
+    },
+    {
+      "date": "2026-09-16T00:00:00",
+      "name": "",
+      "dishes": [
+        "Stekt panerad fisk med kall örtsås & kokt potatis",
+        "Gratäng med gnocchi, tomatsås & ost"
+      ]
+    },
+    {
+      "date": "2026-09-17T00:00:00",
+      "name": "",
+      "dishes": [
+        "Lunchkorv med potatismos & gurkmajonnäs",
+        "Rostad majssoppa & nachos med bröd & tillbehör"
+      ]
+    },
+    {
+      "date": "2026-09-18T00:00:00",
+      "name": "",
+      "dishes": [
+        "Het kycklingsoppa med bröd & tillbehör",
+        "Rostad majssoppa & nachos med bröd & tillbehör"
       ]
     }
   ]
