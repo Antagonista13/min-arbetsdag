@@ -1,38 +1,7 @@
 {
-  "updatedAt": "2026-09-13T23:57:42.263316+02:00",
-  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-09-07&endDate=2026-09-20&lang=sv",
+  "updatedAt": "2026-09-14T00:17:28.277843+02:00",
+  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-09-14&endDate=2026-09-27&lang=sv",
   "meals": [
-    {
-      "date": "2026-09-07T00:00:00",
-      "name": "",
-      "dishes": [
-        "Kockens val"
-      ]
-    },
-    {
-      "date": "2026-09-08T00:00:00",
-      "name": "",
-      "dishes": [
-        "Fiskbullar i dillsås & kokt potatis",
-        "Mozzarellabiffar med äppelcoleslaw & rostade rotfrukter"
-      ]
-    },
-    {
-      "date": "2026-09-09T00:00:00",
-      "name": "",
-      "dishes": [
-        "Fransk fläskköttsgryta med ris",
-        "BBQ-blomkål med kidneybönor, bulgursallad & vitlöksdressing"
-      ]
-    },
-    {
-      "date": "2026-09-10T00:00:00",
-      "name": "",
-      "dishes": [
-        "Högsbosoppa med bröd & tillbehör",
-        "Spenatsoppa, ägghalvor med bröd & tillbehör"
-      ]
-    },
     {
       "date": "2026-09-14T00:00:00",
       "name": "",
@@ -70,6 +39,45 @@
       "dishes": [
         "Het kycklingsoppa med bröd & tillbehör",
         "Rostad majssoppa & nachos med bröd & tillbehör"
+      ]
+    },
+    {
+      "date": "2026-09-21T00:00:00",
+      "name": "",
+      "dishes": [
+        "Stekta köttbullar med makaroner",
+        "Auberginegryta med bulgur & yoghurttopping"
+      ]
+    },
+    {
+      "date": "2026-09-22T00:00:00",
+      "name": "",
+      "dishes": [
+        "Flygande Jacob med ris",
+        "Färgglada ärtbiffar med limesås & klyftpotatis"
+      ]
+    },
+    {
+      "date": "2026-09-23T00:00:00",
+      "name": "",
+      "dishes": [
+        "Kockens val"
+      ]
+    },
+    {
+      "date": "2026-09-24T00:00:00",
+      "name": "",
+      "dishes": [
+        "Fisk med frasigt örttäcke & potatismos",
+        "Korvstroganoff med pasta"
+      ]
+    },
+    {
+      "date": "2026-09-25T00:00:00",
+      "name": "",
+      "dishes": [
+        "Potatis & purjolökssoppa med bröd & tillbehör",
+        "Grekisk fasolada"
       ]
     }
   ]
