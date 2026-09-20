@@ -1,46 +1,7 @@
 {
-  "updatedAt": "2026-09-20T23:57:37.161366+02:00",
-  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-09-14&endDate=2026-09-27&lang=sv",
+  "updatedAt": "2026-09-21T00:16:37.868843+02:00",
+  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-09-21&endDate=2026-10-04&lang=sv",
   "meals": [
-    {
-      "date": "2026-09-14T00:00:00",
-      "name": "",
-      "dishes": [
-        "Kockens val"
-      ]
-    },
-    {
-      "date": "2026-09-15T00:00:00",
-      "name": "",
-      "dishes": [
-        "Spaghetti & köttfärssås",
-        "Falafel med yoghurtdressing, picklad rödlök & bulgur"
-      ]
-    },
-    {
-      "date": "2026-09-16T00:00:00",
-      "name": "",
-      "dishes": [
-        "Stekt panerad fisk med kall örtsås & kokt potatis",
-        "Gratäng med gnocchi, tomatsås & ost"
-      ]
-    },
-    {
-      "date": "2026-09-17T00:00:00",
-      "name": "",
-      "dishes": [
-        "Lunchkorv med potatismos & gurkmajonnäs",
-        "Rostad majssoppa & nachos med bröd & tillbehör"
-      ]
-    },
-    {
-      "date": "2026-09-18T00:00:00",
-      "name": "",
-      "dishes": [
-        "Het kycklingsoppa med bröd & tillbehör",
-        "Rostad majssoppa & nachos med bröd & tillbehör"
-      ]
-    },
     {
       "date": "2026-09-21T00:00:00",
       "name": "",
@@ -78,6 +39,45 @@
       "dishes": [
         "Potatis & purjolökssoppa med bröd & tillbehör",
         "Grekisk fasolada"
+      ]
+    },
+    {
+      "date": "2026-09-28T00:00:00",
+      "name": "",
+      "dishes": [
+        "Pasta med tomatsås toppad med knaperstekt bacon",
+        "Gratinerad färsfylld paprika med krämig polenta"
+      ]
+    },
+    {
+      "date": "2026-09-29T00:00:00",
+      "name": "",
+      "dishes": [
+        "Fiskgratäng med soltorkad tomat & basilika serveras med kokt potatis",
+        "Bakad potatis med curryröra"
+      ]
+    },
+    {
+      "date": "2026-09-30T00:00:00",
+      "name": "",
+      "dishes": [
+        "Kockens val"
+      ]
+    },
+    {
+      "date": "2026-10-01T00:00:00",
+      "name": "",
+      "dishes": [
+        "Blodpudding, kycklingkorv, potatismos & lingonsylt",
+        "Panerad grillost med gremolatakeso & couscous"
+      ]
+    },
+    {
+      "date": "2026-10-02T00:00:00",
+      "name": "",
+      "dishes": [
+        "Gulaschsoppa med gräddfil, bröd & tillbehör",
+        "Spenat & linssoppa med garam masala, bröd & tillbehör"
       ]
     }
   ]
