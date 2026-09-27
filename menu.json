@@ -1,46 +1,7 @@
 {
-  "updatedAt": "2026-09-27T21:25:10.022121+02:00",
-  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-09-21&endDate=2026-10-04&lang=sv",
+  "updatedAt": "2026-09-28T00:29:54.056056+02:00",
+  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-09-28&endDate=2026-10-11&lang=sv",
   "meals": [
-    {
-      "date": "2026-09-21T00:00:00",
-      "name": "",
-      "dishes": [
-        "Stekta köttbullar med makaroner",
-        "Auberginegryta med bulgur & yoghurttopping"
-      ]
-    },
-    {
-      "date": "2026-09-22T00:00:00",
-      "name": "",
-      "dishes": [
-        "Flygande Jacob med ris",
-        "Färgglada ärtbiffar med limesås & klyftpotatis"
-      ]
-    },
-    {
-      "date": "2026-09-23T00:00:00",
-      "name": "",
-      "dishes": [
-        "Kockens val"
-      ]
-    },
-    {
-      "date": "2026-09-24T00:00:00",
-      "name": "",
-      "dishes": [
-        "Fisk med frasigt örttäcke & potatismos",
-        "Korvstroganoff med pasta"
-      ]
-    },
-    {
-      "date": "2026-09-25T00:00:00",
-      "name": "",
-      "dishes": [
-        "Potatis & purjolökssoppa med bröd & tillbehör",
-        "Grekisk fasolada"
-      ]
-    },
     {
       "date": "2026-09-28T00:00:00",
       "name": "",
@@ -78,6 +39,45 @@
       "dishes": [
         "Gulaschsoppa med gräddfil, bröd & tillbehör",
         "Spenat & linssoppa med garam masala, bröd & tillbehör"
+      ]
+    },
+    {
+      "date": "2026-10-05T00:00:00",
+      "name": "",
+      "dishes": [
+        "Lasagnette",
+        "Bondbönsbiffar med vitlökssås & klyftpotatis"
+      ]
+    },
+    {
+      "date": "2026-10-06T00:00:00",
+      "name": "",
+      "dishes": [
+        "Skinkstek med örtsås, stekt kulpotatis & äppelmos",
+        "Pasta pesto toppad med solrosfrön"
+      ]
+    },
+    {
+      "date": "2026-10-07T00:00:00",
+      "name": "",
+      "dishes": [
+        "Stekt panerad fisk med remouladsås & kokt potatis",
+        "Tacogratäng med bulgur & salsa"
+      ]
+    },
+    {
+      "date": "2026-10-08T00:00:00",
+      "name": "",
+      "dishes": [
+        "Kockens val"
+      ]
+    },
+    {
+      "date": "2026-10-09T00:00:00",
+      "name": "",
+      "dishes": [
+        "Sunny soup med brödkrutonger samt bröd & tillbehör",
+        "Minestronesoppa med bröd & tillbehör"
       ]
     }
   ]
