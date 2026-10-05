@@ -1,46 +1,7 @@
 {
-  "updatedAt": "2026-10-04T23:30:02.686889+02:00",
-  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-09-28&endDate=2026-10-11&lang=sv",
+  "updatedAt": "2026-10-05T02:07:57.096173+02:00",
+  "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-10-05&endDate=2026-10-18&lang=sv",
   "meals": [
-    {
-      "date": "2026-09-28T00:00:00",
-      "name": "",
-      "dishes": [
-        "Pasta med tomatsås toppad med knaperstekt bacon",
-        "Gratinerad färsfylld paprika med krämig polenta"
-      ]
-    },
-    {
-      "date": "2026-09-29T00:00:00",
-      "name": "",
-      "dishes": [
-        "Fiskgratäng med soltorkad tomat & basilika serveras med kokt potatis",
-        "Bakad potatis med curryröra"
-      ]
-    },
-    {
-      "date": "2026-09-30T00:00:00",
-      "name": "",
-      "dishes": [
-        "Kockens val"
-      ]
-    },
-    {
-      "date": "2026-10-01T00:00:00",
-      "name": "",
-      "dishes": [
-        "Blodpudding, kycklingkorv, potatismos & lingonsylt",
-        "Panerad grillost med gremolatakeso & couscous"
-      ]
-    },
-    {
-      "date": "2026-10-02T00:00:00",
-      "name": "",
-      "dishes": [
-        "Gulaschsoppa med gräddfil, bröd & tillbehör",
-        "Spenat & linssoppa med garam masala, bröd & tillbehör"
-      ]
-    },
     {
       "date": "2026-10-05T00:00:00",
       "name": "",
@@ -78,6 +39,45 @@
       "dishes": [
         "Sunny soup med brödkrutonger samt bröd & tillbehör",
         "Minestronesoppa med bröd & tillbehör"
+      ]
+    },
+    {
+      "date": "2026-10-12T00:00:00",
+      "name": "",
+      "dishes": [
+        "Stekt kyckling med rosépepparsås & Vaxholmsris",
+        "Caponata di melanzane & pasta"
+      ]
+    },
+    {
+      "date": "2026-10-13T00:00:00",
+      "name": "",
+      "dishes": [
+        "Kålpudding med gräddsås & kokt potatis",
+        "Morotsbiffar med böncréme & rostade rotfrukter"
+      ]
+    },
+    {
+      "date": "2026-10-14T00:00:00",
+      "name": "",
+      "dishes": [
+        "Ångad fisk med ägg & persiljesås serveras med kokt potatis",
+        "Färssås & Spaghetti"
+      ]
+    },
+    {
+      "date": "2026-10-15T00:00:00",
+      "name": "",
+      "dishes": [
+        "Kockens val"
+      ]
+    },
+    {
+      "date": "2026-10-16T00:00:00",
+      "name": "",
+      "dishes": [
+        "Cowboysoppa med bröd & tillbehör",
+        "Champinjonsoppa med vitlök & brödkrutonger med bröd & tillbehör"
       ]
     }
   ]
