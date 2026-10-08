@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T04:55:00.883336+02:00",
+  "updatedAt": "2026-10-08T12:16:35.460876+02:00",
   "source": "https://menu.matildaplatform.com/api/menu?distributorId=68d18b0e30b565aba61bf59e&startDate=2026-10-05&endDate=2026-10-18&lang=sv",
   "meals": [
     {
@@ -53,7 +53,7 @@
       "date": "2026-10-13T00:00:00",
       "name": "",
       "dishes": [
-        "Kålpudding med gräddsås & kokt potatis",
+        "Ångad fisk med ägg & persiljesås serveras med kokt potatis",
         "Morotsbiffar med böncréme & rostade rotfrukter"
       ]
     },
@@ -61,7 +61,7 @@
       "date": "2026-10-14T00:00:00",
       "name": "",
       "dishes": [
-        "Ångad fisk med ägg & persiljesås serveras med kokt potatis",
+        "Kålpudding med gräddsås & kokt potatis",
         "Färssås & Spaghetti"
       ]
     },
